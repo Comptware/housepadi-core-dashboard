@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --zusco-green: #02ba81;
+  --zusco-grey2: #c1c1c1;
+  --zusco-grey: #65717c;
+  --zusco-grey3: #e1e1e1;
+  --zusco-yellow: #f2c94c;
+  --zusco-warning: #ffb413;
+  --zusco-red: #f3564d;
+  --zusco-blue: #00509d;
+  --zusco-blue2: #2d9cdb;
+  --zusco-purple: #483dab;
+}
+
+@font-face {
+  font-family: "GTWalsheimProLight";
+  src: url("./assets/fonts/GTWalsheimPro-Light.woff2") format("woff2"),
+    url("./assets/fonts/GTWalsheimPro-Light.woff") format("woff"),
+    url("./assets/fonts/GTWalsheimPro-Light.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GTWalsheimProRegular";
+  src: url("./assets/fonts/GTWalsheimPro-Regular.woff2") format("woff2"),
+    url("./assets/fonts/GTWalsheimPro-Regular.woff") format("woff"),
+    url("./assets/fonts/GTWalsheimPro-Regular.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GTWalsheimProMedium";
+  src: url("./assets/fonts/GTWalsheimPro-Medium.woff2") format("woff2"),
+    url("./assets/fonts/GTWalsheimPro-Medium.woff") format("woff"),
+    url("./assets/fonts/GTWalsheimPro-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GTWalsheimProBold";
+  src: url("./assets/fonts/GTWalsheimPro-Bold.woff2") format("woff2"),
+    url("./assets/fonts/GTWalsheimPro-Bold.woff") format("woff"),
+    url("./assets/fonts/GTWalsheimPro-Bold.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: auto;
+
+  margin: 0;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  /* font-family: "Helvetica-Medium", "sans-serif"; */
+  /* font-family: Arial, Helvetica, sans-serif; */
+  /* font-family: HelveticaNeue, sans-serif; */
+  font-family: GTWalsheimProLight, sans-serif !important;
+  min-height: 100vh;
+  height: 100% !important;
+  box-sizing: border-box;
+  width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  color: #ffffff6e;
+}
+
+.light-font {
+  font-family: GTWalsheimProLight, sans-serif !important;
+}
+
+.regular-font {
+  font-family: GTWalsheimProRegular, sans-serif !important;
+}
+
+.medium-font {
+  font-family: GTWalsheimProMedium, sans-serif !important;
+}
+
+.bold-font {
+  font-family: GTWalsheimProBold, sans-serif !important;
+}
+
+@keyframes slide-right {
+  0% {
+  }
+
+  50% {
+  }
+
+  100% {
+    left: -100%;
+  }
+}
+
+.main_gradient {
+  background: linear-gradient(264.12deg, #00509d -24%, #00296b 65.77%);
+}
+
+table,
+tr {
+  border-spacing: 0;
+  border-collapse: separate;
+}
+
+td {
+  padding: 15px 10px;
+  vertical-align: top;
+  height: fit-content;
+  max-height: 50px !important;
+}
+
+th {
+  padding: 10px 10px 30px;
+}
+
+.fade-in {
+  animation: fadein 1s forwards !important;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0.4;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* react-datepicker custom styles */
+.react-datepicker__time-container,
+.react-datepicker__time-box {
+  width: 100% !important;
+}
+
+.backdrop {
+  background: rgba(0, 0, 0, 0.4) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+.file-box > label {
+  width: 100% !important;
+}
