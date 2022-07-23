@@ -17,7 +17,7 @@ const AuthLayout = ({ children }) => {
         </div>
       </header>
 
-      <main className="bg-white-back w-full pb-14 flex flex-col align-center justify-center flex-grow overflow-y-auto max-w-9xl mx-auto pt-[4.5rem]">
+      <main className="bg-white w-full pb-14 flex flex-col align-center justify-start md:justify-center flex-grow overflow-y-auto max-w-9xl mx-auto pt-[4.5rem]">
         {children}
       </main>
     </div>

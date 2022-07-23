@@ -68,11 +68,11 @@ const SendOtp = observer(() => {
   const phone_number = watch("phone_number");
 
   return (
-    <div className="flex ">
-      <div className="w-[40%]  mmd:hidden">
+    <div className="flex mx-auto md:m-auto">
+      <div className="w-[40%] hidden md:flex">
         <Banner />
       </div>
-      <section className="w-[380px] m-auto flex flex-col">
+      <section className="w-[90%] h-fit md:w-[380px] mx-auto md:m-auto flex flex-col">
         <h2 className="text-black text-[24px] mb-6 medium-font">
           {" "}
           Welcome Back!

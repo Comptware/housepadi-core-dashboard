@@ -22,14 +22,16 @@ const Router = () => {
     <>
       <Routes>
         {/* welcome */}
-        <Route
+         <Route
           path="/"
           element={
             <AuthRoute path="" notProtected>
-              <SendOtp />
+              <AuthHome />
             </AuthRoute>
           }
-        ></Route>
+        >
+          <Route path="" element={<SendOtp />} />
+        </Route>
 
         {/* end welcome */}
 
