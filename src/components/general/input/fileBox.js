@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FileUploader } from "react-drag-drop-files";
 
@@ -20,7 +20,7 @@ const FileBox = ({
   isAvatar,
   ...rest
 }) => {
-  const fileRef = useRef();
+
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const fileTypes = ["JPG", "PNG", "JPEG"];
@@ -123,15 +123,8 @@ const FileBox = ({
        ${error || isError ? "!border-red" : "border-grey"} 
       `}
           type="button"
-          onClick={() => {
-            if (file && file[0]) {
-              return;
-            }
-          }}
+         
           disabled={isDisabled}
-          // style={{
-          //   backgroundImage: url ? `url(${url})` : "",
-          // }}
         >
           {file && file[0] && (
             <div
@@ -192,6 +185,7 @@ FileBox.propTypes = {
   rest: PropTypes.object,
   removeAllClick: PropTypes.func,
   multiple: PropTypes.bool,
+  isAvatar: PropTypes.bool,
 };
 
 export default FileBox;

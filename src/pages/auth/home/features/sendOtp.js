@@ -24,10 +24,6 @@ const SendOtp = observer(() => {
   const navigate = useNavigate();
   const { loading, sendOtp } = AuthStore;
   const phone = localStorage.getItem("otp_phone_number");
-  let defaultValues = {
-    phone_number: "",
-  };
-
   const [agreed, setAgreed] = useState(false);
   useEffect(() => {
     sharedOnChange("", { name: "phone_number", value: phone }, "From effect");
@@ -35,11 +31,10 @@ const SendOtp = observer(() => {
   }, []);
   const {
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     register,
     setValue,
     trigger,
-    reset,
     watch,
   } = useForm({
     defaultValues,

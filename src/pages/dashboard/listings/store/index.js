@@ -45,7 +45,7 @@ class ListingStore {
   // Computed views
   // ====================================================
   // While MobX promotes OOP, we can still benefit from using FP where it's appropriate
-  get token() { }
+
 
   // ====================================================
   // Actions
@@ -246,7 +246,7 @@ class ListingStore {
       lisingsArr = this.listings;
     }
 
-    let currentListing = lisingsArr?.find(({ id }) => id === url);
+    const currentListing = lisingsArr?.find(({ id }) => id === url);
 
     if (currentListing) {
       console.log("currentListing", currentListing);
@@ -362,7 +362,7 @@ class ListingStore {
   savelistingFormTwo = (item, items, prop) => {
     let newArr = [...items, item];
     newArr = [...new Set(newArr)];
-    let match = items?.find((el) => el === item);
+    const match = items?.find((el) => el === item);
     if (match) {
       newArr = newArr.filter((itm) => itm !== item);
     }

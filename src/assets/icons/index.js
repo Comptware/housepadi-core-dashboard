@@ -24,11 +24,11 @@ const Messages = ({ className }) => (
   >
     <path
       className={className}
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M18 8.49996C18 12.9182 14.1941 16.4999 9.5 16.4999C7.9913 16.5067 6.50327 16.1226 5.16181 15.3799L1 16.4999L2.42163 12.9308C1.52381 11.6622 1 10.1388 1 8.49996C1 4.08169 4.80587 0.5 9.5 0.5C14.1941 0.5 18 4.08169 18 8.49996ZM6.3125 7.3571H4.1875V9.64281H6.3125V7.3571ZM14.8125 7.3571H12.6875V9.64281H14.8125V7.3571ZM8.4375 7.3571H10.5625V9.64281H8.4375V7.3571Z"
       fill="#00296B"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -102,7 +102,7 @@ const SignifierOne = ({ className }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="20" cy="20" r="6.5" className={className} stroke-width="3" />
+    <circle cx="20" cy="20" r="6.5" className={className} strokeWidth="3" />
     <path d="M20 27V40" className={className} />
   </svg>
 );
@@ -115,7 +115,7 @@ const SignifierTwo = ({ className }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="20" cy="20" r="6.5" className={className} stroke-width="3" />
+    <circle cx="20" cy="20" r="6.5" className={className} strokeWidth="3" />
     <path d="M20 0V13" className={className} />
     <path d="M20 27V40" className={className} />
   </svg>
@@ -128,7 +128,7 @@ const SignifierThree = ({ className }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="20" cy="20" r="6.5" className={className} stroke-width="3" />
+    <circle cx="20" cy="20" r="6.5" className={className} strokeWidth="3" />
     <path d="M20 0V13" className={className} />
     <path d="M20 27V40" className={className} />
   </svg>
@@ -141,7 +141,7 @@ const SignifierFour = ({ className }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <circle cx="20" cy="20" r="6.5" className={className} stroke-width="3" />
+    <circle cx="20" cy="20" r="6.5" className={className} strokeWidth="3" />
     <path d="M20 0V13" className={className} />
   </svg>
 );

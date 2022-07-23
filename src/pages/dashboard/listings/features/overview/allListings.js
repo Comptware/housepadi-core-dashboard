@@ -32,7 +32,7 @@ const AllListings = observer(({ data }) => {
   const handleCheckboxChange = (item) => {
     let newArr = [...selectedRows, item];
     newArr = [...new Set(newArr)];
-    let match = selectedRows?.find((el) => el === item);
+    const match = selectedRows?.find((el) => el === item);
     if (match) {
       newArr = newArr.filter((itm) => itm !== item);
     }
@@ -40,7 +40,7 @@ const AllListings = observer(({ data }) => {
   };
 
   const handleGlobalCheckboxChange = () => {
-    let newArr = checked ? data?.map(({ id }) => id) : [];
+    const newArr = checked ? data?.map(({ id }) => id) : [];
     setSelectedRows(newArr);
   };
   return (
