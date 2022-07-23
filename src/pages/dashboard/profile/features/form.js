@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router";
 import { observer } from "mobx-react-lite";
 
 import { handleFileType } from "utils/functions";
@@ -17,10 +16,7 @@ import cleanPayload from "utils/cleanPayload";
 
 const Form = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const pathName = location?.pathname?.replace("/new-listing/step-one", "");
-  const path = pathName?.replace("/", "");
-  const suffix = path ? "/" + path : "";
+
   const { loading, loadingFetchMe, getMe, updateMe } = CommonStore;
   const emptyFiles = {
     agent_identification_document_url: { type: "", url: "" },

@@ -3,9 +3,6 @@ import axios from "axios";
 import { getToken } from "../utils/storage";
 import { errorToast } from "components/general/toast/toast";
 
-function logout() {
-  window.localStorage.clear();
-}
 
 export function apiInstance2(
   endpoint,

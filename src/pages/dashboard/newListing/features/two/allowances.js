@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { ReactComponent as CaretDown } from "assets/icons/caret-down.svg";

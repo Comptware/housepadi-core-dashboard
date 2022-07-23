@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation,useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import { ReactComponent as ArrowBack } from "assets/icons/arrow-back.svg";

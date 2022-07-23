@@ -32,11 +32,10 @@ const VerifyOtp = observer(() => {
   const phone_number = "0" + phone.substring(4);
   const {
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     register,
     setValue,
     trigger,
-    reset,
     watch,
   } = useForm({
     defaultValues,

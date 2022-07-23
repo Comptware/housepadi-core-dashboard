@@ -27,12 +27,10 @@ const Form = () => {
     savelistingFormFour,
     listingFormFour,
     listingFormThree,
-    listingFormOne,
     handleFindListing,
     listingDataSet,
     formFourDisabled,
     updateListing,
-    deleteListing,
   } = ListingStore;
 
   const {
