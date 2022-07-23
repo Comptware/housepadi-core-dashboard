@@ -1,10 +1,10 @@
 export const determineListingType = (type) => {
   if (type) {
-    if (type.includes("unreserved")) {
+    if (type.includes("unoccupied")) {
       return (
         <div className="py-2 px-0 w-full">
           <span className="p-1 bg-green-light text-green-deep border-1/2 border-green-deep rounded">
-            Unreserved
+            Unoccupied
           </span>
         </div>
       );
@@ -16,11 +16,11 @@ export const determineListingType = (type) => {
           </span>
         </div>
       );
-    } else if (type.includes("reserved")) {
+    } else if (type.includes("occupied")) {
       return (
         <div className="py-2 px-0 w-full">
           <span className="p-1 bg-blue-light text-blue-deep border-1/2 border-blue-deep rounded">
-            Reserved
+            Occupied
           </span>
         </div>
       );

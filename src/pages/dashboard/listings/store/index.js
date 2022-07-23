@@ -45,7 +45,7 @@ class ListingStore {
   // Computed views
   // ====================================================
   // While MobX promotes OOP, we can still benefit from using FP where it's appropriate
-  get token() {}
+  get token() { }
 
   // ====================================================
   // Actions
@@ -101,11 +101,10 @@ class ListingStore {
       this.listingsCount = res?.total;
       res = res?.data;
       res = res?.map(({ draft, occupied, ...items }) => {
-        const status = draft ? "draft" : occupied ? "reserved" : "unreserved";
+        const status = draft ? "draft" : occupied ? "occupied" : "unoccupied";
         return { ...items, status };
       });
       this.listings = res || [];
-
       this.reservedListings = res?.filter(
         ({ status }) => status === "reserved"
       );

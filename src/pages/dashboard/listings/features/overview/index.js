@@ -21,18 +21,18 @@ const Overview = observer(() => {
       ),
     },
     {
-      title: "Unoccupied",
+      title: "Occupied",
       content: (
         <AllListings
-          data={listings.filter(({ status }) => status === "unreserved")}
+          data={listings.filter(({ status }) => status === "occupied")}
         />
       ),
     },
     {
-      title: "Reserved",
+      title: "Unoccupied",
       content: (
         <AllListings
-          data={listings.filter(({ status }) => status === "reserved")}
+          data={listings.filter(({ status }) => status === "unoccupied")}
         />
       ),
     },
