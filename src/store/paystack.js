@@ -22,7 +22,6 @@ class PaystackStore {
   // Computed views
   // ====================================================
   // While MobX promotes OOP, we can still benefit from using FP where it's appropriate
-  get token() {}
 
   // ====================================================
   // Actions

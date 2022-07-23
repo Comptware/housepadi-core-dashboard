@@ -81,7 +81,7 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUploading(true);
-    let phone_number = "";
+    const phone_number = "";
     const profile_image_url = await uploadImageToCloud(form.profile_image_url);
     setUploading(false);
     let payload = { ...form, phone_number, profile_image_url };
