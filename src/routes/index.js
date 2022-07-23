@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import LandingHome from "pages/landing/home";
 import DashboardHome from "pages/dashboard/home";
 import DashBoard from "pages/dashboard/home/features/dashboard";
 import { AuthRoute } from "./authRoute";
