@@ -11,8 +11,9 @@ import AuthStore from "store/auth";
 import Button from "components/general/button/button";
 import { FormErrorMessage } from "components/general/errorMessage";
 import PhoneNumber from "components/general/phoneNumber/phoneNumber";
-import Banner from "./banner";
 import CheckBox from "components/general/input/checkBox";
+import ListingStore from "pages/dashboard/listings/store";
+import Banner from "./banner";
 
 YupPassword(Yup);
 
@@ -23,12 +24,18 @@ const schema = Yup.object({
 const SendOtp = observer(() => {
   const navigate = useNavigate();
   const { loading, sendOtp } = AuthStore;
+  const { getListings } = ListingStore;
   const phone = localStorage.getItem("otp_phone_number");
   const defaultValues = {
     phone_number: "",
   };
 
   const [agreed, setAgreed] = useState(false);
+
+  useEffect(() => {
+    getListings("1");
+  }, []);
+
   useEffect(() => {
     sharedOnChange("", { name: "phone_number", value: phone }, "From effect");
     register("phone_number");
