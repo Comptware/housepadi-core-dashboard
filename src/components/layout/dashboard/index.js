@@ -142,7 +142,7 @@ const DashboardLayout = ({ children }) => {
           {children}
         </main>
       </section>
-      <footer className="flex flex-row justify-between items-center w-full py-2 fixed left-0 right-0 bottom-0 border-t-1/2 border-grey-border z-[99] h-[50px] bg-white">
+      <footer className="hidden sm:flex flex-row justify-between items-center w-full py-2 fixed left-0 right-0 bottom-0 border-t-1/2 border-grey-border z-[99] h-[50px] bg-white">
         <div className="relative flex flex-row justify-between items-center mx-auto w-full px-20 ">
           <p className="text-base text-black text-left">
             © 2022 Zusco, All Rights Reserved
