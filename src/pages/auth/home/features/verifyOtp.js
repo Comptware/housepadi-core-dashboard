@@ -78,11 +78,11 @@ const VerifyOtp = observer(() => {
         <Banner />
       </div>
       <section className="w-[90%] h-fit md:w-[380px] mx-auto md:m-auto flex flex-col">
-        <h2 className="text-black text-[24px] mb-6 medium-font">
+        <h2 className="text-black text-[24px] mb-4 medium-font">
           {" "}
           Verify Phone Number
         </h2>
-        <h2 className="text-lg text-grey-textalt mb-8">
+        <h2 className="text-lg text-grey-textalt mb-3">
           {" "}
           A message with a verification code has been sent to your phone number!
         </h2>
@@ -127,7 +127,7 @@ const VerifyOtp = observer(() => {
               type="submit"
               text="Verify"
               isLoading={loadingVerify}
-              isDisabled={otp?.length < 4 || loading}
+              isDisabled={!otp || otp?.length < 4 || loading}
               fullWidth
             />
           </div>

@@ -12,7 +12,6 @@ import Button from "components/general/button/button";
 import { FormErrorMessage } from "components/general/errorMessage";
 import PhoneNumber from "components/general/phoneNumber/phoneNumber";
 import CheckBox from "components/general/input/checkBox";
-import ListingStore from "pages/dashboard/listings/store";
 import Banner from "./banner";
 
 YupPassword(Yup);
@@ -24,17 +23,12 @@ const schema = Yup.object({
 const SendOtp = observer(() => {
   const navigate = useNavigate();
   const { loading, sendOtp } = AuthStore;
-  const { getListings } = ListingStore;
   const phone = localStorage.getItem("otp_phone_number");
   const defaultValues = {
     phone_number: "",
   };
 
   const [agreed, setAgreed] = useState(false);
-
-  useEffect(() => {
-    getListings("1");
-  }, []);
 
   useEffect(() => {
     sharedOnChange("", { name: "phone_number", value: phone }, "From effect");
@@ -80,11 +74,8 @@ const SendOtp = observer(() => {
         <Banner />
       </div>
       <section className="w-[90%] h-fit md:w-[380px] mx-auto md:m-auto flex flex-col">
-        <h2 className="text-black text-[24px] mb-6 medium-font">
-          {" "}
-          Welcome Back!
-        </h2>
-        <h2 className="text-lg text-grey-textalt mb-8">
+        <h2 className="text-black text-[24px] mb-4 medium-font"> Welcome,</h2>
+        <h2 className="text-lg text-grey-textalt mb-3">
           {" "}
           Enter your phone number to receive veification code.
         </h2>
@@ -133,7 +124,7 @@ const SendOtp = observer(() => {
               type="submit"
               text="Send Otp"
               isLoading={loading}
-              isDisabled={phone_number?.length < 14 || !agreed}
+              isDisabled={!phone_number || phone_number?.length < 14 || !agreed}
               fullWidth
             />
           </div>

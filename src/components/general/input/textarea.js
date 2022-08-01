@@ -77,7 +77,7 @@ const Textarea = ({
           onChange={({ target }) => {
             onChangeFunc(target.value, { value: target.value, name });
           }}
-          maxLength="50"
+         
         ></textarea>
       </div>
     </div>

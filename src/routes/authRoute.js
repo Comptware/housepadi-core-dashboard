@@ -6,7 +6,6 @@ import { Navigate } from "react-router-dom";
 
 export const AuthRoute = ({ path, notProtected, children, ...rest }) => {
   const { isAuthenticated } = useAuth();
-
   if (notProtected && isAuthenticated) {
     return (
       <DashboardLayout>
@@ -14,13 +13,7 @@ export const AuthRoute = ({ path, notProtected, children, ...rest }) => {
       </DashboardLayout>
     );
   }
-  // if (notProtected && !isAuthenticated) {
-  //   return (
-  //     <LandingLayout>
-  //       <Navigate replace to="/" />;
-  //     </LandingLayout>
-  //   );
-  // }
+ 
 
   if (!isAuthenticated && !notProtected) {
     return (

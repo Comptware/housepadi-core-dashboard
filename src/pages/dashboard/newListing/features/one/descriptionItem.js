@@ -22,7 +22,7 @@ const DescriptionItem = ({
         <button
           type="button"
           onClick={decrementClick}
-          className={`${
+          className={`hover:opacity-70 transition-opacity duration-500 ease-in-out ${
             itemCount === 0 ? "opacity-40 cursor-not-allowed" : ""
           }`}
         >
@@ -30,7 +30,11 @@ const DescriptionItem = ({
         </button>
 
         <span className="text-lg text-black">{itemCount}</span>
-        <button type="button" onClick={incrementClick}>
+        <button
+          type="button"
+          onClick={incrementClick}
+          className="hover:opacity-70 transition-opacity duration-500 ease-in-out"
+        >
           <Increment />
         </button>
       </div>
