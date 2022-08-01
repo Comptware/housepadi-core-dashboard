@@ -74,7 +74,7 @@ const SendOtp = observer(() => {
         <Banner />
       </div>
       <section className="w-[90%] h-fit md:w-[380px] mx-auto md:m-auto flex flex-col">
-        <h2 className="text-black text-[24px] mb-4 medium-font"> Welcome,</h2>
+        <h2 className="text-black text-[24px] mb-4 medium-font">Welcome to Zusco</h2>
         <h2 className="text-lg text-grey-textalt mb-3">
           {" "}
           Enter your phone number to receive veification code.
