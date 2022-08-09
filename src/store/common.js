@@ -4,7 +4,6 @@
 
 import { makeAutoObservable } from "mobx";
 import apis from "services/common";
-
 import { successToast } from "components/general/toast/toast";
 
 class CommonStore {

@@ -8,7 +8,7 @@ const LinkButton = ({ onClick, text, fullWidth }) => (
     {...{ onClick, text, fullWidth }}
     icon={<Caret />}
     isOutline
-    borderColor="purple"
+    borderColor="border-purple"
   />
 );
 
