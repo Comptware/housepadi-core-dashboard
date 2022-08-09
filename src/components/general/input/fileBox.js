@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FileUploader } from "react-drag-drop-files";
 
-import ImageModal from "../Modal/imageModal/ImageModal";
+import ImageModal from "../modal/imageModal/ImageModal";
 
 const FileBox = ({
   placeholder,

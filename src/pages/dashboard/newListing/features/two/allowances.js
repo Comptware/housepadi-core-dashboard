@@ -5,7 +5,7 @@ import { ReactComponent as CaretDown } from "assets/icons/caret-down.svg";
 import AarItem from "./aarItem";
 
 const Allowances = ({
-  form,
+  path,
   allowances,
   searchQuery,
   handleCheckboxChange,
@@ -42,7 +42,7 @@ const Allowances = ({
                 key={id}
                 title={name}
                 icon={icon}
-                onClick={() => handleCheckboxChange(id, items, "allowances")}
+                onClick={() => handleCheckboxChange(id, items, "allowances", path )}
                 checked={checked}
               />
             );
@@ -60,7 +60,7 @@ const Allowances = ({
   ) : null;
 };
 Allowances.propTypes = {
-  form: PropTypes.object,
+  path: PropTypes.any,
   allowances: PropTypes.array,
   searchQuery: PropTypes.string,
   handleCheckboxChange: PropTypes.func,

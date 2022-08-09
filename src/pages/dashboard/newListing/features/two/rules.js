@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { ReactComponent as CaretDown } from "assets/icons/caret-down.svg";
 import AarItem from "./aarItem";
 
-const Rules = ({ form, rules, searchQuery, handleCheckboxChange, items }) => {
+const Rules = ({ path, rules, searchQuery, handleCheckboxChange, items }) => {
   const [show, setShow] = useState(true);
   const [showAll, setShowAll] = useState(false);
   return rules?.length > 0 ? (
@@ -34,7 +34,7 @@ const Rules = ({ form, rules, searchQuery, handleCheckboxChange, items }) => {
                 key={id}
                 title={name}
                 icon={icon}
-                onClick={() => handleCheckboxChange(id, items, "rules")}
+                onClick={() => handleCheckboxChange(id, items, "rules", path)}
                 checked={checked}
               />
             );
@@ -52,7 +52,7 @@ const Rules = ({ form, rules, searchQuery, handleCheckboxChange, items }) => {
   ) : null;
 };
 Rules.propTypes = {
-  form: PropTypes.object,
+  path: PropTypes.any,
   rules: PropTypes.array,
   searchQuery: PropTypes.string,
   handleCheckboxChange: PropTypes.func,

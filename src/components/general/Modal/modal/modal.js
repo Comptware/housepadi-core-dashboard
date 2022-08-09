@@ -40,14 +40,16 @@ const Modal = ({
         )}
       >
         {children}
-        <div
-          className="absolute top-0 -right-14 cursor-pointer flex justify-center items-center text-white bg-grey-whitesmoke bg-opacity-30 hover:bg-opacity-100 hover:text-black hover:bg-white rounded-full transition-all duration-150 ease-in-out "
-          onClick={toggler}
-        >
-          <div className="h-8 w-8 relative flex justify-center items-center ">
-            <CancelIcon className="stroke-current" />
+        {toggler && (
+          <div
+            className="absolute top-0 -right-14 cursor-pointer flex justify-center items-center text-white bg-grey-whitesmoke bg-opacity-30 hover:bg-opacity-100 hover:text-black hover:bg-white rounded-full transition-all duration-150 ease-in-out "
+            onClick={toggler}
+          >
+            <div className="h-8 w-8 relative flex justify-center items-center ">
+              <CancelIcon className="stroke-current" />
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="fixed top-0 left-0 h-screen w-full !my-0 "></div>

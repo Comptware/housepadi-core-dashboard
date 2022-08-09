@@ -4,6 +4,7 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 
 import { useAuth } from "hooks/auth";
+import { DEFAULT_AVATAR } from "utils/constants";
 import {
   Dashboard,
   Settings,
@@ -19,6 +20,7 @@ import { ReactComponent as Linkedin } from "assets/icons/linkedin.svg";
 import { ReactComponent as Logo } from "assets/icons/logo/logo_black.svg";
 import { ReactComponent as Notification } from "assets/icons/notification.svg";
 import ListingStore from "pages/dashboard/listings/store";
+import CommonStore from "store/common";
 
 import Toast from "../../general/toast/toast";
 import Hamburger from "../hamburger";
@@ -27,6 +29,7 @@ const DashboardLayout = ({ children }) => {
   const location = useLocation();
   const { logout } = useAuth();
   const { setListingDataSet } = ListingStore;
+  const { getMe, me } = CommonStore;
   const [sidenavOpen, setSidenavOpen] = useState(false);
   useEffect(() => {
     setListingDataSet(false);
@@ -43,6 +46,11 @@ const DashboardLayout = ({ children }) => {
       icon: <Listings className="fill-current" />,
     },
     {
+      title: "Bookings",
+      link: "/dashboard/bookings",
+      icon: <BookAStay className="fill-current" />,
+    },
+    {
       title: "Messages",
       link: "/dashboard/messages",
       icon: <Messages className="fill-current" />,
@@ -51,10 +59,19 @@ const DashboardLayout = ({ children }) => {
 
   const listingLinks = [
     {
-      title: "Book a Stay",
-      link: "/dashboard/book-a-stay",
-      icon: <BookAStay className="fill-current" />,
+      title: me?.first_name
+        ? me.first_name + " " + me.last_name
+        : "Edit Profile",
+      link: "/dashboard/me",
+      icon: (
+        <img
+          className={` w-[25px] border rounded-full `}
+          src={me?.profile_image_url || DEFAULT_AVATAR}
+          alt=""
+        />
+      ),
     },
+
     {
       title: "Settings",
       link: "/dashboard/settings",

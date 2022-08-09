@@ -109,7 +109,8 @@ const Form = () => {
           }}
           type="button"
           isOutline
-          textColor=""
+          textColor="text-blue-alt"
+          borderColor="border-blue-alt"
         />
         <Button
           text="Save & Continue"

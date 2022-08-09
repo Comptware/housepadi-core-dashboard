@@ -8,55 +8,34 @@ import { determineListingType } from "utils/listings";
 import { pageCount } from "utils/constants";
 import { Button } from "components/general/button";
 import Table from "components/general/table";
-import CheckBox from "components/general/input/checkBox";
 import CircleLoader from "components/general/circleLoader/circleLoader";
-import ListingStore from "../../store/index";
+import ListingStore from "pages/dashboard/listings/store";
 import Pagination from "components/general/pagination";
 
 const listingsHead = [
-  "",
   "LISTING",
-  "STATUS",
-  "ACTIONS",
-  "BED",
-  "BATHROOM",
-  "LOCATION",
+  "DATE",
+  "NIGHTS",
+  "PAYMENT",
 ];
-const AllListings = observer(({ data }) => {
+const AllTransactions = observer(({ data }) => {
   const navigate = useNavigate();
   const { loading, listingsCount, getListings } = ListingStore;
-  const [checked, setChecked] = useState(false);
-  const [selectedRows, setSelectedRows] = useState([]);
+
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    handleGlobalCheckboxChange();
-  }, [checked]);
+
 
   useEffect(() => {
     currentPage > 1 && getListings(currentPage);
   }, [currentPage]);
 
-  const handleCheckboxChange = (item) => {
-    let newArr = [...selectedRows, item];
-    newArr = [...new Set(newArr)];
-    const match = selectedRows?.find((el) => el === item);
-    if (match) {
-      newArr = newArr.filter((itm) => itm !== item);
-    }
-    setSelectedRows(newArr);
-  };
 
-  const handleGlobalCheckboxChange = () => {
-    const newArr = checked ? data?.map(({ id }) => id) : [];
-    setSelectedRows(newArr);
-  };
+ 
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit p-6 max-h-fit ">
       <Table
         head={listingsHead}
-        checked={checked}
-        onClick={() => setChecked((prev) => !prev)}
       >
         {loading && (
           <div className="absolute w-full flex justify-center items-center h-[100px]">
@@ -77,16 +56,10 @@ const AllListings = observer(({ data }) => {
             },
             i
           ) => {
-            const isSelected = selectedRows.find((row) => row === id);
             const tdClass = "max-h-fit border-b-1/2 border-grey-border";
             return (
               <tr className="py-4 bg-white w-full" key={i + id}>
-                <td className={tdClass}>
-                  <CheckBox
-                    checked={!!isSelected}
-                    onClick={() => handleCheckboxChange(id)}
-                  />
-                </td>
+               
                 <td className={tdClass}>
                   <div className="flex flex-col justify-start items-start space-y-2">
                     <div
@@ -143,7 +116,7 @@ const AllListings = observer(({ data }) => {
     </div>
   );
 });
-AllListings.propTypes = {
+AllTransactions.propTypes = {
   data: PropTypes.array,
 };
-export default AllListings;
+export default AllTransactions;

@@ -33,6 +33,7 @@ const Form = () => {
     handleFindListing,
     listingDataSet,
     formTwoDisabled,
+    aarUpdateLoading,
   } = ListingStore;
 
   const [saveType, setSaveType] = useState("");
@@ -79,13 +80,16 @@ const Form = () => {
           containerClass="!shadow-[5px_10px_25px_4px_rgba(50,106,217,0.12)] mb-10"
         />
         <div className="flex flex-col justify-between items-center w-full my-8">
-          {aarLoading && amenities?.length < 1 && <CircleLoader blue />}
+          {((aarLoading && amenities?.length < 1) || aarUpdateLoading) && (
+            <CircleLoader blue />
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-20 justify-between items-start w-full">
             <Amenities
               amenities={amenities}
               searchQuery={searchQuery}
               handleCheckboxChange={savelistingFormTwo}
               items={listingFormTwo?.amenities}
+              path={path}
             />
 
             <Allowances
@@ -93,6 +97,7 @@ const Form = () => {
               searchQuery={searchQuery}
               handleCheckboxChange={savelistingFormTwo}
               items={listingFormTwo?.allowances}
+              path={path}
             />
 
             <Rules
@@ -100,6 +105,7 @@ const Form = () => {
               searchQuery={searchQuery}
               handleCheckboxChange={savelistingFormTwo}
               items={listingFormTwo?.rules}
+              path={path}
             />
           </div>
         </div>
@@ -113,7 +119,8 @@ const Form = () => {
           }}
           type="button"
           isOutline
-          textColor=""
+          textColor="text-blue-alt"
+          borderColor="border-blue-alt"
         />
         <Button
           text="Save & Continue"

@@ -52,6 +52,7 @@ module.exports = {
           DEFAULT: "#F3564D",
           light: "#F2E3E6",
           deep: "#EA3073",
+          alt:"#CE1313"
         },
         green: {
           DEFAULT: "#4CAF50",

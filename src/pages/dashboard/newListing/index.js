@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router";
-import { Link, useLocation,useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import { ReactComponent as ArrowBack } from "assets/icons/arrow-back.svg";
-import { ReactComponent as Loader } from "assets/icons/loader/loader.svg";
+import { ReactComponent as SmallLoader } from "assets/icons/loader/loader.svg";
 import NewListingLayout from "components/layout/listing";
 import ListingStore from "pages/dashboard/listings/store";
-import DeleteModal from "components/general/Modal/deleteModal";
-
+import DeleteModal from "components/general/modal/deleteModal";
+import Loader from "components/general/loader";
 const NewLising = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,7 +21,6 @@ const NewLising = () => {
   ];
   let pathName = location?.pathname;
   for (let index = 0; index < listLinks.length; index++) {
-    console.log("listLinks[index]", listLinks[index]);
     pathName = pathName?.replace(listLinks[index], "");
   }
   const path = pathName?.replace("/", "");
@@ -33,6 +32,7 @@ const NewLising = () => {
     createListing,
     updateListing,
     deleteListing,
+    searchIdLoading,
   } = ListingStore;
 
   const saveAndExit = () => {
@@ -60,6 +60,7 @@ const NewLising = () => {
     <div>
       <NewListingLayout>
         <div className="flex justify-between items-start w-full my-6 max-w-[970px] px-5">
+          {searchIdLoading && <Loader />}
           <Link
             to="/dashboard/listings"
             className="flex justify-start items-center text-base text-black cursor-pointer underline w-full text-left"
@@ -78,7 +79,7 @@ const NewLising = () => {
               onClick={saveAndExit}
               disabled={!listingFormOne?.name || loading}
             >
-              {loading && saveType === "exit" ? <Loader /> : "Save & Exit"}
+              {loading && saveType === "exit" ? <SmallLoader /> : "Save & Exit"}
             </button>
 
             {path && (
@@ -92,7 +93,7 @@ const NewLising = () => {
                 disabled={loading}
               >
                 {loading && saveType === "delete" ? (
-                  <Loader />
+                  <SmallLoader />
                 ) : (
                   "Delete listing"
                 )}

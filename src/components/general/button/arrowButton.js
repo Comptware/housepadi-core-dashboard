@@ -7,7 +7,7 @@ const ArrowButton = ({ onClick, text }) => (
   <Button
     {...{ onClick, text }}
     icon={<ArrowRight />}
-    borderColor="white"
+    borderColor="border-white"
     blackBg
     xsmall
   />

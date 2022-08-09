@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { FileUploader } from "react-drag-drop-files";
 import { DEFAULT_AVATAR } from "utils/constants";
 import { ReactComponent as EditSpan } from "assets/icons/edit-span.svg";
-import ImageModal from "../Modal/imageModal/ImageModal";
+import ImageModal from "../modal/imageModal/ImageModal";
 
 const AvatarPhoto = ({
   file,

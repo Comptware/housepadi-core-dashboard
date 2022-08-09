@@ -10,7 +10,7 @@ const EditButton = ({ onClick, text }) => (
     icon={<Edit />}
     isOutline
     fullWidth
-    borderColor="blue-alt"
+    borderColor="border-blue-alt"
   />
 );
 

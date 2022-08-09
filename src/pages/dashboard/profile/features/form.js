@@ -10,7 +10,7 @@ import CommonStore from "store/common";
 import AvatarPhoto from "components/general/input/avatarPhoto";
 import PhoneNumber from "components/general/phoneNumber/phoneNumber";
 import FileInput from "components/general/input/fileInput";
-import ImageModal from "components/general/Modal/imageModal/ImageModal";
+import ImageModal from "components/general/modal/imageModal/ImageModal";
 import CircleLoader from "components/general/circleLoader/circleLoader";
 import cleanPayload from "utils/cleanPayload";
 
@@ -86,7 +86,7 @@ const Form = () => {
     setUploading(false);
     let payload = { ...form, phone_number, profile_image_url };
     payload = cleanPayload(payload);
-    updateMe({ data: payload, navigate, route: "/" });
+    updateMe({ data: payload, navigate, route: "/dashboard/explore" });
   };
   const handleChange = (prop, val) => {
     setForm({ ...form, [prop]: val });
@@ -96,8 +96,7 @@ const Form = () => {
       !form?.first_name ||
       !form?.last_name ||
       !form?.email ||
-      !form?.phone_number ||
-      !form?.profile_image_url
+      !form?.phone_number
     );
   };
   return (
@@ -190,6 +189,9 @@ const Form = () => {
             />
           ))}
       </div>
+      <div className="absolute w-full flex justify-center items-center h-full z-[99]">
+          <CircleLoader blue />
+        </div>
       <Button
         text="Save & Continue"
         type="submit"
@@ -197,11 +199,11 @@ const Form = () => {
         isLoading={loading || uploading}
         onClick={handleSubmit}
       />
-      {loadingFetchMe && (
+      {/* {loadingFetchMe && ( */}
         <div className="absolute w-full flex justify-center items-center h-full z-[99]">
           <CircleLoader blue />
         </div>
-      )}
+      {/* )} */}
       <div className="w-full min-h-[100px]" />
       {imageModal.show && (
         <ImageModal

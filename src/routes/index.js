@@ -16,13 +16,17 @@ import FormThree from "pages/dashboard/newListing/features/three";
 import FormFour from "pages/dashboard/newListing/features/four";
 import ProfileHome from "pages/dashboard/profile/features";
 import Profile from "pages/dashboard/profile";
+import Bookings from "pages/dashboard/bookings";
+import BookingsHome from "pages/dashboard/bookings/features";
+import BookingDetails from "pages/dashboard/bookings/features/details";
+import UserBookingsProfile from "pages/dashboard/bookings/features/userProfile";
 
 const Router = () => {
   return (
     <>
       <Routes>
         {/* welcome */}
-         <Route
+        <Route
           path="/"
           element={
             <AuthRoute path="" notProtected>
@@ -58,6 +62,22 @@ const Router = () => {
           <Route path="" element={<ListingsHome />} />
         </Route>
         {/* end listings */}
+
+        {/* bookings */}
+        <Route
+          path="/dashboard/bookings"
+          element={
+            <AuthRoute path="">
+              <Bookings />
+            </AuthRoute>
+          }
+        >
+          <Route path="" element={<BookingsHome />} />
+
+          <Route path=":id" element={<BookingDetails />} />
+          <Route path="user/:id" element={<UserBookingsProfile />} />
+        </Route>
+        {/* end bookings */}
 
         {/* messages */}
         <Route

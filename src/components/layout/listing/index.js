@@ -29,7 +29,6 @@ const NewListingLayout = ({ children }) => {
   let pathName = location?.pathname;
 
   for (let index = 0; index < listLinks.length; index++) {
-    console.log("listLinks[index]", listLinks[index]);
     pathName = pathName?.replace(listLinks[index], "");
   }
 

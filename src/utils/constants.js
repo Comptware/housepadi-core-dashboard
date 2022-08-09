@@ -47,3 +47,5 @@ export const GUEST_PAYMENTS = [
 
 export const DEFAULT_AVATAR =
   "https://res.cloudinary.com/olamilekan1/image/upload/v1658528808/avatar-default.png";
+
+  export const pageCount = 10;

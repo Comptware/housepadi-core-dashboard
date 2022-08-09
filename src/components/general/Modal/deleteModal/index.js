@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "components/general/button/button";
-import Modal from "components/general/Modal/modal/modal";
-import ModalBody from "components/general/Modal/modalBody/modalBody";
+import Modal from "components/general/modal/modal/modal";
+import ModalBody from "components/general/modal/modalBody/modalBody";
 
 const DeleteModal = ({ handleDelete, isDeleting, onClose, title, text }) => {
   return (

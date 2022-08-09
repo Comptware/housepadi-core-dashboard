@@ -32,9 +32,9 @@ const Button = ({
   ${fullWidth ? "w-full" : ""}
   whitespace-nowrap ${
     isOutline
-      ? `bg-transparent ${
-          isDisabled ? "bg-white/[.2]" : ""
-        } text-blue-alt border border-${borderColor || "white"}`
+      ? `bg-transparent hover:bg-grey-light ${isDisabled ? "bg-white/[.2]" : ""} ${
+          textColor || "blue-alt"
+        } border ${borderColor || "border-white"}`
       : whiteBg
       ? `bg-white ${isDisabled ? "bg-white/[.2]" : ""} text-${
           textColor || "grey-text"

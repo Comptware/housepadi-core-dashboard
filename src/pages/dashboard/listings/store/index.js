@@ -20,7 +20,7 @@ class ListingStore {
   // State
   // ====================================================
   listings = [];
-  listingsCount = [];
+  listingsCount = 0;
   reservedListings = [];
   allowances = [];
   amenities = [];
@@ -34,8 +34,10 @@ class ListingStore {
   error = null;
   loading = false;
   aarLoading = false;
+  aarUpdateLoading = false;
   listingDataSet = false;
   activeListingId = "";
+  searchIdLoading = true;
 
   constructor() {
     makeAutoObservable(this);
@@ -45,7 +47,6 @@ class ListingStore {
   // Computed views
   // ====================================================
   // While MobX promotes OOP, we can still benefit from using FP where it's appropriate
-
 
   // ====================================================
   // Actions
@@ -87,7 +88,10 @@ class ListingStore {
   };
 
   formFourDisabled = () => {
-    return !this.listingFormFour?.base_price;
+    return (
+      !this.listingFormFour?.base_price ||
+      (!this.listingFormFour?.bank_transfer && !this.listingFormFour?.card)
+    );
     // ||
     // (this.listingFormFour?.bank_transfer && (this.listingFormFour?.account_number?.length < 10 || !PaystackStore.userDetails)) ||
     // (this.listingFormFour?.card && (!this.listingFormFour?.card_number || !this.listingFormFour?.expiry_date | !this.listingFormFour?.cvv))
@@ -221,6 +225,7 @@ class ListingStore {
       this.loading = false;
     }
   };
+
   // Get Allowances amenities rules
   getAAR = async () => {
     this.aarLoading = true;
@@ -235,19 +240,31 @@ class ListingStore {
       this.aarLoading = false;
     }
   };
-
-  handleFindListing = async (url, navigate) => {
-    let listingRes;
-    let lisingsArr;
-    if (this.listings?.length < 1) {
-      listingRes = await this.getListings("1");
-      lisingsArr = listingRes;
-    } else {
-      lisingsArr = this.listings;
+  // Update Listings
+  updateAAR = async ({ data, type, action, shortlet_id }) => {
+    this.loading = true;
+    try {
+      await apis.updateAAR(data, type, action, shortlet_id);
+    } catch (error) {
+      this.error = error;
+    } finally {
+      this.loading = false;
     }
-
-    const currentListing = lisingsArr?.find(({ id }) => id === url);
-
+  };
+  searchListingsById = async (shortlet_id) => {
+    this.searchIdLoading = true;
+    try {
+      let results = await apis.searchListingById(shortlet_id);
+      results = results?.shortlet;
+      return results;
+    } catch (error) {
+      this.error = error;
+    } finally {
+      this.searchIdLoading = false;
+    }
+  };
+  handleFindListing = async (url, navigate) => {
+    let currentListing = await this.searchListingsById(url);
     if (currentListing) {
       console.log("currentListing", currentListing);
       const {
@@ -306,9 +323,9 @@ class ListingStore {
         state,
       };
       const lisingDataTwo = {
-        amenities: amenities?.map(({ id }) => id),
-        allowances: allowances?.map(({ id }) => id),
-        rules: rules?.map(({ id }) => id),
+        amenities: amenities?.map(({ amenity_id }) => amenity_id),
+        allowances: allowances?.map(({ allowance_id }) => allowance_id),
+        rules: rules?.map(({ rule_id }) => rule_id),
       };
       const lisingDataThree = {
         images,
@@ -359,14 +376,49 @@ class ListingStore {
       this.listingFormOne = { ...this.listingFormOne, [prop]: val };
     }
   };
-  savelistingFormTwo = (item, items, prop) => {
+  savelistingFormTwo = async (item, items, prop, shortlet_id) => {
     let newArr = [...items, item];
     newArr = [...new Set(newArr)];
     const match = items?.find((el) => el === item);
     if (match) {
       newArr = newArr.filter((itm) => itm !== item);
+      console.log("Item UnChecked");
+    } else {
+      console.log("Item Checked");
     }
-    this.listingFormTwo = { ...this.listingFormTwo, [prop]: newArr };
+    if (shortlet_id) {
+      console.log("This is shortlet_id: ", shortlet_id);
+
+      const data =
+        prop === "allowances"
+          ? { allowance_id: item }
+          : prop === "amenities"
+          ? { amenity_id: item }
+          : prop === "rules"
+          ? { rule_id: item }
+          : {};
+      const type =
+        prop === "allowances"
+          ? "allowance"
+          : prop === "amenities"
+          ? "amenity"
+          : prop === "rules"
+          ? "rule"
+          : "";
+      const action = match ? "remove" : "add";
+
+      try {
+        this.aarUpdateLoading = true;
+        await apis.updateAAR(data, type, action, shortlet_id);
+        this.listingFormTwo = { ...this.listingFormTwo, [prop]: newArr };
+      } catch (error) {
+        this.error = error;
+      } finally {
+        this.aarUpdateLoading = false;
+      }
+    } else {
+      this.listingFormTwo = { ...this.listingFormTwo, [prop]: newArr };
+    }
   };
   savelistingFormThree = (prop, val) => {
     this.listingFormThree = { ...this.listingFormThree, [prop]: val };

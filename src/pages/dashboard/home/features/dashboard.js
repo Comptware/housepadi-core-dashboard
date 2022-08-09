@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
+import moment from "moment";
+
 import Listings from "./listings";
 import RecentRequests from "./recentRequests";
 import UserProfile from "./userProfile";
-const DashBoard = observer(() => {
+import HomeStore from "../store";
+
+
+const DashBoard = () => {
+  const { getBookings, date } = HomeStore;
+  useEffect(() => {
+    getBookings(1);
+  }, []);
+
   return (
     <div className="flex flex-col justify-start items-start h-full w-full">
       <div className="flex flex-row justify-start items-start h-fit  w-full bg-white p-4 border-b-1/2 border-grey-border">
@@ -21,7 +31,7 @@ const DashBoard = observer(() => {
               Recent Requests
             </h3>
             <span className="text-black text-[10px] uppercase regular-font">
-              Last updated 2 hours ago
+              Last updated {moment(date).fromNow()}
             </span>
           </div>
 
@@ -37,6 +47,6 @@ const DashBoard = observer(() => {
       </div>
     </div>
   );
-});
+};
 
-export default DashBoard;
+export default observer(DashBoard);
