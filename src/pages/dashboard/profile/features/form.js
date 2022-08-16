@@ -48,7 +48,6 @@ const Form = () => {
 
   const handleSetForm = async () => {
     const data = await getMe();
-    console.log("data handleSetForm", data);
     const {
       first_name,
       last_name,
@@ -189,9 +188,7 @@ const Form = () => {
             />
           ))}
       </div>
-      <div className="absolute w-full flex justify-center items-center h-full z-[99]">
-          <CircleLoader blue />
-        </div>
+
       <Button
         text="Save & Continue"
         type="submit"
@@ -199,11 +196,11 @@ const Form = () => {
         isLoading={loading || uploading}
         onClick={handleSubmit}
       />
-      {/* {loadingFetchMe && ( */}
+      {loadingFetchMe && (
         <div className="absolute w-full flex justify-center items-center h-full z-[99]">
           <CircleLoader blue />
         </div>
-      {/* )} */}
+      )}
       <div className="w-full min-h-[100px]" />
       {imageModal.show && (
         <ImageModal

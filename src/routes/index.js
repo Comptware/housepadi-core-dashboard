@@ -20,6 +20,8 @@ import Bookings from "pages/dashboard/bookings";
 import BookingsHome from "pages/dashboard/bookings/features";
 import BookingDetails from "pages/dashboard/bookings/features/details";
 import UserBookingsProfile from "pages/dashboard/bookings/features/userProfile";
+import Settings from "pages/dashboard/settings";
+import SettingsHome from "pages/dashboard/settings/features";
 
 const Router = () => {
   return (
@@ -91,7 +93,18 @@ const Router = () => {
           <Route path="" element={<MessagesHome />} />
         </Route>
         {/* end messages */}
-
+        {/* settings */}
+        <Route
+          path="/dashboard/settings"
+          element={
+            <AuthRoute path="">
+              <Settings />
+            </AuthRoute>
+          }
+        >
+          <Route path="" element={<SettingsHome />} />
+        </Route>
+        {/* end settings */}
         {/* profile */}
         <Route
           path="/dashboard/me"

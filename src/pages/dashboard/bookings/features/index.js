@@ -2,16 +2,10 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
 import UserProfile from "pages/dashboard/home/features/userProfile";
-import HomeStore from "pages/dashboard/home/store";
 import Listings from "./bookings";
 import Overview from "./overview";
 
 const BookingsHome = observer(() => {
-  const { getBookings } = HomeStore;
-  useEffect(() => {
-    getBookings(1);
-  }, []);
-
   return (
     <div className="flex flex-col justify-start items-start h-full w-full">
       <div className="flex flex-row justify-start items-start h-fit  w-full bg-white p-4 border-b-1/2 border-grey-border">

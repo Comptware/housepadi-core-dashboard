@@ -14,7 +14,7 @@ const AllBookings = observer(({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    currentPage > 1 && getBookings(currentPage);
+    getBookings(currentPage);
   }, [currentPage]);
 
   return (
@@ -23,7 +23,7 @@ const AllBookings = observer(({ data }) => {
         <List key={booking?.id} listing={booking} />
       ))}
       {loading && (
-        <div className="absolute w-full flex justify-center items-center h-[100px]">
+        <div className=" w-full flex justify-center items-center h-[100px]">
           <CircleLoader blue />
         </div>
       )}

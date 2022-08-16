@@ -152,7 +152,6 @@ class ListingStore {
     this.loading = true;
     try {
       const formThree = await this.uploadListingImages(this.listingFormThree);
-      console.log("formThree", formThree);
       let payload = {
         ...this.listingFormOne,
         ...formThree,
@@ -186,7 +185,6 @@ class ListingStore {
     this.loading = true;
     try {
       const formThree = await this.uploadListingImages(this.listingFormThree);
-      console.log("formThree Update", formThree);
       let payload = {
         ...this.listingFormOne,
         ...formThree,
@@ -266,7 +264,6 @@ class ListingStore {
   handleFindListing = async (url, navigate) => {
     let currentListing = await this.searchListingsById(url);
     if (currentListing) {
-      console.log("currentListing", currentListing);
       const {
         // Form one
         name,
@@ -342,7 +339,6 @@ class ListingStore {
         addon_caution_fee,
         addon_cleaning_fee,
       };
-      console.log("lisingDataFour", lisingDataFour);
       this.selectedAddress = { label: address };
       this.listingFormOne = { ...lisingDataOne };
       this.listingFormTwo = { ...lisingDataTwo };
@@ -382,13 +378,8 @@ class ListingStore {
     const match = items?.find((el) => el === item);
     if (match) {
       newArr = newArr.filter((itm) => itm !== item);
-      console.log("Item UnChecked");
-    } else {
-      console.log("Item Checked");
     }
     if (shortlet_id) {
-      console.log("This is shortlet_id: ", shortlet_id);
-
       const data =
         prop === "allowances"
           ? { allowance_id: item }

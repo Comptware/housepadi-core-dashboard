@@ -12,6 +12,7 @@
     "chart.js": "^3.8.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.0",
+    "firebase": "^9.9.2",
     "formik": "^2.2.9",
     "mobx": "^6.6.0",
     "mobx-react-lite": "^3.4.0",

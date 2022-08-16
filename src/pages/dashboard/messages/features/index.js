@@ -24,13 +24,13 @@ const MessagesHome = observer(() => {
               leftIcon
             />
           </div>
-          <div className="flex flex-col justify-start items-start pl-3 ">
+          <div className="flex flex-col justify-start items-start pl-3 w-full">
             <Overview />
           </div>
         </div>
 
         {/* Right column */}
-        <div className="flex flex-col basis-[100%] md:basis-[60%] md:w-[50%] fixed right-0 h-[calc(100%-140px)] bg-white justify-start items-center space-y-7 border-l-1/2 border-grey-border">
+        <div className="flex flex-col basis-[100%] w-full md:basis-[60%] md:w-[50%] fixed right-0 h-[calc(100%-120px)] bg-white justify-start items-center space-y-7 border-l-1/2 border-grey-border">
           <ChatSection />
         </div>
       </div>

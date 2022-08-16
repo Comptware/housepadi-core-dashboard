@@ -6,12 +6,19 @@ import { Slide } from "react-slideshow-image";
 import Modal from "../modal/modal";
 import ModalBody from "../modalBody/modalBody";
 
-const ImageModal = ({ active, toggler, photos }) => {
+const ImageModal = ({ active, toggler, photos, className, togglerClass }) => {
   return (
-    <Modal size="md" active={active} toggler={toggler} noPadding bodyClass="">
+    <Modal
+      size="md"
+      active={active}
+      toggler={toggler}
+      noPadding
+      bodyClass=""
+      togglerClass={togglerClass}
+    >
       <ModalBody>
-        <div className="w-full h-full">
-          <Slide cssClass="w-full h-full">
+        <div className={`w-full h-full ${className}`}>
+          <Slide cssClass="w-full h-full" arrows={photos?.length > 1}>
             {photos?.map((slideImage, index) => (
               <div className="each-slide w-full h-full" key={index}>
                 {/* <div className='w-full h-full' style={{'backgroundImage': `url(${slideImage.url})`}}>
@@ -44,5 +51,7 @@ ImageModal.propTypes = {
   active: PropTypes.bool,
   toggler: PropTypes.func,
   photos: PropTypes.array,
+  className: PropTypes.string,
+  togglerClass: PropTypes.string,
 };
 export default ImageModal;

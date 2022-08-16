@@ -1,10 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { observer } from "mobx-react-lite";
 
-const ChatTile = ({ className, image, title, label, count, date, read }) => {
+import MessagesStore from "pages/dashboard/messages/store";
+
+const ChatTile = ({
+  className,
+  image,
+  title,
+  label,
+  count,
+  date,
+  read,
+  onClick,
+}) => {
+  const { currentChat } = MessagesStore;
   return (
     <div
-      className={`flex justify-between items-center w-full h-fit rounded-lg py-6 space-x-6 border-b-1/2 border-grey-border cursor-pointer ${className} `}
+      className={`flex justify-between items-center w-full h-fit rounded-lg py-6 px-3 space-x-6 border-b-1/2 border-grey-border hover:bg-grey-alt cursor-pointer ${
+        currentChat?.userName === title ? "bg-grey-alte" : ""
+      } ${className} transition-all duration-500 ease-in-out`}
+      onClick={onClick}
     >
       <div className="flex justify-start items-center w-fit space-x-6">
         <div className="flex flex-col justify-center items-start space-y-1">
@@ -30,7 +46,7 @@ const ChatTile = ({ className, image, title, label, count, date, read }) => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-between items-start space-y-14 h-full">
+      <div className="flex flex-col justify-between items-start space-y-4 h-full">
         {!read && (
           <span className="flex justify-center items-center text-xs text-white bg-black w-[22px] h-[22px] rounded-[22px]">
             {count}
@@ -51,5 +67,6 @@ ChatTile.propTypes = {
   count: PropTypes.string,
   date: PropTypes.string,
   read: PropTypes.bool,
+  onClick: PropTypes.func,
 };
-export default ChatTile;
+export default observer(ChatTile);

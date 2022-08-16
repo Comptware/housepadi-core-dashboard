@@ -44,7 +44,9 @@ const Textarea = ({
         </label>
       )}
       <div
-        className={`textarea-container relative py-3 w-full bg-white rounded-lg flex items-center justify-between  font-normal outline-none capitalize tracking-wider focus:outline-none transition-all duration-150 whitespace-nowrap  text-base leading-relaxed  border border-solid shadow-none text-left
+        className={`textarea-container relative ${
+          sm ? "" : "py-3"
+        } w-full bg-white rounded-lg flex items-center justify-between  font-normal outline-none capitalize tracking-wider focus:outline-none transition-all duration-150 whitespace-nowrap  text-base leading-relaxed  border border-solid shadow-none text-left
           ${
             active
               ? "border-blue text-black"
@@ -64,7 +66,7 @@ const Textarea = ({
                 ? "text-black"
                 : "placeholder:text-grey"
             }
-            ${sm ? "h-20" : "h-32"}
+            ${sm ? "h-[46px] p-3" : "h-32"}
           `}
           value={value}
           placeholder={placeholder}
@@ -77,7 +79,6 @@ const Textarea = ({
           onChange={({ target }) => {
             onChangeFunc(target.value, { value: target.value, name });
           }}
-         
         ></textarea>
       </div>
     </div>

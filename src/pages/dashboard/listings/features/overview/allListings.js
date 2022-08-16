@@ -58,12 +58,6 @@ const AllListings = observer(({ data }) => {
         checked={checked}
         onClick={() => setChecked((prev) => !prev)}
       >
-        {loading && (
-          <div className="absolute w-full flex justify-center items-center h-[100px]">
-            <CircleLoader blue />
-          </div>
-        )}
-
         {data.map(
           (
             {
@@ -132,6 +126,11 @@ const AllListings = observer(({ data }) => {
               </tr>
             );
           }
+        )}
+        {loading && (
+          <div className="absolute w-full flex justify-center items-center h-[100px]">
+            <CircleLoader blue />
+          </div>
         )}
       </Table>
       <Pagination

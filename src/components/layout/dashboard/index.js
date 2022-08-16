@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
 import { useAuth } from "hooks/auth";
 import { DEFAULT_AVATAR } from "utils/constants";
@@ -207,4 +208,4 @@ DashboardLayout.propTypes = {
   children: PropTypes.any,
 };
 
-export default DashboardLayout;
+export default observer(DashboardLayout);

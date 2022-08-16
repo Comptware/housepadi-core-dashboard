@@ -32,7 +32,6 @@ class PaystackStore {
     try {
       let res = await getPaystackData("/bank");
       res = res?.data?.data;
-      console.log("BANKSS", res);
       this.banks =
         res?.map(({ name, code, ...item }) => {
           return { ...item, label: name, value: code };
@@ -52,7 +51,6 @@ class PaystackStore {
         `/bank/resolve?account_number=${account_number}&bank_code=${bank_code}`
       );
       res = res?.data?.data;
-      console.log("BANK DETAILS", res);
       this.userDetails = res || null;
     } catch (error) {
       this.error = error;

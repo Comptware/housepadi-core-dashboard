@@ -38,6 +38,7 @@ module.exports = {
           ghostwhite: "#f8f9fb",
           textalt: "#686B6F",
           alt: "#F6F7F8",
+          alte: "rgba(222, 225, 233, 0.973)",
           fade: "#EAEBEC",
           placeholder: "#A4A4A4",
           label: "#2A2B2C",
@@ -52,7 +53,7 @@ module.exports = {
           DEFAULT: "#F3564D",
           light: "#F2E3E6",
           deep: "#EA3073",
-          alt:"#CE1313"
+          alt: "#CE1313",
         },
         green: {
           DEFAULT: "#4CAF50",

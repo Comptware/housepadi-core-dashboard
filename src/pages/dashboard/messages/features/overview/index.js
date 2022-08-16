@@ -1,112 +1,56 @@
 import React, { useState, useRef, useEffect } from "react";
 import { observer } from "mobx-react-lite";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 
-import Avatar from "assets/images/avatar.png";
+import { getUserInfoFromStorage } from "utils/storage";
+import db from "services/firebase.config";
+import MessagesStore from "../../store";
 import ChatList from "./chatList";
-const Overview = observer(() => {
-  const data = [
-    {
-      user: { image: Avatar, name: "Taiwo Harry" },
-      label:
-        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ...",
-      time: "5 mins",
-      status: "unread",
-      id: "01",
-    },
-    {
-      user: { image: Avatar, name: "Taiwo Harry" },
-      label:
-        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ...",
-      time: "5 mins",
-      status: "unread",
-      id: "02",
-    },
-    {
-      user: { image: Avatar, name: "Taiwo Harry" },
-      label:
-        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ...",
-      time: "5 mins",
-      status: "unread",
-      id: "03",
-    },
-    {
-      user: { image: Avatar, name: "Taiwo Harry" },
-      label:
-        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ...",
-      time: "5 mins",
-      status: "unread",
-      id: "04",
-    },
-    {
-      user: { image: Avatar, name: "Taiwo Harry" },
-      label:
-        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ...",
-      time: "5 mins",
-      status: "unread",
-      id: "05",
-    },
-
-    {
-      user: { image: Avatar, name: "Taiwo Harry" },
-      label:
-        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ...",
-      time: "5 mins",
-      status: "read",
-      id: "06",
-    },
-    {
-      user: { image: Avatar, name: "Taiwo Harry" },
-      label:
-        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ...",
-      time: "5 mins",
-      status: "read",
-      id: "07",
-    },
-    {
-      user: { image: Avatar, name: "Taiwo Harry" },
-      label:
-        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ...",
-      time: "5 mins",
-      status: "read",
-      id: "08",
-    },
-    {
-      user: { image: Avatar, name: "Taiwo Harry" },
-      label:
-        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ...",
-      time: "5 mins",
-      status: "read",
-      id: "09",
-    },
-    {
-      user: { image: Avatar, name: "Taiwo Harry" },
-      label:
-        "incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ...",
-      time: "5 mins",
-      status: "read",
-      id: "10",
-    },
-  ];
-
-  const readMessages = data.filter(({ status }) => status === "read");
-  const unReadMessages = data.filter(({ status }) => status === "unread");
+const Overview = () => {
+  const { setConversations: setStoreConversations, chats } = MessagesStore;
+  const userInfo = getUserInfoFromStorage();
   const containerRef = useRef(null);
+  const [sliderWidth, setSliderWidth] = useState(0);
+  const [sliderPosition, setSliderPosition] = useState(0);
+  const [conversations, setConversations] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getConversations();
+  }, [chats]);
+
   const tabs = [
     {
-      title: `Unread (${unReadMessages.length})`,
-      content: <ChatList data={unReadMessages} />,
-    },
-    {
-      title: "Opened",
-      content: <ChatList data={readMessages} />,
+      title: `Chats`,
+      content: <ChatList data={conversations} />,
     },
   ];
   const [activeTab, setActiveTab] = useState({
     title: tabs[0].title,
     index: 0,
   });
-  const [sliderWidth, setSliderWidth] = useState(0);
-  const [sliderPosition, setSliderPosition] = useState(0);
+
+  const getConversations = async () => {
+    setLoading(true);
+    let convos = [];
+    const convoRef = collection(db, "conversations");
+    const q = query(convoRef, where("agentId", "==", userInfo?.id));
+
+    onSnapshot(q, (querySnapshot) => {
+      convos = [];
+      querySnapshot.forEach((item) => {
+        convos.push(item.data());
+      });
+      convos = convos.sort(
+        (a, b) =>
+          new Date(b?.lastMessageAt?.toDate()) -
+          new Date(a?.lastMessageAt?.toDate())
+      );
+      setConversations(convos);
+      setStoreConversations(convos);
+      setLoading(false);
+    });
+  };
 
   useEffect(() => {
     handleSlide();
@@ -138,7 +82,11 @@ const Overview = observer(() => {
               }`}
               onClick={() => setActiveTab({ title, index })}
             >
-              <span className="">{title} </span>
+              <span className="">
+                {`${title} ${
+                  title === "Chats" ? "(" + conversations?.length + ")" : ""
+                }`}{" "}
+              </span>
             </button>
           ))}
         </div>
@@ -164,6 +112,6 @@ const Overview = observer(() => {
       </div>
     </div>
   );
-});
+};
 
-export default Overview;
+export default observer(Overview);

@@ -3,17 +3,18 @@
  */
 import { makeAutoObservable } from "mobx";
 
-class MessagesStore {
+class SettingsStore {
   // ====================================================
   // State
   // ====================================================
-  conversations = null;
-  chats = null;
-  currentChat = null;
-  currentChatRef = null;
-  externalChat = null;
+  user = null;
+  count = 0;
   error = null;
   loading = false;
+
+  pushNotification = false;
+  chatNotification = false;
+  bannerNotification = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -21,31 +22,26 @@ class MessagesStore {
 
   // ====================================================
   // Computed views
+
   // ====================================================
   // While MobX promotes OOP, we can still benefit from using FP where it's appropriate
+  get token() {
+    return this.user.token;
+  }
 
   // ====================================================
   // Actions
   // ====================================================
 
-  setConversations = (data) => {
-    this.conversations = data;
-  };
-  setCurrentChat = (data) => {
-    this.currentChat = data;
-  };
-  setCurrentChatRef = (data) => {
-    this.currentChatRef = data;
-  };
-  setChats = (data) => {
-    this.chats = data;
-  };
-  setLoading = (data) => {
-    this.loading = data;
-  };
-  setExternalChat = (data) => {
-    this.externalChat = data;
-  };
+  toggleChat() {
+    this.chatNotification = !this.chatNotification;
+  }
+  togglePush() {
+    this.pushNotification = !this.pushNotification;
+  }
+  toggleBanner() {
+    this.bannerNotification = !this.bannerNotification;
+  }
 }
 
-export default new MessagesStore();
+export default new SettingsStore();

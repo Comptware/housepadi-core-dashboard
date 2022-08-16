@@ -20,7 +20,6 @@ const FileBox = ({
   isAvatar,
   ...rest
 }) => {
-
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const fileTypes = ["JPG", "PNG", "JPEG"];
@@ -32,7 +31,6 @@ const FileBox = ({
   useEffect(() => {
     const fileSize = (file?.size || 0) / 1024 ** 2;
     if (fileSize > 50) return setError(true);
-    console.log("effect file", file);
     setError(false);
   }, [file]);
 
@@ -123,7 +121,6 @@ const FileBox = ({
        ${error || isError ? "!border-red" : "border-grey"} 
       `}
           type="button"
-         
           disabled={isDisabled}
         >
           {file && file[0] && (

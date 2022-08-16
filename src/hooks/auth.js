@@ -23,6 +23,7 @@ function useAuth() {
     try {
       AuthStore.logout();
       await clearUserDetails();
+      window.location.reload();
     } catch (error) {
       return error;
     }
