@@ -95,7 +95,7 @@ const UserProfile = () => {
       setCurrentChat(payload);
       navigate("/dashboard/messages");
     } catch (error) {
-      console.log("SENDING ERROR", error);
+      console.log("SENDING MESSAGE ERROR", error);
     } finally {
       setSending(false);
     }
