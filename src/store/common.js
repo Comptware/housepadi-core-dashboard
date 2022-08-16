@@ -5,6 +5,7 @@
 import { makeAutoObservable } from "mobx";
 import apis from "services/common";
 import { successToast } from "components/general/toast/toast";
+import { saveUserInfoToStorage } from "utils/storage";
 
 class CommonStore {
   // ====================================================
@@ -33,8 +34,8 @@ class CommonStore {
     this.loadingFetchMe = true;
     try {
       const res = await apis.getMe();
-      console.log("Me res", res);
       this.me = res;
+      saveUserInfoToStorage(res);
       return res;
     } catch (error) {
       this.error = error;
