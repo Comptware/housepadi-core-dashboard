@@ -70,7 +70,7 @@ const UserProfile = () => {
           <p className="text-base text-black">Transactions</p>
         </Link>
         <Link
-          to="/#"
+          to="/dashboard/me"
           className="space-x-3 flex justify-start items-center py-4 border-b-1/2 border-grey-border w-full"
         >
           <Host />

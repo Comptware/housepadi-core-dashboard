@@ -7,7 +7,6 @@ import RecentRequests from "./recentRequests";
 import UserProfile from "./userProfile";
 import HomeStore from "../store";
 
-
 const DashBoard = () => {
   const { getBookings, date } = HomeStore;
   useEffect(() => {
@@ -28,7 +27,7 @@ const DashBoard = () => {
           <Listings />
           <div className="flex flex-col justify-start items-start space-y-1">
             <h3 className="text-lg text-grey-text medium-font">
-              Recent Requests
+              Recent Bookings
             </h3>
             <span className="text-black text-[10px] uppercase regular-font">
               Last updated {moment(date).fromNow()}

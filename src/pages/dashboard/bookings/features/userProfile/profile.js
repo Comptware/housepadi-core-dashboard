@@ -19,7 +19,7 @@ import { ReactComponent as Message } from "assets/icons/btn-message.svg";
 import { ReactComponent as Report } from "assets/icons/report.svg";
 import MessagesStore from "pages/dashboard/messages/store";
 import db from "services/firebase.config";
-import cleanPayload from "utils/cleanPayload";
+import cleanPayload, { checkPayloadEmptyField } from "utils/cleanPayload";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -88,12 +88,14 @@ const UserProfile = () => {
         unreadUserChats: 0,
         unreadAgentChats: 0,
       };
-
-      payload = cleanPayload(payload);
-      const docRef = await addDoc(chatsRef, payload);
-      setCurrentChatRef(docRef.path);
-      setCurrentChat(payload);
-      navigate("/dashboard/messages");
+      const emptyFieldFound = checkPayloadEmptyField(payload);
+      if (!emptyFieldFound) {
+        payload = cleanPayload(payload);
+        const docRef = await addDoc(chatsRef, payload);
+        setCurrentChatRef(docRef.path);
+        setCurrentChat(payload);
+        navigate("/dashboard/messages");
+      }
     } catch (error) {
       console.log("SENDING MESSAGE ERROR", error);
     } finally {

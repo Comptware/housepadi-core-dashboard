@@ -10,7 +10,7 @@ const DeleteModal = ({ handleDelete, isDeleting, onClose, title, text }) => {
       <ModalBody>
         <div className="w-full text-center ">
           <div className="pt-[42px] px-[24px] pb-[24px]">
-            <p className="text-black mb-[16px]">{title}</p>
+            <p className="text-black mb-[16px] regular-font">{title}</p>
             <p className="text-grey-text text-sm">{text}</p>
           </div>
 

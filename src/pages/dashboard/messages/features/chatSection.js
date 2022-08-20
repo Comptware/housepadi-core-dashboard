@@ -25,7 +25,7 @@ import moment from "moment";
 import { DEFAULT_AVATAR } from "utils/constants";
 import Loader from "components/general/loader";
 import db from "services/firebase.config";
-import cleanPayload from "utils/cleanPayload";
+import cleanPayload, { checkPayloadEmptyField } from "utils/cleanPayload";
 import { uploadImageToCloud } from "utils/uploadImagesToCloud";
 import Input from "components/general/input/input";
 import ImageChatModal from "./imageChatModal";
@@ -160,8 +160,14 @@ const ChatSection = () => {
         unreadUserChats: 0,
       };
       payload = cleanPayload(payload);
+      const emptyFieldFound = checkPayloadEmptyField(payload);
+
       const data = count ? payload : payloadAlt;
-      await setDoc(chatsRef, data, { merge: true });
+      if (!emptyFieldFound && count) {
+        await setDoc(chatsRef, data, { merge: true });
+      } else if (!count) {
+        await setDoc(chatsRef, data, { merge: true });
+      }
     } catch (error) {
       console.log("UPDATE ERROR", error);
     }

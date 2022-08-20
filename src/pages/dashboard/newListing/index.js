@@ -60,7 +60,7 @@ const NewLising = () => {
     <div>
       <NewListingLayout>
         <div className="flex justify-between items-start w-full my-6 max-w-[970px] px-5">
-          {searchIdLoading && <Loader />}
+          {searchIdLoading && path && <Loader />}
           <Link
             to="/dashboard/listings"
             className="flex justify-start items-center text-base text-black cursor-pointer underline w-full text-left"
@@ -110,7 +110,7 @@ const NewLising = () => {
             isDeleting={loading}
             onClose={() => setShowModal(false)}
             title="You are about to delete this listing"
-            text="This will delete your product from the list of products, Are you sure?"
+            text="This listing will be permanently removed from your listings, Are you sure?"
           />
         )}
         <Outlet />

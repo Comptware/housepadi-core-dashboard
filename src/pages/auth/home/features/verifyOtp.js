@@ -12,7 +12,6 @@ import { ReactComponent as Loader } from "assets/icons/loader/loader.svg";
 import Button from "components/general/button/button";
 import { FormErrorMessage } from "components/general/errorMessage";
 import useLoginSetup from "hooks/loginSetup";
-import Banner from "./banner";
 import OtpField from "components/general/input/otpInput";
 
 YupPassword(Yup);
@@ -73,10 +72,9 @@ const VerifyOtp = observer(() => {
   const otp = watch("otp");
 
   return (
-    <div className="flex mx-auto md:m-auto ">
-      <div className="w-[40%]  hidden md:flex">
-        <Banner />
-      </div>
+    <div
+      className={`flex mx-auto md:m-auto transition-transform duration-500 ease-in-out  h-[60vh]`}
+    >
       <section className="w-[90%] h-fit md:w-[380px] mx-auto md:m-auto flex flex-col">
         <h2 className="text-black text-[24px] mb-4 medium-font">
           {" "}

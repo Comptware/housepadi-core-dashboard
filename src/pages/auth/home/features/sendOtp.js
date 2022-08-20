@@ -12,7 +12,6 @@ import Button from "components/general/button/button";
 import { FormErrorMessage } from "components/general/errorMessage";
 import PhoneNumber from "components/general/phoneNumber/phoneNumber";
 import CheckBox from "components/general/input/checkBox";
-import Banner from "./banner";
 
 YupPassword(Yup);
 
@@ -69,12 +68,13 @@ const SendOtp = observer(() => {
   const phone_number = watch("phone_number");
 
   return (
-    <div className="flex mx-auto md:m-auto">
-      <div className="w-[40%] hidden md:flex">
-        <Banner />
-      </div>
+    <div
+      className={`flex mx-auto md:m-auto transition-transform duration-500 ease-in-out  h-[60vh]`}
+    >
       <section className="w-[90%] h-fit md:w-[380px] mx-auto md:m-auto flex flex-col">
-        <h2 className="text-black text-[24px] mb-4 medium-font">Welcome to Zusco Host</h2>
+        <h2 className="text-black text-[24px] mb-4 medium-font">
+          Welcome to Zusco Host
+        </h2>
         <h2 className="text-lg text-grey-textalt mb-3">
           {" "}
           Enter your phone number to receive veification code.

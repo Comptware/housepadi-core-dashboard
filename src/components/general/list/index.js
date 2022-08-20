@@ -5,6 +5,7 @@ import { ReactComponent as Location } from "assets/icons/location.svg";
 import { ReactComponent as Clock } from "assets/icons/time.svg";
 import { Button } from "../button";
 import { Link } from "react-router-dom";
+import { determinePaymentStatus } from "utils/bookings";
 
 const List = ({ listing }) => {
   return (
@@ -32,7 +33,10 @@ const List = ({ listing }) => {
           </span>
         </div>
         <div className="flex flex-col justify-center items-start space-y-3">
-          <span className="text-xl text-black">{listing?.shortlet?.name} </span>
+          <span className="text-xl text-black flex justify-start items-center gap-x-2 whitespace-nowrap">
+            {listing?.shortlet?.name}
+            {determinePaymentStatus(listing?.paid)}
+          </span>
 
           <span className="text-base text-black flex justify-between items-center">
             <Location className=" mr-2 w-[15px] h-[15px]" />{" "}
@@ -51,7 +55,13 @@ const List = ({ listing }) => {
       </div>
 
       <div className="flex flex-col justify-center items-end space-y-4 h-full">
-        <Button isOutline text="View details" borderColor="border-blue-alt" textColor="text-blue-alt" small />
+        <Button
+          isOutline
+          text="View details"
+          borderColor="border-blue-alt"
+          textColor="text-blue-alt"
+          small
+        />
       </div>
     </Link>
   );
