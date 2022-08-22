@@ -10,8 +10,7 @@ import NewLising from "pages/dashboard/newListing";
 import FormOne from "pages/dashboard/newListing/features/one";
 import FormTwo from "pages/dashboard/newListing/features/two";
 import AuthHome from "pages/auth/home";
-import SendOtp from "pages/auth/home/features/sendOtp";
-import VerifyOtp from "pages/auth/home/features/verifyOtp";
+import Login from "pages/auth/home/features/login";
 import FormThree from "pages/dashboard/newListing/features/three";
 import FormFour from "pages/dashboard/newListing/features/four";
 import ProfileHome from "pages/dashboard/profile/features";
@@ -22,6 +21,7 @@ import BookingDetails from "pages/dashboard/bookings/features/details";
 import UserBookingsProfile from "pages/dashboard/bookings/features/userProfile";
 import Settings from "pages/dashboard/settings";
 import SettingsHome from "pages/dashboard/settings/features";
+import Utilities from "pages/dashboard/listings/features/utilities";
 
 const Router = () => {
   return (
@@ -36,7 +36,7 @@ const Router = () => {
             </AuthRoute>
           }
         >
-          <Route path="" element={<SendOtp />} />
+          <Route path="" element={<Login />} />
         </Route>
 
         {/* end welcome */}
@@ -62,6 +62,7 @@ const Router = () => {
           }
         >
           <Route path="" element={<ListingsHome />} />
+          <Route path="utilities" element={<Utilities />} />
         </Route>
         {/* end listings */}
 
@@ -139,15 +140,14 @@ const Router = () => {
         </Route>
         {/* end new-listing */}
         <Route
-          path="otp"
+          path="auth"
           element={
             <AuthRoute path="" notProtected>
               <AuthHome />
             </AuthRoute>
           }
         >
-          <Route path="send" element={<SendOtp />} />
-          <Route path="verify" element={<VerifyOtp />} />
+          <Route path="login" element={<Login />} />
         </Route>
       </Routes>
     </>

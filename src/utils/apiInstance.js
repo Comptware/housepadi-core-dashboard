@@ -3,7 +3,6 @@ import axios from "axios";
 import { getToken } from "../utils/storage";
 import { errorToast } from "components/general/toast/toast";
 
-
 export function apiInstance2(
   endpoint,
   { method = "GET", data, body, ...customConfig } = {}
@@ -54,8 +53,8 @@ export function apiInstance2(
           message = "Bad Request";
           break;
         case 401:
-          // logout();
-          // window.location.assign(window.location);
+          logout();
+          window.location.assign(window.location);
           message = "You're not Authenticated. Kindly Login";
           break;
         case 403:

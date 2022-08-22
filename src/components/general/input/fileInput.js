@@ -85,7 +85,7 @@ const FileInput = ({
             ? ".pdf, .doc, .docx"
             : type === "pdf_image"
             ? ".jpg, .jpeg, .png, .pdf, .doc, .docx"
-            : ".jpg, .jpeg, .png"
+            : ".jpg, .jpeg, .png, .svg"
         }
         onChange={(e) => onChangeFunc(e.target.files[0])}
         ref={fileRef}

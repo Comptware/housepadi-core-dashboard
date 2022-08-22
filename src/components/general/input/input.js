@@ -76,7 +76,7 @@ const Input = ({
     <div className="w-full ">
       {label && (
         <div className="flex justify-between items-start w-full space-x-2">
-          <label className="general-input-label text-grey-label text-sm">
+          <label className="general-input-label text-grey-label text-sm capitalize">
             {label}
           </label>
           {labelAlt && (

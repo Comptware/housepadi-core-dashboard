@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { ReactComponent as CaretDown } from "assets/icons/caret-down.svg";
+import AddAarModal from "pages/dashboard/listings/features/utilities/addAarModal";
 import AarItem from "./aarItem";
 
 const Amenities = ({
@@ -13,19 +14,31 @@ const Amenities = ({
 }) => {
   const [show, setShow] = useState(true);
   const [showAll, setShowAll] = useState(false);
+  const [addModal, setAddModal] = useState(false);
+
   return amenities?.length > 0 ? (
     <div className="flex flex-col justify-start items-start w-full space-y-6">
-      <div
-        className="flex justify-between items-start w-full cursor-pointer"
-        onClick={() => setShow((prev) => !prev)}
-      >
-        <span className="text-black text-sm uppercase regular-font">
-          amenities
-        </span>
+      <div className="flex justify-between items-start w-full cursor-pointer">
+        <div className="flex justify-start items-start w-fit gap-x-4">
+          <span
+            onClick={() => setShow((prev) => !prev)}
+            className="text-black text-sm uppercase regular-font"
+          >
+            amenities
+          </span>
+          <button
+            type="button"
+            className="text-blue-alt text-xs underline regular-font"
+            onClick={() => setAddModal(true)}
+          >
+            Create amenity
+          </button>
+        </div>
         <button
           type="button"
           className={`flex justify-center items-center transition-transform ease-in-out duration-300 transform 
           ${show ? "" : "-rotate-180"}`}
+          onClick={() => setShow((prev) => !prev)}
         >
           <CaretDown className="stroke-current h-3 w-3" />
         </button>
@@ -57,6 +70,10 @@ const Amenities = ({
         >
           {showAll ? "View fewer" : "View all"}
         </div>
+      )}
+
+      {addModal && (
+        <AddAarModal toggleModal={() => setAddModal(false)} type={"amenity"} />
       )}
     </div>
   ) : null;

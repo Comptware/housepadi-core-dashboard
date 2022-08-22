@@ -22,9 +22,15 @@ const apis = {
 
   getAAR: () => apiInstance2("internal/aar", { internal: true }),
 
-  updateAAR: (data, type, action, shortlet_id) =>
+  updateListingAAR: (data, type, action, shortlet_id) =>
     apiInstance2(`shortlet/${type}/${action}/${shortlet_id}`, {
       method: "PUT",
+      body: data,
+    }),
+
+  createAAR: (data, type) =>
+    apiInstance2(`${type}`, {
+      method: "POST",
       body: data,
     }),
   searchListingById: (shortlet_id) =>

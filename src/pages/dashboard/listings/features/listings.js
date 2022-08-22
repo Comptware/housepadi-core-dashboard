@@ -13,7 +13,9 @@ const Listings = () => {
     <div className="flex justify-between items-start w-full h-fit space-x-10">
       <div className="flex flex-col justify-start items-start space-y-2 w-full relative">
         <span className="text-2xl text-black regular-font">
-          {reservedListings?.length}/{listingsCount}
+          {`${
+            listingsCount ? reservedListings?.length + "/" + listingsCount : 0
+          }`}
         </span>
         <span className="text-[13px] text-black">Total listings </span>
       </div>

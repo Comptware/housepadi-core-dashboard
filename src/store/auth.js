@@ -6,7 +6,6 @@ import { makeAutoObservable } from "mobx";
 import apis from "services/auth";
 
 import { successToast } from "components/general/toast/toast";
-import { saveToStorage } from "utils/storage";
 
 class AuthStore {
   // ====================================================
@@ -16,7 +15,6 @@ class AuthStore {
   otp_value = "";
   error = null;
   loading = false;
-  loadingVerify = false;
   constructor() {
     makeAutoObservable(this);
   }
@@ -32,35 +30,19 @@ class AuthStore {
   // ====================================================
   // Actions
   // ====================================================
-  sendOtp = async (data, phone_number, navigate) => {
+
+  login = async (data, logUserIn) => {
     this.loading = true;
     try {
-      const res = await apis.sendOtp(data);
-      this.otp_value = res?.otp_value;
-      phone_number && saveToStorage("otp_phone_number", phone_number);
-      navigate && navigate("/otp/verify", { replace: false });
-      const message = "Veification code successfully sent to your number";
-      successToast(`Veification code sent`, message);
-    } catch (error) {
-      this.error = error;
-    } finally {
-      this.loading = false;
-    }
-  };
-
-  verifyOtp = async (data, logUserIn) => {
-    this.loadingVerify = true;
-    try {
-      const res = await apis.verifyOtp(data);
+      const res = await apis.login(data);
       this.setCurrentUser(res);
       logUserIn(res);
-      const message =
-        "You have successfully logged into your zusco agent dashboard";
+      const message = "You have successfully logged into zusco admin dashboard";
       successToast(`Successfully logged in`, message);
     } catch (error) {
       this.error = error;
     } finally {
-      this.loadingVerify = false;
+      this.loading = false;
     }
   };
   setCurrentUser = (data) => {
@@ -69,6 +51,7 @@ class AuthStore {
 
   logout = () => {
     this.user = null;
+    this.setCurrentUser(null);
   };
 }
 

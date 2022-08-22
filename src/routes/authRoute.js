@@ -13,14 +13,13 @@ export const AuthRoute = ({ path, notProtected, children, ...rest }) => {
       </DashboardLayout>
     );
   }
- 
 
   if (!isAuthenticated && !notProtected) {
     return (
       <Navigate
         replace
         to={{
-          pathname: "/",
+          pathname: "/auth/login",
           state: {
             prevLocation: path,
             error: "You need to login first!",

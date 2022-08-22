@@ -80,7 +80,7 @@ const DashboardLayout = ({ children }) => {
     },
     {
       title: "Logout",
-      link: "/otp/send",
+      link: "/auth/login",
       click: () => {
         logout();
       },

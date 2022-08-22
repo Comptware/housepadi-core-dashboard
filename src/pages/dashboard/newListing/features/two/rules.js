@@ -2,22 +2,40 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { ReactComponent as CaretDown } from "assets/icons/caret-down.svg";
+import AddAarModal from "pages/dashboard/listings/features/utilities/addAarModal";
 import AarItem from "./aarItem";
 
 const Rules = ({ path, rules, searchQuery, handleCheckboxChange, items }) => {
   const [show, setShow] = useState(true);
   const [showAll, setShowAll] = useState(false);
+  const [addModal, setAddModal] = useState(false);
   return rules?.length > 0 ? (
     <div className="flex flex-col justify-start items-start w-full space-y-6">
       <div
         className="flex justify-between items-start w-full cursor-pointer"
         onClick={() => setShow((prev) => !prev)}
       >
-        <span className="text-black text-sm uppercase regular-font">rules</span>
+        <div className="flex justify-start items-start w-fit gap-x-4">
+          <span
+            onClick={() => setShow((prev) => !prev)}
+            className="text-black text-sm uppercase regular-font"
+          >
+            rules
+          </span>
+          <button
+            type="button"
+            className="text-blue-alt text-xs underline regular-font"
+            onClick={() => setAddModal(true)}
+          >
+            Create rule
+          </button>
+        </div>
+
         <button
           type="button"
           className={`flex justify-center items-center transition-transform ease-in-out duration-300 transform 
           ${show ? "" : "-rotate-180"}`}
+          onClick={() => setShow((prev) => !prev)}
         >
           <CaretDown className="stroke-current h-3 w-3" />
         </button>
@@ -47,6 +65,10 @@ const Rules = ({ path, rules, searchQuery, handleCheckboxChange, items }) => {
         >
           {showAll ? "View fewer" : "View all"}
         </div>
+      )}
+
+      {addModal && (
+        <AddAarModal toggleModal={() => setAddModal(false)} type={"rule"} />
       )}
     </div>
   ) : null;

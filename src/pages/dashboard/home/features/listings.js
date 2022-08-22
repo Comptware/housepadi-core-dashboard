@@ -70,7 +70,11 @@ const Listings = () => {
               content={`${reservedListings?.length}  of ${listingsCount} listings occupied`}
             >
               <span className="text-2xl text-black regular-font">
-                {reservedListings?.length}/{listingsCount}
+                {`${
+                  listingsCount
+                    ? reservedListings?.length + "/" + listingsCount
+                    : 0
+                }`}
               </span>
             </Tippy>
             <span className="text-[13px] text-black">Total listings </span>

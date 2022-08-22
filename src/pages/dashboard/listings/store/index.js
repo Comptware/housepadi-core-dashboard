@@ -35,6 +35,7 @@ class ListingStore {
   loading = false;
   aarLoading = false;
   aarUpdateLoading = false;
+  createAarLoading = false;
   listingDataSet = false;
   activeListingId = "";
   searchIdLoading = true;
@@ -157,7 +158,7 @@ class ListingStore {
         ...formThree,
         ...this.listingFormTwo,
         ...this.listingFormFour,
-        zusco: false,
+        zusco: true,
       };
       payload.check_in_time = moment(payload.check_in_time).format("HH:mm");
       payload.check_out_time = moment(payload.check_out_time).format("HH:mm");
@@ -188,9 +189,8 @@ class ListingStore {
       let payload = {
         ...this.listingFormOne,
         ...formThree,
-        // ...this.listingFormTwo,
         ...this.listingFormFour,
-        zusco: false,
+        zusco: true,
       };
       payload.check_in_time = moment(payload.check_in_time).format("HH:mm");
       payload.check_out_time = moment(payload.check_out_time).format("HH:mm");
@@ -239,14 +239,27 @@ class ListingStore {
     }
   };
   // Update Listings
-  updateAAR = async ({ data, type, action, shortlet_id }) => {
+  updateListingAAR = async ({ data, type, action, shortlet_id }) => {
     this.loading = true;
     try {
-      await apis.updateAAR(data, type, action, shortlet_id);
+      await apis.updateListingAAR(data, type, action, shortlet_id);
     } catch (error) {
       this.error = error;
     } finally {
       this.loading = false;
+    }
+  };
+
+  // Update Listings
+  createAAR = async ({ data, type }) => {
+    this.createAarLoading = true;
+    try {
+      await apis.createAAR(data, type);
+      successToast("Success", type + " was created successfully");
+    } catch (error) {
+      this.error = error;
+    } finally {
+      this.createAarLoading = false;
     }
   };
   searchListingsById = async (shortlet_id) => {
@@ -400,7 +413,7 @@ class ListingStore {
 
       try {
         this.aarUpdateLoading = true;
-        await apis.updateAAR(data, type, action, shortlet_id);
+        await apis.updateListingAAR(data, type, action, shortlet_id);
         this.listingFormTwo = { ...this.listingFormTwo, [prop]: newArr };
       } catch (error) {
         this.error = error;

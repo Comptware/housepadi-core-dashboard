@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
+import { FaSwimmingPool } from "react-icons/fa";
 
 import { ReactComponent as Transaction } from "assets/icons/transaction.svg";
 import { ReactComponent as Host } from "assets/icons/host.svg";
-import { ReactComponent as Cash } from "assets/icons/cash.svg";
 import CommonStore from "store/common";
 import { EditButton } from "components/general/button";
 import CircleLoader from "components/general/circleLoader/circleLoader";
@@ -56,11 +56,11 @@ const UserProfile = () => {
 
       <div className="flex flex-col justify-start items-start mb-10 space-y-3 w-full">
         <Link
-          to="/#"
+          to="/dashboard/listings/utilities"
           className="space-x-3 flex justify-start items-center py-4 border-b-1/2 border-grey-border w-full"
         >
-          <Cash />
-          <p className="text-base text-black">Manage Payments</p>
+          <FaSwimmingPool className="fill-black" />
+          <p className="text-base text-black">Manage Utilities</p>
         </Link>
         <Link
           to="/#"
