@@ -6,7 +6,7 @@ import { handleFileType } from "utils/functions";
 import { uploadImageToCloud } from "utils/uploadImagesToCloud";
 import { Button } from "components/general/button";
 import Input from "components/general/input/input";
-import CommonStore from "store/common";
+import CommonStore from "stores/common";
 import AvatarPhoto from "components/general/input/avatarPhoto";
 import PhoneNumber from "components/general/phoneNumber/phoneNumber";
 import FileInput from "components/general/input/fileInput";

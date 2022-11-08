@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -24,7 +24,8 @@ const listingsHead = [
 ];
 const AllListings = observer(({ data }) => {
   const navigate = useNavigate();
-  const { loading, listingsCount, getListings } = ListingStore;
+  const { loading, listingsCount, getListings, listings } = ListingStore;
+  const listTopRef = useRef(null);
   const [checked, setChecked] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,7 +35,7 @@ const AllListings = observer(({ data }) => {
   }, [checked]);
 
   useEffect(() => {
-    currentPage > 1 && getListings(currentPage);
+    getListings(currentPage);
   }, [currentPage]);
 
   const handleCheckboxChange = (item) => {
@@ -51,8 +52,15 @@ const AllListings = observer(({ data }) => {
     const newArr = checked ? data?.map(({ id }) => id) : [];
     setSelectedRows(newArr);
   };
+
+  useEffect(() => {
+    return scrollToListTop();
+  }, [listings]);
+
+  const scrollToListTop = () => listTopRef?.current?.scrollIntoView();
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit p-6 max-h-fit ">
+      <div ref={listTopRef} />
       <Table
         head={listingsHead}
         checked={checked}
@@ -74,14 +82,20 @@ const AllListings = observer(({ data }) => {
             const isSelected = selectedRows.find((row) => row === id);
             const tdClass = "max-h-fit border-b-1/2 border-grey-border";
             return (
-              <tr className="py-4 bg-white w-full" key={i + id}>
+              <tr
+                className="py-4 bg-white w-full hover:bg-grey-light duration-300 ease-in-out cursor-pointer"
+                key={i + id}
+              >
                 <td className={tdClass}>
                   <CheckBox
                     checked={!!isSelected}
                     onClick={() => handleCheckboxChange(id)}
                   />
                 </td>
-                <td className={tdClass}>
+                <td
+                  className={tdClass}
+                  onClick={() => navigate(`/new-listing/step-one/${id}`)}
+                >
                   <div className="flex flex-col justify-start items-start space-y-2">
                     <div
                       className="w-[149px] h-[91px] rounded-lg bg-no-repeat bg-center bg-cover"
@@ -92,29 +106,46 @@ const AllListings = observer(({ data }) => {
                     <span className="text-xl text-grey-textalt">{name}</span>
                   </div>
                 </td>
-                <td className={tdClass}>{determineListingType(status)}</td>
-                <td className={tdClass}>
+                <td
+                  className={tdClass}
+                  onClick={() => navigate(`/new-listing/step-one/${id}`)}
+                >
+                  {determineListingType(status)}
+                </td>
+                <td
+                  className={tdClass}
+                  onClick={() => navigate(`/new-listing/step-one/${id}`)}
+                >
                   <Button
                     small
-                    text={status === "draft" ? "Complete" : "Edit"}
+                    text={"Edit"}
                     isOutline
                     borderColor="border-black"
                     textClass="text-black regular-font"
                     className="w-[112px]"
-                    onClick={() => navigate(`/new-listing/step-one/${id}`)}
+                    onClick={() => console.log("hef")}
                   />
                 </td>
-                <td className={tdClass}>
+                <td
+                  className={tdClass}
+                  onClick={() => navigate(`/new-listing/step-one/${id}`)}
+                >
                   <span className="text-sm text-black">
                     {number_of_bedrooms}
                   </span>
                 </td>
-                <td className={tdClass}>
+                <td
+                  className={tdClass}
+                  onClick={() => navigate(`/new-listing/step-one/${id}`)}
+                >
                   <span className="text-sm text-black">
                     {number_of_bathrooms}
                   </span>
                 </td>
-                <td className={tdClass}>
+                <td
+                  className={tdClass}
+                  onClick={() => navigate(`/new-listing/step-one/${id}`)}
+                >
                   <div className="flex justify-start items-center space-x-2">
                     <span className="w-[15px] h-[15px]">
                       <Location className="w-[15px] h-[15px]" />

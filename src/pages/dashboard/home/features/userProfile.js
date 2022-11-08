@@ -3,9 +3,8 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { FaSwimmingPool } from "react-icons/fa";
 
-import { ReactComponent as Transaction } from "assets/icons/transaction.svg";
 import { ReactComponent as Host } from "assets/icons/host.svg";
-import CommonStore from "store/common";
+import CommonStore from "stores/common";
 import { EditButton } from "components/general/button";
 import CircleLoader from "components/general/circleLoader/circleLoader";
 import { DEFAULT_AVATAR } from "utils/constants";
@@ -62,13 +61,7 @@ const UserProfile = () => {
           <FaSwimmingPool className="fill-black" />
           <p className="text-base text-black">Manage Utilities</p>
         </Link>
-        <Link
-          to="/#"
-          className="space-x-3 flex justify-start items-center py-4 border-b-1/2 border-grey-border w-full"
-        >
-          <Transaction />
-          <p className="text-base text-black">Transactions</p>
-        </Link>
+
         <Link
           to="/dashboard/me"
           className="space-x-3 flex justify-start items-center py-4 border-b-1/2 border-grey-border w-full"

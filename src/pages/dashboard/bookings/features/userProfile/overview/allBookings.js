@@ -18,8 +18,8 @@ const AllBookings = observer(({ data }) => {
 
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit p-6 space-y-5 max-h-fit relative">
-      {data.map((booking) => (
-        <List key={booking?.id} listing={booking} isAlt/>
+      {data?.map((booking) => (
+        <List key={booking?.id} listing={booking} isAlt />
       ))}
       {loading && (
         <div className="absolute w-full flex justify-center items-center h-[100px]">

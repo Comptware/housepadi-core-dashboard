@@ -1,4 +1,4 @@
-import AuthStore from "store/auth";
+import AuthStore from "stores/auth";
 import {
   clearUserDetails,
   getToken,

@@ -1,11 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
 
 import UserProfile from "pages/dashboard/home/features/userProfile";
+import HomeStore from "pages/dashboard/home/store";
 import Listings from "./bookings";
 import Overview from "./overview";
 
 const BookingsHome = observer(() => {
+  const listTopRef = useRef(null);
+  const { bookings } = HomeStore;
+
+  useEffect(() => {
+    return scrollToListTop();
+  }, [bookings]);
+
+  const scrollToListTop = () => listTopRef?.current?.scrollIntoView();
   return (
     <div className="flex flex-col justify-start items-start h-full w-full">
       <div className="flex flex-row justify-start items-start h-fit  w-full bg-white p-4 border-b-1/2 border-grey-border">
@@ -16,6 +25,7 @@ const BookingsHome = observer(() => {
         {/* Left column */}
 
         <div className="flex flex-col basis-[100%] md:basis-[70%] justify-start items-start h-full w-full space-y-7 pt-8 md:overflow-y-scroll">
+          <div ref={listTopRef} />
           {/* Listings */}
           <Listings />
 

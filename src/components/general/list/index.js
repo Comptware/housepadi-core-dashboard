@@ -10,7 +10,7 @@ import { determinePaymentStatus } from "utils/bookings";
 const List = ({ listing }) => {
   return (
     <Link
-      to={`/dashboard/bookings/${listing?.shortlet_id}`}
+      to={`/dashboard/bookings/${listing?.id}`}
       className={`bg-white flex flex-col sm:flex-row space-y-3 sm:space-y-0  justify-between items-center w-full h-fit rounded-lg py-6 px-6 border-1/2 border-grey-border`}
     >
       <div className="flex justify-start items-center w-fit space-x-6">

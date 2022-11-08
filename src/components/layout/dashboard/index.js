@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 import { useAuth } from "hooks/auth";
 import { DEFAULT_AVATAR } from "utils/constants";
@@ -12,6 +13,7 @@ import {
   Listings,
   Messages,
   BookAStay,
+  Agent,
 } from "assets/icons";
 import { ReactComponent as Logout } from "assets/icons/logout.svg";
 import { ReactComponent as Call } from "assets/icons/call.svg";
@@ -21,20 +23,40 @@ import { ReactComponent as Linkedin } from "assets/icons/linkedin.svg";
 import { ReactComponent as Logo } from "assets/icons/logo/logo_black.svg";
 import { ReactComponent as Notification } from "assets/icons/notification.svg";
 import ListingStore from "pages/dashboard/listings/store";
-import CommonStore from "store/common";
+import CommonStore from "stores/common";
+import HomeStore from "pages/dashboard/home/store";
+import notificationAlertSound from "assets/audios/quick-alert.wav";
+import { getUserInfoFromStorage } from "utils/storage";
+import db from "services/firebase.config";
 
 import Toast from "../../general/toast/toast";
+import NotificationPane from "../notification";
 import Hamburger from "../hamburger";
+import useInterval from "hooks/useInterval";
 
 const DashboardLayout = ({ children }) => {
   const location = useLocation();
   const { logout } = useAuth();
   const { setListingDataSet } = ListingStore;
   const { getMe, me } = CommonStore;
+  const userInfo = getUserInfoFromStorage();
   const [sidenavOpen, setSidenavOpen] = useState(false);
+  const [notificationPaneOpen, setNotificationPaneOpen] = useState(false);
+
   useEffect(() => {
     setListingDataSet(false);
   }, []);
+  const { notificationItems, getNotificationData, handleSetNotificationItems } =
+    HomeStore;
+  const notificationAlertAudio = new Audio(notificationAlertSound);
+  const playAudio = (audioFile) => {
+    audioFile?.play();
+  };
+
+  useInterval(() => {
+    getNotificationData(1, () => playAudio(notificationAlertAudio));
+  }, 5000);
+
   const dashboardLinks = [
     {
       title: "Overview",
@@ -50,6 +72,12 @@ const DashboardLayout = ({ children }) => {
       title: "Bookings",
       link: "/dashboard/bookings",
       icon: <BookAStay className="fill-current" />,
+    },
+
+    {
+      title: "Agents",
+      link: "/dashboard/agents",
+      icon: <Agent className="fill-current" />,
     },
     {
       title: "Messages",
@@ -88,17 +116,73 @@ const DashboardLayout = ({ children }) => {
     },
   ];
 
+  const getConversations = async () => {
+    let convos = [];
+    const convoRef = collection(db, "conversations");
+    const q = query(convoRef, where("agentId", "==", userInfo?.id));
+    let loaded = false;
+    onSnapshot(q, (querySnapshot) => {
+      convos = [];
+
+      querySnapshot.forEach((item) => {
+        convos.push(item.data());
+      });
+
+      convos = convos.sort(
+        (a, b) =>
+          new Date(b?.lastMessageAt?.toDate()) -
+          new Date(a?.lastMessageAt?.toDate())
+      );
+
+      const unreadConvos = convos?.filter((item) => item?.unreadUserChats > 0);
+
+      if (unreadConvos.length > 0 && loaded) {
+        unreadConvos?.map((item) => {
+          const itemIsInNotificationItems = notificationItems?.find(
+            (ntf) =>
+              ntf.unreadUserChats + ntf.lastMessageAt?.toDate() ===
+              item.unreadUserChats + item.lastMessageAt?.toDate()
+          )?.lastMessageAt;
+          if (!itemIsInNotificationItems) {
+            handleSetNotificationItems([
+              {
+                ...item,
+                notification_type: "message",
+                link: `/dashboard/messages`,
+              },
+            ]);
+          }
+        });
+
+        playAudio(notificationAlertAudio);
+      }
+      loaded = true;
+    });
+  };
+
+  useEffect(() => {
+    getConversations();
+  }, []);
+
   return (
     <div className="w-screen min-h-screen h-screen flex flex-grow flex-col relative">
       <header className="flex flex-row justify-between items-center w-full py-4 fixed left-0 right-0 top-0 border-b-1/2 border-grey-border z-[99] h-[70px] bg-white">
         <div className="relative flex flex-row justify-between items-center mx-auto w-full px-10 ">
-          <div className="h-8 w-[110px] !my-0">
+          <Link className="h-8 w-[110px] !my-0" to="/">
             <Logo className="w-full h-full z-90" />
-          </div>
+          </Link>
           <Toast />
 
           <div className="flex flex-row justify-start items-center space-x-[20px]">
-            <Notification className="hover:fill-grey-lighter transition-all duration-300 ease-in-out cursor-pointer" />
+            <button
+              onClick={() => setNotificationPaneOpen(true)}
+              className="relative"
+            >
+              {notificationItems?.length > 0 && (
+                <div className="absolute right-[15px] top-[17px] bg-red-alt rounded-full w-[5px] h-[5px]" />
+              )}
+              <Notification className="hover:fill-grey-lighter transition-all duration-300 ease-in-out cursor-pointer" />
+            </button>
 
             <Hamburger
               click={() => {
@@ -107,6 +191,11 @@ const DashboardLayout = ({ children }) => {
               className={sidenavOpen ? "ham_crossed" : ""}
             />
           </div>
+        </div>
+        <div className="relative">
+          {notificationPaneOpen && (
+            <NotificationPane onClose={() => setNotificationPaneOpen(false)} />
+          )}
         </div>
       </header>
       <section className="w-full h-full flex flex-row flex-grow max-w-9xl mx-auto relative mt-[70px] overflow-hidden">
@@ -190,11 +279,21 @@ const DashboardLayout = ({ children }) => {
           </div>
 
           <div className="flex justify-start items-center  w-fit space-x-8">
-            <a className="text-base text-black text-left" href="#">
+            <a
+              className="text-base text-black text-left"
+              href="https://getzusco.com/platform/privacy-policy"
+              target="_blank"
+              rel="noreferrer"
+            >
               Privacy Policy
             </a>
 
-            <a className="text-base text-black text-left" href="#">
+            <a
+              className="text-base text-black text-left"
+              href="https://getzusco.com/platform/terms"
+              target="_blank"
+              rel="noreferrer"
+            >
               Terms & Condition
             </a>
           </div>

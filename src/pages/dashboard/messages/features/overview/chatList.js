@@ -11,7 +11,7 @@ const ChatList = ({ data }) => {
   const { setCurrentChat } = MessagesStore;
 
   return (
-    <div className="flex flex-col justify-start items-start w-full h-fit p-6 max-h-fit">
+    <div className="flex flex-col justify-start items-start w-full h-fit p-2 md:p-6 max-h-fit">
       {data?.map(
         (
           {

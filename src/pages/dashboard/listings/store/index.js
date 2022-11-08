@@ -105,8 +105,14 @@ class ListingStore {
       let res = await apis.getListings(page_number);
       this.listingsCount = res?.total;
       res = res?.data;
-      res = res?.map(({ draft, occupied, ...items }) => {
-        const status = draft ? "draft" : occupied ? "occupied" : "unoccupied";
+      res = res?.map(({ draft, occupied, blocked, ...items }) => {
+        const status = blocked
+          ? "blocked"
+          : draft
+          ? "draft"
+          : occupied
+          ? "occupied"
+          : "unoccupied";
         return { ...items, status };
       });
       this.listings = res || [];
@@ -168,7 +174,9 @@ class ListingStore {
       delete payload.account_number;
       delete payload.expiry_date;
 
+      navigator.clipboard.writeText(JSON.stringify(payload));
       await apis.createListing(payload);
+
       successToast(
         "Success",
         `Your listing was ${complete ? "created" : "saved"} successfully`

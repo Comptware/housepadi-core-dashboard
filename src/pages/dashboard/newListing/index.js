@@ -9,10 +9,11 @@ import NewListingLayout from "components/layout/listing";
 import ListingStore from "pages/dashboard/listings/store";
 import DeleteModal from "components/general/modal/deleteModal";
 import Loader from "components/general/loader";
+import useWindowDimensions from "hooks/useWindowDimensions";
 const NewLising = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
+  const { isSm } = useWindowDimensions();
   const listLinks = [
     "/new-listing/step-one",
     "/new-listing/step-two",
@@ -62,25 +63,31 @@ const NewLising = () => {
         <div className="flex justify-between items-start w-full my-6 max-w-[970px] px-5">
           {searchIdLoading && path && <Loader />}
           <Link
-            to="/dashboard/listings"
+            to={-1}
             className="flex justify-start items-center text-base text-black cursor-pointer underline w-full text-left"
           >
-            <ArrowBack className="mr-2" /> Back to Listings
+            <ArrowBack className="mr-2" /> {"Back"}
           </Link>
 
           <div className="flex justify-between items-start w-fit space-x-10">
-            <button
-              type="button"
-              className={`whitespace-nowrap ${
-                !listingFormOne?.name || loading
-                  ? "cursor-not-allowed opacity-50"
-                  : ""
-              } text-base text-blue-alt underline`}
-              onClick={saveAndExit}
-              disabled={!listingFormOne?.name || loading}
-            >
-              {loading && saveType === "exit" ? <SmallLoader /> : "Save & Exit"}
-            </button>
+            {path && (
+              <button
+                type="button"
+                className={`whitespace-nowrap ${
+                  !listingFormOne?.name || loading
+                    ? "cursor-not-allowed opacity-50"
+                    : ""
+                } text-base text-blue-alt underline`}
+                onClick={saveAndExit}
+                disabled={!listingFormOne?.name || loading}
+              >
+                {loading && saveType === "exit" ? (
+                  <SmallLoader />
+                ) : (
+                  "Save & Exit"
+                )}
+              </button>
+            )}
 
             {path && (
               <button

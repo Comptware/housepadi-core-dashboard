@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
-import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { pageCount } from "utils/constants";
 
@@ -10,15 +9,22 @@ import List from "components/general/list";
 import HomeStore from "pages/dashboard/home/store";
 
 const AllBookings = observer(({ data }) => {
-  const { loading, getBookings, bookingsCount } = HomeStore;
+  const listTopRef = useRef(null);
+  const { loading, getBookings, bookingsCount, bookings } = HomeStore;
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     getBookings(currentPage);
   }, [currentPage]);
 
+  useEffect(() => {
+    return scrollToListTop();
+  }, [bookings]);
+
+  const scrollToListTop = () => listTopRef?.current?.scrollIntoView();
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit p-6 space-y-5 max-h-fit relative">
+      <div ref={listTopRef} />
       {data?.map((booking) => (
         <List key={booking?.id} listing={booking} />
       ))}

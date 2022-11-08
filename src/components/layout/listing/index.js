@@ -82,7 +82,7 @@ const NewListingLayout = ({ children }) => {
         </div>
       </header>
       <section className="w-full h-full flex flex-row flex-grow max-w-9xl mx-auto relative mt-[70px]">
-        <aside className="dashboard-sidenav w-60 pt-[20px] pb-28 h-full flex flex-col flex-grow absolute left-0 top-0 bottom-0 z-50 bg-white overflow-y-scroll border-r-1/2 border-grey-border">
+        <aside className="dashboard-sidenav w-60 pt-[20px] pb-28 h-full hidden md:flex flex-col flex-grow absolute left-0 top-0 bottom-0 z-50 bg-white overflow-y-scroll border-r-1/2 border-grey-border">
           <div className="flex flex-col justify-between items-start w-full h-full pl-10 pr-5">
             <div className="flex flex-col justify-start items-start pb-10 w-full transition-all duration-150 ease-in-out">
               <span className="text-grey uppercase text-xs pt-6 pl-5">
@@ -113,7 +113,7 @@ const NewListingLayout = ({ children }) => {
           </div>
         </aside>
 
-        <main className="dashboard-content bg-grey-whitesmoke w-full  ml-60 flex flex-col items-center flex-grow overflow-y-auto">
+        <main className="dashboard-content bg-grey-whitesmoke w-full md:ml-60 flex flex-col items-center flex-grow overflow-y-auto">
           {children}
         </main>
       </section>

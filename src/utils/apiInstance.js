@@ -2,12 +2,14 @@
 import axios from "axios";
 import { getToken } from "../utils/storage";
 import { errorToast } from "components/general/toast/toast";
+import { useAuth } from "hooks/auth";
 
 export function apiInstance2(
   endpoint,
   { method = "GET", data, body, ...customConfig } = {}
 ) {
   const token = getToken();
+  const { isAuthenticated } = useAuth();
   let url = "";
 
   const headers = { "content-type": "application/json" };
@@ -53,8 +55,9 @@ export function apiInstance2(
           message = "Bad Request";
           break;
         case 401:
-          logout();
-          window.location.assign(window.location);
+          // logout();
+
+          isAuthenticated && window.location.assign(window.location);
           message = "You're not Authenticated. Kindly Login";
           break;
         case 403:

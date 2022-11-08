@@ -22,7 +22,9 @@ import UserBookingsProfile from "pages/dashboard/bookings/features/userProfile";
 import Settings from "pages/dashboard/settings";
 import SettingsHome from "pages/dashboard/settings/features";
 import Utilities from "pages/dashboard/listings/features/utilities";
-
+import Hosts from "pages/dashboard/hosts";
+import HostsHome from "pages/dashboard/hosts/features";
+import HostProfile from "pages/dashboard/hosts/features/hostProfile";
 const Router = () => {
   return (
     <>
@@ -81,6 +83,20 @@ const Router = () => {
           <Route path="user/:id" element={<UserBookingsProfile />} />
         </Route>
         {/* end bookings */}
+
+        {/* agents */}
+        <Route
+          path="/dashboard/agents"
+          element={
+            <AuthRoute path="">
+              <Hosts />
+            </AuthRoute>
+          }
+        >
+          <Route path="" element={<HostsHome />} />
+          <Route path=":id" element={<HostProfile />} />
+        </Route>
+        {/* end agents */}
 
         {/* messages */}
         <Route

@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 
-import AuthStore from "store/auth";
+import AuthStore from "stores/auth";
 import Button from "components/general/button/button";
 import { FormErrorMessage } from "components/general/errorMessage";
 import Input from "components/general/input/input";

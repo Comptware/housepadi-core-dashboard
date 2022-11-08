@@ -8,11 +8,12 @@ import { findPath } from "utils/findPath";
 import HomeStore from "pages/dashboard/home/store";
 import Profile from "./profile";
 import Overview from "./overview";
+import Loader from "components/general/loader";
 
 const BookingDetails = observer(() => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { handleFindBooking } = HomeStore;
+  const { handleFindBooking, searchLoading } = HomeStore;
   const path = findPath(location, "/dashboard/bookings");
 
   useEffect(() => {
@@ -20,7 +21,8 @@ const BookingDetails = observer(() => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-start items-start h-full w-full">
+    <div className="flex flex-col justify-start items-start h-full w-full relative">
+      {searchLoading && <Loader absolute />}
       <div className="flex flex-row justify-start items-start h-fit  w-full p-4 mb-8">
         <button
           type="button"

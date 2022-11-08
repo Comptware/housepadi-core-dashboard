@@ -35,8 +35,14 @@ const emptyForm = { message: "", image: null };
 const ChatSection = () => {
   const chatBaseRef = useRef(null);
   const fileRef = useRef();
-  const { currentChat, chats, setChats, currentChatRef, setCurrentChatRef } =
-    MessagesStore;
+  const {
+    currentChat,
+    chats,
+    setChats,
+    currentChatRef,
+    setCurrentChatRef,
+    setCurrentChat,
+  } = MessagesStore;
   const [form, setForm] = useState(emptyForm);
   const [sending, setSending] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -199,7 +205,10 @@ const ChatSection = () => {
       {currentChat?.userId && (
         <>
           <div className="bg-white flex justify-between items-center w-full space-x-4 py-4 px-6 absolute right-0 top-[0px] z-[99] border-1/2 border-grey-border">
-            <ArrowBack />
+            <button onClick={() => setCurrentChat(null)} className="h-full">
+              <ArrowBack />
+            </button>
+
             <div
               className="flex justify-start items-center w-fit space-x-4 cursor-pointer"
               onClick={() => setShowProfileModal(true)}

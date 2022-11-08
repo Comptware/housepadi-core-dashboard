@@ -9,10 +9,11 @@ import { GUEST_PAYMENTS, PAYMENT_ADDONS } from "utils/constants";
 import { Button } from "components/general/button";
 import Input from "components/general/input/input";
 import ListingStore from "pages/dashboard/listings/store";
-import PaystackStore from "store/paystack";
-import Accordion from "./accordion";
+import PaystackStore from "stores/paystack";
 import AppSwitch from "components/general/switch";
 import Select from "components/general/input/select";
+import useWindowDimensions from "hooks/useWindowDimensions";
+import Accordion from "./accordion";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Form = () => {
   const pathName = location?.pathname?.replace("/new-listing/step-four", "");
   const path = pathName?.replace("/", "");
   const suffix = path ? "/" + path : "";
-
+  const { isSm } = useWindowDimensions();
   const {
     createListing,
     loading,
@@ -216,9 +217,9 @@ const Form = () => {
         </div>
       </div>
       {/* Footer */}
-      <div className="flex flex-row justify-start items-center w-full px-10 space-x-10 py-4 fixed bottom-0 right-0 bg-white shadow-[0_-10px_20px_rgba(196,196,196,0.3)] z-[99] left-60 max:left-0">
+      <div className="flex flex-row justify-start items-center w-full px-10 space-x-10 py-4 fixed bottom-0 right-0 bg-white shadow-[0_-10px_20px_rgba(196,196,196,0.3)] z-[99] left-0 md:left-60 max:left-0">
         <Button
-          text="Back to previous step"
+          text={isSm ? "Back" : "Back to previous step"}
           onClick={() => {
             navigate(`/new-listing/step-three${suffix}`);
           }}

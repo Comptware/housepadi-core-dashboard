@@ -12,6 +12,7 @@ const Button = ({
   isLoading,
   whiteBg,
   redBg,
+  yellowBg,
   blackBg,
   fullWidth,
   borderColor,
@@ -32,9 +33,9 @@ const Button = ({
   ${fullWidth ? "w-full" : ""}
   whitespace-nowrap ${
     isOutline
-      ? `bg-transparent hover:bg-grey-light ${isDisabled ? "bg-white/[.2]" : ""} ${
-          textColor || "blue-alt"
-        } border ${borderColor || "border-white"}`
+      ? `bg-transparent hover:bg-grey-light ${
+          isDisabled ? "bg-white/[.2]" : ""
+        } ${textColor || "blue-alt"} border ${borderColor || "border-white"}`
       : whiteBg
       ? `bg-white ${isDisabled ? "bg-white/[.2]" : ""} text-${
           textColor || "grey-text"
@@ -45,6 +46,8 @@ const Button = ({
         } border-1/2 border-${borderColor || "white"}`
       : redBg
       ? `bg-red ${isDisabled ? "bg-red/[.2]" : ""} text-white`
+      : yellowBg
+      ? `bg-yellow ${isDisabled ? "bg-yellow/[.2]" : ""} text-white`
       : ` ${
           isDisabled
             ? "bg-blue-alt/[.2] border-blue-alt"
@@ -82,6 +85,7 @@ Button.propTypes = {
   whiteBg: PropTypes.bool,
   redBg: PropTypes.bool,
   blackBg: PropTypes.bool,
+  yellowBg: PropTypes.bool,
   fullWidth: PropTypes.bool,
   icon: PropTypes.element,
   borderColor: PropTypes.string,

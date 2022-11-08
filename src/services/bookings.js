@@ -12,7 +12,11 @@ const apis = {
       method: "DELETE",
     }),
 
-  getBookings: (page_number) => apiInstance2(`agent/shortlet/bookings/${page_number}`),
+  getBookings: (page_number) =>
+    apiInstance2(`agent/shortlet/bookings/${page_number}`),
+
+  getBookingById: (booking_id) =>
+    apiInstance2(`shortlet-booking/one/${booking_id}`),
 
   updatBooking: (data, shortlet_id) =>
     apiInstance2(`shortlet/${shortlet_id}`, {

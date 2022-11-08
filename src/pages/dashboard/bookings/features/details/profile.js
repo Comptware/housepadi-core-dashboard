@@ -43,14 +43,14 @@ const Profile = () => {
 
             <Link
               className="text-xs text-blue-alt underline cursor-pointer"
-              to={`/dashboard/bookings/user/${currentBooking?.shortlet_id}`}
+              to={`/dashboard/bookings/user/${currentBooking?.id}`}
             >
               View Profile
             </Link>
           </div>
         </div>
       </div>
-      {!currentBooking?.paid && (
+      {/* {!currentBooking?.paid && (
         <div className="flex justify-start items-start space-x-3 w-fit">
           <Button
             isOutline
@@ -61,7 +61,7 @@ const Profile = () => {
           />
           <Button text="Accept" small />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

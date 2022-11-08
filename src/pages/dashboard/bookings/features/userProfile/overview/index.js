@@ -4,22 +4,15 @@ import { observer } from "mobx-react-lite";
 import HomeStore from "pages/dashboard/home/store";
 import ListingStore from "pages/dashboard/listings/store";
 import AllBookings from "./allBookings";
-import AllTransactions from "./allTransactions";
 const Overview = observer(() => {
   const { bookings } = HomeStore;
-  const { listings } = ListingStore;
 
   const containerRef = useRef(null);
   const tabs = [
     {
-      title: "Requests",
+      title: "Bookings",
       content: <AllBookings data={bookings} />,
     },
-    {
-      title: "Transaction",
-      content: <AllTransactions data={listings} />,
-    },
-   
   ];
   const [activeTab, setActiveTab] = useState({
     title: tabs[0].title,
@@ -44,7 +37,7 @@ const Overview = observer(() => {
     setSliderWidth(slideWidth);
     setSliderPosition(slidePosition);
   };
-  
+
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit rounded-lg">
       <div className="flex justify-between items-center w-full border-b-1/2 border-grey-border">

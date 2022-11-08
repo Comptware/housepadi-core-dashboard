@@ -75,6 +75,7 @@ const Textarea = ({
           cols="30"
           rows={rows || "10"}
           ref={domNode}
+          maxlength="254"
           onClick={() => setActive(true)}
           onChange={({ target }) => {
             onChangeFunc(target.value, { value: target.value, name });

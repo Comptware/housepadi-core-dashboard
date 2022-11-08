@@ -7,6 +7,7 @@ import ExportButton from "./exportButton";
 import FilterButton from "./filterButton";
 import LinkButton from "./linkButton";
 import ArrowButton from "./arrowButton";
+import ClearAllButton from "./clearAllButton";
 
 export {
   Button,
@@ -18,4 +19,5 @@ export {
   EditButton,
   LinkButton,
   ArrowButton,
+  ClearAllButton,
 };

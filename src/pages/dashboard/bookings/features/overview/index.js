@@ -44,7 +44,7 @@ const Overview = observer(() => {
     setSliderWidth(slideWidth);
     setSliderPosition(slidePosition);
   };
-  
+
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit rounded-lg">
       <div className="flex justify-between items-center w-full border-b-1/2 border-grey-border">

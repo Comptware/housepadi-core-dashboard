@@ -3,8 +3,8 @@ import { Chart, registerables } from "chart.js";
 import { observer } from "mobx-react-lite";
 
 import HomeStore from "pages/dashboard/home/store";
-
 Chart.register(...registerables);
+
 const Bookings = () => {
   const { bookingsCount } = HomeStore;
   return (
