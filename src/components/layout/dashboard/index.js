@@ -20,8 +20,7 @@ import { ReactComponent as Call } from "assets/icons/call.svg";
 import { ReactComponent as Facebook } from "assets/icons/facebook.svg";
 import { ReactComponent as Twitter } from "assets/icons/twitter.svg";
 import { ReactComponent as Linkedin } from "assets/icons/linkedin.svg";
-import { ReactComponent as Logo } from "assets/icons/logo/logo_black.svg";
-import { ReactComponent as Notification } from "assets/icons/notification.svg";
+
 import ListingStore from "pages/dashboard/listings/store";
 import CommonStore from "stores/common";
 import HomeStore from "pages/dashboard/home/store";
@@ -29,10 +28,8 @@ import notificationAlertSound from "assets/audios/quick-alert.wav";
 import { getUserInfoFromStorage } from "utils/storage";
 import db from "services/firebase.config";
 
-import Toast from "../../general/toast/toast";
-import NotificationPane from "../notification";
-import Hamburger from "../hamburger";
 import useInterval from "hooks/useInterval";
+import Header from "../header";
 
 const DashboardLayout = ({ children }) => {
   const location = useLocation();
@@ -41,7 +38,6 @@ const DashboardLayout = ({ children }) => {
   const { getMe, me } = CommonStore;
   const userInfo = getUserInfoFromStorage();
   const [sidenavOpen, setSidenavOpen] = useState(false);
-  const [notificationPaneOpen, setNotificationPaneOpen] = useState(false);
 
   useEffect(() => {
     setListingDataSet(false);
@@ -94,7 +90,7 @@ const DashboardLayout = ({ children }) => {
       link: "/dashboard/me",
       icon: (
         <img
-          className={` w-[25px] border rounded-full `}
+          className={` w-[25px] h-[25px] border rounded-full `}
           src={me?.profile_image_url || DEFAULT_AVATAR}
           alt=""
         />
@@ -166,38 +162,8 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <div className="w-screen min-h-screen h-screen flex flex-grow flex-col relative">
-      <header className="flex flex-row justify-between items-center w-full py-4 fixed left-0 right-0 top-0 border-b-1/2 border-grey-border z-[99] h-[70px] bg-white">
-        <div className="relative flex flex-row justify-between items-center mx-auto w-full px-10 ">
-          <Link className="h-8 w-[110px] !my-0" to="/">
-            <Logo className="w-full h-full z-90" />
-          </Link>
-          <Toast />
+      <Header />
 
-          <div className="flex flex-row justify-start items-center space-x-[20px]">
-            <button
-              onClick={() => setNotificationPaneOpen(true)}
-              className="relative"
-            >
-              {notificationItems?.length > 0 && (
-                <div className="absolute right-[15px] top-[17px] bg-red-alt rounded-full w-[5px] h-[5px]" />
-              )}
-              <Notification className="hover:fill-grey-lighter transition-all duration-300 ease-in-out cursor-pointer" />
-            </button>
-
-            <Hamburger
-              click={() => {
-                setSidenavOpen(!sidenavOpen);
-              }}
-              className={sidenavOpen ? "ham_crossed" : ""}
-            />
-          </div>
-        </div>
-        <div className="relative">
-          {notificationPaneOpen && (
-            <NotificationPane onClose={() => setNotificationPaneOpen(false)} />
-          )}
-        </div>
-      </header>
       <section className="w-full h-full flex flex-row flex-grow max-w-9xl mx-auto relative mt-[70px] overflow-hidden">
         <aside
           className={`dashboard-sidenav w-52 pt-[20px] pb-28 h-full flex flex-col flex-grow absolute left-0 top-0 bottom-0 z-50 bg-white

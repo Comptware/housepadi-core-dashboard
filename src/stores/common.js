@@ -15,6 +15,7 @@ class CommonStore {
   error = null;
   loading = false;
   loadingFetchMe = false;
+  sidenavOpen = false;
   constructor() {
     makeAutoObservable(this);
   }
@@ -30,6 +31,11 @@ class CommonStore {
   // ====================================================
   // Actions
   // ====================================================
+
+  setSidenavOpen = (item) => {
+    this.sidenavOpen = item;
+  };
+
   getMe = async () => {
     this.loadingFetchMe = true;
     try {

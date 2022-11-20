@@ -1,29 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { AiOutlineRight } from "react-icons/ai";
-import AppSwitch from "components/general/switch";
 import { Link } from "react-router-dom";
+import { AiOutlineRight } from "react-icons/ai";
+
+import { ReactComponent as Delete } from "assets/icons/delete.svg";
+import AppSwitch from "components/general/switch";
+import SettingsStore from "../store";
 
 const SettingsHome = () => {
   const [form, setForm] = useState({
-    pushNotification: false,
-    chatBannerNotification: false,
-    chatNotification: false,
+    push_notification: false,
+    chat_banner_notification: false,
+    chat_notification: false,
   });
+  const [loadingStates, setLoadingStates] = useState([]);
+  const { getSettings, settings, updateLoading, updateSettings } =
+    SettingsStore;
 
-  const handleChange = (prop, val) => {
-    setForm({ ...form, [prop]: val });
+  useEffect(() => {
+    getSettings();
+  }, []);
+
+  useEffect(() => {
+    handleFormUpdate();
+  }, [settings]);
+
+  const handleFormUpdate = () => {
+    setForm({
+      push_notification: settings?.push_notification,
+      chat_banner_notification: settings?.chat_banner_notification,
+      chat_notification: settings?.chat_notification,
+    });
+  };
+
+  const updateSetting = async (prop, val) => {
+    setLoadingStates((prev) => [...prev, prop]);
+    await updateSettings({ [prop]: val });
+    setLoadingStates((prev) => prev.filter((state) => state != prop));
   };
   return (
-    <section className="py-6 pl-6 pr-12">
+    <section className="py-6 pl-6 pr-6 sm:pr-12">
       <div className="flex justify-between">
         <p className="text-[#211D31] text-[19px] regular-font">Settings</p>
-        {/* <p className="text-[#8B8E93] flex items-center gap-1">
+        <p className="text-[#8B8E93] flex items-center gap-1">
           <span>
             <Delete />
           </span>{" "}
           Delete Account
-        </p> */}
+        </p>
       </div>
 
       <br />
@@ -44,9 +68,12 @@ const SettingsHome = () => {
           <div className="flex justify-between px-6 py-4 md:py-6 bg-white border-[0.5px] border-[#E7EAEE] items-center">
             <p className="text-[19px] whitespace-nowrap">Push Notification</p>
             <AppSwitch
-              checked={form.pushNotification}
+              checked={form.push_notification}
               onChange={() =>
-                handleChange("pushNotification", !form.pushNotification)
+                updateSetting("push_notification", !form.push_notification)
+              }
+              loading={
+                updateLoading && loadingStates.includes("push_notification")
               }
             />
           </div>
@@ -55,21 +82,28 @@ const SettingsHome = () => {
               Chat Banner Notification
             </p>
             <AppSwitch
-              checked={form.chatBannerNotification}
+              checked={form.chat_banner_notification}
               onChange={() =>
-                handleChange(
-                  "chatBannerNotification",
-                  !form.chatBannerNotification
+                updateSetting(
+                  "chat_banner_notification",
+                  !form.chat_banner_notification
                 )
+              }
+              loading={
+                updateLoading &&
+                loadingStates.includes("chat_banner_notification")
               }
             />
           </div>
           <div className="flex justify-between px-6 py-4 md:py-6 bg-white border-[0.5px] border-[#E7EAEE] items-center">
             <p className="text-[19px] whitespace-nowrap">Chat Notification</p>
             <AppSwitch
-              checked={form.chatNotification}
+              checked={form.chat_notification}
               onChange={() =>
-                handleChange("chatNotification", !form.chatNotification)
+                updateSetting("chat_notification", !form.chat_notification)
+              }
+              loading={
+                updateLoading && loadingStates.includes("chat_notification")
               }
             />
           </div>
@@ -101,15 +135,12 @@ const SettingsHome = () => {
             </span>
           </a>
 
-          <a
-            href="#"
-            className="flex justify-between px-6 py-4 md:py-6 bg-white border-[0.5px] border-[#E7EAEE] items-center"
-          >
+          <div className="flex justify-between px-6 py-4 md:py-6 bg-white border-[0.5px] border-[#E7EAEE] items-center">
             <p className="text-[19px]">Support & F.A.Q</p>
             <span>
               <AiOutlineRight size={16} />
             </span>
-          </a>
+          </div>
         </div>
       </main>
     </section>

@@ -167,7 +167,7 @@ th {
 }
 
 .backdrop {
-  background: rgba(0, 0, 0, 0.08) !important;
+  background: rgba(0, 0, 0, 0.25) !important;
   -webkit-backdrop-filter: blur(2px) !important;
   backdrop-filter: blur(2px) !important;
 }

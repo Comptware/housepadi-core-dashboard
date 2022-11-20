@@ -13,11 +13,22 @@ import FileInput from "components/general/input/fileInput";
 import ImageModal from "components/general/modal/imageModal/ImageModal";
 import CircleLoader from "components/general/circleLoader/circleLoader";
 import cleanPayload from "utils/cleanPayload";
+import Select from "components/general/input/select";
+import PaystackStore from "stores/paystack";
+import { isEmpty } from "lodash";
 
 const Form = () => {
   const navigate = useNavigate();
 
   const { loading, loadingFetchMe, getMe, updateMe } = CommonStore;
+  const {
+    banks,
+    getBanks,
+    userDetails,
+    getUserBankDetails,
+    loading: banksloading,
+    detailsLoading,
+  } = PaystackStore;
   const emptyFiles = {
     agent_identification_document_url: { type: "", url: "" },
   };
@@ -32,11 +43,16 @@ const Form = () => {
     profile_image_url: "",
     email: "",
     agent_identification_document_url: "",
+    account_name: "",
+    account_number: "",
+    agent_land_document_url: "",
+    agent_license_document_url: "",
   });
 
   const [files, setFiles] = useState({ ...emptyFiles });
   const [uploading, setUploading] = useState(false);
   const [imageModal, setImageModal] = useState({ ...emptyImageModal });
+  const [selectedBank, setSelectedBank] = useState("");
 
   useEffect(() => {
     handleSetForm();
@@ -46,8 +62,16 @@ const Form = () => {
     handleFiles();
   }, [form.agent_identification_document_url]);
 
+  useEffect(() => {
+    !isEmpty(banks) &&
+      selectedBank?.value &&
+      form?.account_number?.length > 9 &&
+      getUserBankDetails(form?.account_number, selectedBank?.value);
+  }, [form?.account_number, selectedBank]);
+
   const handleSetForm = async () => {
-    const data = await getMe();
+    const res = await Promise.all([getMe(), getBanks()]);
+    const data = res[0];
     const {
       first_name,
       last_name,
@@ -98,10 +122,11 @@ const Form = () => {
       !form?.phone_number
     );
   };
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col justify-start items-start w-full max-w-[650px] h-full relative px-5 space-y-8 mb-24 "
+      className="flex flex-col justify-start items-start w-full h-full relative px-5 space-y-8 mb-24 "
     >
       <div className="pt-8">
         <AvatarPhoto
@@ -111,82 +136,206 @@ const Form = () => {
           isEdit
         />
       </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 xl:gap-14 justify-between items-start w-full">
+        <div className="flex flex-col justify-start items-start w-full h-fit relative gap-5">
+          <span className="text-grey-text text-base uppercase regular-font">
+            PERSONAL DETAILS *
+          </span>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-between items-start w-full">
-        <Input
-          label="First Name"
-          value={form?.first_name}
-          onChangeFunc={(val) => handleChange("first_name", val)}
-          placeholder="Enter first Name"
-          required
-        />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 justify-between items-start w-full">
+            <Input
+              label="First Name"
+              value={form?.first_name}
+              onChangeFunc={(val) => handleChange("first_name", val)}
+              placeholder="Enter first Name"
+              required
+            />
 
-        <Input
-          label="Last Name"
-          value={form?.last_name}
-          onChangeFunc={(val) => handleChange("last_name", val)}
-          placeholder="Enter last Name"
-          required
-        />
-      </div>
+            <Input
+              label="Last Name"
+              value={form?.last_name}
+              onChangeFunc={(val) => handleChange("last_name", val)}
+              placeholder="Enter last Name"
+              required
+            />
+          </div>
 
-      <Input
-        label="Email Address"
-        value={form?.email}
-        onChangeFunc={(val) => handleChange("email", val)}
-        placeholder="taiwoharry@gmail.com"
-        type="email"
-        required
-      />
+          <Input
+            label="Email Address"
+            value={form?.email}
+            onChangeFunc={(val) => handleChange("email", val)}
+            placeholder="taiwoharry@gmail.com"
+            type="email"
+            required
+          />
 
-      <PhoneNumber
-        label="Contact Number"
-        value={form.phone_number}
-        onPhoneChange={(val) => handleChange("phone_number", val)}
-        placeholder="Enter contact number"
-        // labelClass="!text-black regular-font"
-        required
-      />
+          <PhoneNumber
+            label="Contact Number"
+            value={form.phone_number}
+            onPhoneChange={(val) => handleChange("phone_number", val)}
+            placeholder="Enter contact number"
+            // labelClass="!text-black regular-font"
+            required
+          />
+        </div>
 
-      <div className="flex justify-between items-end w-full">
-        <FileInput
-          placeholder="Upload a valid government issued ID"
-          title="Upload a valid government issued ID"
-          file={form.agent_identification_document_url}
-          onChangeFunc={(val) =>
-            handleChange("agent_identification_document_url", val)
-          }
-          isDisabled={loading}
-          type="pdf_image"
-          className={
-            files?.agent_identification_document_url?.url
-              ? "w-[calc(100%-100px)]"
-              : "w-full"
-          }
-        />
+        <div className="flex flex-col justify-start items-start w-full space-y-5">
+          <span className="text-grey-text text-base uppercase regular-font">
+            BANK DETAILS *
+          </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 justify-between items-start w-full">
+            <Input
+              type="number"
+              label="Account Number"
+              labelAlt={userDetails?.account_name}
+              value={form?.account_number}
+              onChangeFunc={(val) => handleChange("account_number", val)}
+              placeholder="1234567890"
+              isDisabled={loading}
+              format="##########"
+              isLoading={detailsLoading}
+            />
 
-        {files?.agent_identification_document_url?.url &&
-          (files?.agent_identification_document_url?.type === "pdf" ? (
-            <a
-              href={files?.agent_identification_document_url?.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Button type="button" text="Preview" />
-            </a>
-          ) : (
-            <Button
-              type="button"
-              text="Preview"
-              small
-              onClick={() =>
-                setImageModal({
-                  show: true,
-                  type: files?.agent_identification_document_url?.url,
-                })
+            <Select
+              label="Bank Name"
+              placeholder="Select bank"
+              value={selectedBank}
+              options={banks}
+              onChange={(val) => setSelectedBank(val)}
+              isLoading={banksloading}
+            />
+          </div>
+
+          <span className="text-grey-text text-base uppercase regular-font">
+            VERIFICATION DETAILS *
+          </span>
+          {/* ID document */}
+          <div className="flex justify-between items-end w-full">
+            <FileInput
+              placeholder="Upload a valid government issued ID"
+              title="Upload a valid government issued ID"
+              file={form.agent_identification_document_url}
+              onChangeFunc={(val) =>
+                handleChange("agent_identification_document_url", val)
+              }
+              isDisabled={loading}
+              type="pdf_image"
+              className={
+                files?.agent_identification_document_url?.url
+                  ? "w-[calc(100%-100px)]"
+                  : "w-full"
               }
             />
-          ))}
+
+            {files?.agent_identification_document_url?.url &&
+              (files?.agent_identification_document_url?.type === "pdf" ? (
+                <a
+                  href={files?.agent_identification_document_url?.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Button type="button" text="Preview" />
+                </a>
+              ) : (
+                <Button
+                  type="button"
+                  text="Preview"
+                  small
+                  onClick={() =>
+                    setImageModal({
+                      show: true,
+                      type: files?.agent_identification_document_url?.url,
+                    })
+                  }
+                />
+              ))}
+          </div>
+          {/* License document */}
+
+          <div className="flex justify-between items-end w-full">
+            <FileInput
+              placeholder="Upload a valid government issued license document"
+              title="Upload a valid government issued license document"
+              file={form.agent_license_document_url}
+              onChangeFunc={(val) =>
+                handleChange("agent_license_document_url", val)
+              }
+              isDisabled={loading}
+              type="pdf_image"
+              className={
+                files?.agent_license_document_url?.url
+                  ? "w-[calc(100%-100px)]"
+                  : "w-full"
+              }
+            />
+
+            {files?.agent_license_document_url?.url &&
+              (files?.agent_license_document_url?.type === "pdf" ? (
+                <a
+                  href={files?.agent_license_document_url?.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Button type="button" text="Preview" />
+                </a>
+              ) : (
+                <Button
+                  type="button"
+                  text="Preview"
+                  small
+                  onClick={() =>
+                    setImageModal({
+                      show: true,
+                      type: files?.agent_license_document_url?.url,
+                    })
+                  }
+                />
+              ))}
+          </div>
+
+          {/* Land Document */}
+
+          <div className="flex justify-between items-end w-full">
+            <FileInput
+              placeholder="Upload a valid government issued land document"
+              title="Upload a valid government issued land document"
+              file={form.agent_land_document_url}
+              onChangeFunc={(val) =>
+                handleChange("agent_land_document_url", val)
+              }
+              isDisabled={loading}
+              type="pdf_image"
+              className={
+                files?.agent_land_document_url?.url
+                  ? "w-[calc(100%-100px)]"
+                  : "w-full"
+              }
+            />
+
+            {files?.agent_land_document_url?.url &&
+              (files?.agent_land_document_url?.type === "pdf" ? (
+                <a
+                  href={files?.agent_land_document_url?.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Button type="button" text="Preview" />
+                </a>
+              ) : (
+                <Button
+                  type="button"
+                  text="Preview"
+                  small
+                  onClick={() =>
+                    setImageModal({
+                      show: true,
+                      type: files?.agent_land_document_url?.url,
+                    })
+                  }
+                />
+              ))}
+          </div>
+        </div>
       </div>
 
       <Button

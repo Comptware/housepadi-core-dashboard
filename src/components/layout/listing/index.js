@@ -73,9 +73,9 @@ const NewListingLayout = ({ children }) => {
     <div className="w-screen min-h-screen h-screen flex flex-grow flex-col relative">
       <header className="flex flex-row justify-between items-center w-full py-4 fixed left-0 right-0 top-0 border-b-1/2 border-grey-border z-[99] h-[70px] bg-white">
         <div className="relative flex flex-row justify-between items-center mx-auto w-full px-10 ">
-          <div className="h-8 w-[110px] h-[32px] !my-0">
+          <Link className="h-8 w-[110px] !my-0" to="/">
             <Logo className="w-full h-full z-90" />
-          </div>
+          </Link>
           <Toast />
 
           <Notification className="hover:fill-grey-lighter transition-all duration-300 ease-in-out cursor-pointer" />

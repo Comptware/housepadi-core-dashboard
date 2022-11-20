@@ -33,6 +33,7 @@ const apis = {
       method: "POST",
       body: data,
     }),
+
   searchListingById: (shortlet_id) =>
     apiInstance2(`internal/shortlet/one/${shortlet_id}`, {
       method: "GET",

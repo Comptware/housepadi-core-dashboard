@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
@@ -73,7 +73,7 @@ const NotificationPane = ({ className, onClose }) => {
                     first_name + " " + last_name
                   ) : notification_type === "booking" && paid ? (
                     <p>
-                      To <span className="text-green">Paid </span> booking for{" "}
+                      <span className="text-green">Paid </span> booking for{" "}
                       <span className="text-blue-alt">{shortlet?.name} </span>{" "}
                     </p>
                   ) : notification_type === "booking" && !paid ? (
@@ -92,6 +92,7 @@ const NotificationPane = ({ className, onClose }) => {
                     key={id}
                     className="w-full flex justify-between items-center border-b-1/2 border-[#E0E0E0] py-2 space-x-2 z-[999999] cursor-pointer hover:bg-grey-light duration-300 ease-in-out px-3"
                     to={link}
+                    onClick={onClose}
                   >
                     {notification_type === "message" ? (
                       <NotificationMessage />
