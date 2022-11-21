@@ -20,7 +20,7 @@ const AllUsers = observer(({ data }) => {
   }, [currentPage]);
 
   return (
-    <div className="flex flex-col justify-start items-start w-full h-fit p-6 max-h-fit ">
+    <div className="flex flex-col justify-start items-start w-full h-fit p-3 sm:p-6 max-h-fit ">
       <Table head={listingsHead}>
         {data?.map(({ id, first_name, last_name, phone_number, email }, i) => {
           const tdClass = "max-h-fit border-b-1/2 border-grey-border";

@@ -180,7 +180,7 @@ const HostProfileModal = ({ handleOk, active }) => {
           active={!!showModal}
           toggler={() => setShowModal("")}
           size="sm"
-          togglerClass="-right-[20px]"
+          togglerClass="-right-[32px]"
           photos={[
             {
               url: activeHost[showModal?.type],

@@ -18,15 +18,15 @@ const ListingsHome = observer(() => {
         </h3>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-start items-start h-auto md:h-full w-full mb-24 px-6 space-x-0 md:space-x-10 md:pb-8">
+      <div className="flex flex-col md:flex-row justify-start items-start h-auto md:h-full w-full mb-24 px-3 sm:px-6 space-x-0 md:space-x-10 md:pb-8">
         {/* Left column */}
 
-        <div className="flex flex-col basis-[100%] md:basis-[70%] justify-start items-start h-full w-full space-y-7 pt-8 md:overflow-y-scroll">
+        <div className="flex flex-col basis-[100%] mlg:basis-[70%] justify-start items-start h-full w-full space-y-7 pt-8 md:overflow-y-scroll">
           <Overview />
         </div>
 
         {/* Right column */}
-        <div className="flex flex-col basis-[100%] md:basis-[30%] h-full bg-white justify-start items-center space-y-7 md:overflow-y-scroll border-l-1/2 border-grey-border">
+        <div className="hidden mlg:flex flex-col basis-[100%] mlg:basis-[30%] h-full bg-white justify-start items-center space-y-7 md:overflow-y-scroll border-l-1/2 border-grey-border">
           {/* OutflowOverview */}
           <UserProfile />
         </div>

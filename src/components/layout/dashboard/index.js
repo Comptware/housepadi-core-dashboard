@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
@@ -36,16 +36,16 @@ const DashboardLayout = ({ children }) => {
   const location = useLocation();
   const { logout } = useAuth();
   const { setListingDataSet } = ListingStore;
-  const { getMe, me } = CommonStore;
+  const { getMe, me, sidenavOpen, setSidenavOpen } = CommonStore;
   const { getSettings, settings } = SettingsStore;
+  const { notificationItems, getNotificationData, handleSetNotificationItems } =
+    HomeStore;
   const userInfo = getUserInfoFromStorage();
-  const [sidenavOpen, setSidenavOpen] = useState(false);
 
   useEffect(() => {
     setListingDataSet(false);
   }, []);
-  const { notificationItems, getNotificationData, handleSetNotificationItems } =
-    HomeStore;
+
   const notificationAlertAudio = new Audio(notificationAlertSound);
   const playAudio = (audioFile) => {
     audioFile?.play();
@@ -176,7 +176,7 @@ const DashboardLayout = ({ children }) => {
 
       <section className="w-full h-full flex flex-row flex-grow max-w-9xl mx-auto relative mt-[70px] overflow-hidden">
         <aside
-          className={`dashboard-sidenav w-52 pt-[20px] pb-28 h-full flex flex-col flex-grow absolute left-0 top-0 bottom-0 z-50 bg-white
+          className={`dashboard-sidenav w-52 pt-[20px] pb-28 h-full flex flex-col flex-grow absolute left-0 top-0 bottom-0 z-[999] mlg:z-50 bg-white
          overflow-y-scroll border-r-1/2 border-grey-border
          transition-transform duration-150 ease-in-out 
           ${
@@ -190,7 +190,11 @@ const DashboardLayout = ({ children }) => {
                 DASHBOARD
               </span>
               {dashboardLinks.map(({ title, icon, link }) => (
-                <Link to={link} key={title}>
+                <Link
+                  to={link}
+                  key={title}
+                  onClick={() => setSidenavOpen(false)}
+                >
                   <div
                     className={`flex justify-center items-center hover:text-blue text-grey text-sm space-x-2 ${
                       location.pathname.includes(link) && "!text-blue-alt"
@@ -206,7 +210,14 @@ const DashboardLayout = ({ children }) => {
             <div className=" flex flex-col justify-start items-start pb-10 w-full space-y-8 cursor-pointer transition-all duration-150 ease-in-out">
               <span className="text-grey uppercase text-sm  pt-6">ACtions</span>
               {listingLinks.map(({ title, icon, link, click }) => (
-                <Link to={link} key={title} onClick={() => click && click()}>
+                <Link
+                  to={link}
+                  key={title}
+                  onClick={() => {
+                    setSidenavOpen(false);
+                    click && click();
+                  }}
+                >
                   <div
                     className={`flex justify-center items-center hover:text-blue text-grey text-sm space-x-2 ${
                       location.pathname.includes(link) && "!text-blue-alt "
@@ -221,11 +232,11 @@ const DashboardLayout = ({ children }) => {
           </div>
         </aside>
 
-        <main className="dashboard-content bg-grey-whitesmoke w-full lg:ml-52 pb-14 flex flex-col flex-grow overflow-y-auto">
+        <main className="dashboard-content bg-grey-whitesmoke w-full lg:ml-52 mlg:pb-14 flex flex-col flex-grow overflow-y-auto">
           {children}
         </main>
       </section>
-      <footer className="hidden sm:flex flex-row justify-between items-center w-full py-2 fixed left-0 right-0 bottom-0 border-t-1/2 border-grey-border z-[99] h-[50px] bg-white">
+      <footer className="hidden mlg:flex flex-row justify-between items-center w-full py-2 fixed left-0 right-0 bottom-0 border-t-1/2 border-grey-border z-[99] h-[50px] bg-white">
         <div className="relative flex flex-row justify-between items-center mx-auto w-full px-20 ">
           <p className="text-base text-black text-left">
             © 2022 Zusco, All Rights Reserved

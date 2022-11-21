@@ -16,7 +16,7 @@ const Bookings = () => {
         <h3 className="text-lg text-black regular-font">All Requests</h3>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-start items-start md:h-full w-full mb-24 px-6 space-x-0 md:space-x-10">
+      <div className="flex flex-col md:flex-row justify-start items-start md:h-full w-full mb-24 px-3 sm:px-6 space-x-0 md:space-x-10">
         {/* Left column */}
 
         <div className="flex flex-col justify-start items-start h-full w-full space-y-7 pt-8 md:overflow-y-scroll">

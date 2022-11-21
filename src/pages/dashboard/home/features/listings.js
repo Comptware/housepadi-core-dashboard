@@ -69,7 +69,7 @@ const Listings = () => {
             </Tippy>
             <span className="text-[13px] text-black">Total listings </span>
             <Link
-              className="text-[13px] text-blue-alt regular-font underline ml-auto !mt-0 absolute right-0 -bottom-[40px]"
+              className="text-[13px] text-blue-alt regular-font underline ml-auto !mt-0 absolute right-0 -bottom-[40px] whitespace-nowrap"
               to="/dashboard/listings"
             >
               View all listings

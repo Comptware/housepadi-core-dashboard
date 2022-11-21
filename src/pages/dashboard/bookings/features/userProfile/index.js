@@ -35,7 +35,7 @@ const UserBookingsProfile = observer(() => {
       <div className="flex flex-col md:flex-row justify-start items-start h-auto md:h-full w-full mb-24 pr-6 space-x-0 md:space-x-10 md:pb-8">
         {/* Left column */}
 
-        <div className="flex flex-col basis-[100%] md:basis-[30%] h-full bg-white justify-start items-center space-y-7 md:overflow-y-scroll border-l-1/2 border-grey-border">
+        <div className="flex flex-col basis-[100%] md:basis-[30%] h-full bg-white justify-start items-center space-y-7 md:overflow-y-scroll border-l-1/2 border-grey-border w-full md:min-w-[300px]">
           {/* OutflowOverview */}
           <UserProfile />
         </div>

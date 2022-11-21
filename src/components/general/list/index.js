@@ -11,7 +11,7 @@ const List = ({ listing }) => {
   return (
     <Link
       to={`/dashboard/bookings/${listing?.id}`}
-      className={`bg-white flex flex-col sm:flex-row space-y-3 sm:space-y-0  justify-between items-center w-full h-fit rounded-lg py-6 px-6 border-1/2 border-grey-border`}
+      className={`bg-white flex flex-col sm:flex-row space-y-3 sm:space-y-0  justify-between items-center w-full h-fit rounded-lg p-3 sm:p-6 border-1/2 border-grey-border`}
     >
       <div className="flex justify-start items-center w-fit space-x-6">
         <div className="flex flex-col justify-center items-start space-y-1">
@@ -57,7 +57,7 @@ const List = ({ listing }) => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-end space-y-4 h-full">
+      <div className="hidden sm:flex flex-col justify-center items-end space-y-4 h-full">
         <Button
           isOutline
           text="View details"

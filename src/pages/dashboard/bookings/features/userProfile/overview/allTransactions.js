@@ -12,31 +12,20 @@ import CircleLoader from "components/general/circleLoader/circleLoader";
 import ListingStore from "pages/dashboard/listings/store";
 import Pagination from "components/general/pagination";
 
-const listingsHead = [
-  "LISTING",
-  "DATE",
-  "NIGHTS",
-  "PAYMENT",
-];
+const listingsHead = ["LISTING", "DATE", "NIGHTS", "PAYMENT"];
 const AllTransactions = observer(({ data }) => {
   const navigate = useNavigate();
   const { loading, listingsCount, getListings } = ListingStore;
 
   const [currentPage, setCurrentPage] = useState(1);
 
-
-
   useEffect(() => {
     currentPage > 1 && getListings(currentPage);
   }, [currentPage]);
 
-
- 
   return (
-    <div className="flex flex-col justify-start items-start w-full h-fit p-6 max-h-fit ">
-      <Table
-        head={listingsHead}
-      >
+    <div className="flex flex-col justify-start items-start w-full h-fit p-3 sm:p-6 max-h-fit ">
+      <Table head={listingsHead}>
         {loading && (
           <div className="absolute w-full flex justify-center items-center h-[100px]">
             <CircleLoader blue />
@@ -59,7 +48,6 @@ const AllTransactions = observer(({ data }) => {
             const tdClass = "max-h-fit border-b-1/2 border-grey-border";
             return (
               <tr className="py-4 bg-white w-full" key={i + id}>
-               
                 <td className={tdClass}>
                   <div className="flex flex-col justify-start items-start space-y-2">
                     <div

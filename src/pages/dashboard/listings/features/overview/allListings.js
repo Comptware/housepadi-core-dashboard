@@ -59,7 +59,7 @@ const AllListings = observer(({ data }) => {
 
   const scrollToListTop = () => listTopRef?.current?.scrollIntoView();
   return (
-    <div className="flex flex-col justify-start items-start w-full h-fit p-6 max-h-fit ">
+    <div className="flex flex-col justify-start items-start w-full h-fit p-3 sm:p-6 max-h-fit ">
       <div ref={listTopRef} />
       <Table
         head={listingsHead}

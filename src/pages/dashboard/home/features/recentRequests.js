@@ -14,7 +14,7 @@ const RecentRequests = () => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-start items-start w-full h-fit p-6 space-y-6">
+    <div className="flex flex-col justify-start items-start w-full h-fit sm:p-6 space-y-6">
       <div className="flex flex-col justify-start items-start w-full h-fit space-y-5 relative">
         {loading && (
           <div className="absolute w-full flex justify-center items-center h-[100px]">

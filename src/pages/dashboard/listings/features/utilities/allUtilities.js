@@ -23,7 +23,7 @@ const AllUtilities = observer(({ data, type }) => {
   };
 
   return (
-    <div className="flex flex-col justify-start items-start w-full h-fit p-6 max-h-fit gap-y-3 ">
+    <div className="flex flex-col justify-start items-start w-full h-fit p-3 sm:p-6 max-h-fit gap-y-3 ">
       <div className="flex justify-between items-start w-full h-fit gap-x-3 mt-2 mb-3">
         <Link to="/dashboard/listings">
           <Button text={`View listings`} xsmall />

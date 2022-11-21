@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./styles.css";
 const Hamburger = ({ className, click }) => (
   <button
-    className={`hamburger_btn z-[99999] lg:hidden ${className}`}
+    className={`hamburger_btn z-[99] lg:hidden ${className}`}
     onClick={click}
   >
     <div className="hamburger" />

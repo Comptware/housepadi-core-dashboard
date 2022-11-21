@@ -1,6 +1,5 @@
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-  content: [],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   theme: {
     fontFamily: {
       DMSanns: "'DM Sans', 'sans-serif'",
@@ -101,6 +100,7 @@ module.exports = {
         "4xs": "300px",
         "3xs": "380px",
         "2xs": "475px",
+        mlg: "900px",
         max: "100rem",
       },
       margin: {

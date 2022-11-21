@@ -17,7 +17,7 @@ const AllBookings = observer(({ data }) => {
   }, [currentPage]);
 
   return (
-    <div className="flex flex-col justify-start items-start w-full h-fit p-6 space-y-5 max-h-fit relative">
+    <div className="flex flex-col justify-start items-start w-full h-fit px-3 py-6 sm:p-6 space-y-5 max-h-fit relative">
       {data?.map((booking) => (
         <List key={booking?.id} listing={booking} isAlt />
       ))}

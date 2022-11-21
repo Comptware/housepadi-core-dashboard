@@ -37,7 +37,7 @@ const UserBookingsProfile = observer(() => {
         {searchLoading && <Loader absolute />}
         {/* Left column */}
 
-        <div className="flex flex-col basis-[100%] md:basis-[30%] h-full bg-white justify-start items-center space-y-7 md:overflow-y-scroll border-l-1/2 border-grey-border">
+        <div className="flex flex-col basis-[100%] md:basis-[30%] h-full bg-white justify-start items-center space-y-7 md:overflow-y-scroll border-l-1/2 border-grey-border w-full md:min-w-[300px]">
           {/* OutflowOverview */}
           <UserProfile />
         </div>

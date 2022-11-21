@@ -34,7 +34,7 @@ const AllListings = () => {
   }, [currentPage]);
 
   return (
-    <div className="flex flex-col justify-start items-start w-full h-fit p-6 max-h-fit ">
+    <div className="flex flex-col justify-start items-start w-full h-fit p-3 sm:p-6 max-h-fit ">
       <Table
         head={
           hostListings?.length < 1 && !hostListingsLoading ? null : listingsHead

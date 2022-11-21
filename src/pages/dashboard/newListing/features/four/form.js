@@ -11,7 +11,6 @@ import Input from "components/general/input/input";
 import ListingStore from "pages/dashboard/listings/store";
 import PaystackStore from "stores/paystack";
 import AppSwitch from "components/general/switch";
-import Select from "components/general/input/select";
 import useWindowDimensions from "hooks/useWindowDimensions";
 import Accordion from "./accordion";
 
@@ -34,14 +33,7 @@ const Form = () => {
     updateListing,
   } = ListingStore;
 
-  const {
-    banks,
-    getBanks,
-    userDetails,
-    getUserBankDetails,
-    loading: banksloading,
-    detailsLoading,
-  } = PaystackStore;
+  const { banks, getBanks, getUserBankDetails } = PaystackStore;
 
   const [saveType, setSaveType] = useState("");
   const [selectedBank, setSelectedBank] = useState("");

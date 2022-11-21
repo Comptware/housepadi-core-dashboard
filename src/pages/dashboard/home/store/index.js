@@ -43,7 +43,6 @@ class HomeStore {
       this.bookingsCount = res?.total;
 
       res = res?.data || [];
-
       this.bookings = res;
       this.paidBookings = res?.filter(({ paid }) => paid);
       this.unpaidBookings = res?.filter(({ paid }) => !paid);
@@ -57,7 +56,7 @@ class HomeStore {
     }
   };
 
-  // Get Bookings
+  // Get Notification Data
   getNotificationData = async (page_number = 1, playSound) => {
     try {
       const notificationRes = await Promise.all([
@@ -120,7 +119,6 @@ class HomeStore {
       : [];
 
     if (newBookings.length > 0) {
-      console.log("Best time to play sound: ", notification_type);
       this.handleSetNotificationItems(
         newBookings?.map((item) => {
           return {

@@ -21,7 +21,7 @@ const AllHosts = observer(({ data }) => {
   }, [currentPage]);
 
   return (
-    <div className="flex flex-col justify-start items-start w-full h-fit p-6 max-h-fit ">
+    <div className="flex flex-col justify-start items-start w-full h-fit p-3 sm:p-6 max-h-fit ">
       <Table head={listingsHead}>
         {data?.map(
           (
@@ -43,7 +43,7 @@ const AllHosts = observer(({ data }) => {
                 onClick={() => navigate(id)}
               >
                 <td className={tdClass}>
-                  <span className="text-xl text-grey-textalt capitalize">
+                  <span className="text-sm text-grey-textalt capitalize">
                     {first_name} {last_name}
                   </span>
                 </td>
