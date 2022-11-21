@@ -4,6 +4,7 @@ import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { FaSwimmingPool } from "react-icons/fa";
 
 import { useAuth } from "hooks/auth";
 import { DEFAULT_AVATAR } from "utils/constants";
@@ -205,6 +206,21 @@ const DashboardLayout = ({ children }) => {
                   </div>
                 </Link>
               ))}
+
+              <Link
+                to="/dashboard/listings/utilities"
+                onClick={() => setSidenavOpen(false)}
+                className="mlg:hidden"
+              >
+                <div
+                  className={`flex justify-center items-center hover:text-blue text-grey text-sm space-x-2 ${
+                    location.pathname.includes("/utilities") && "!text-blue-alt"
+                  }`}
+                >
+                  <FaSwimmingPool className="fill-current" />
+                  <span className="text-current">Utilities</span>
+                </div>
+              </Link>
             </div>
 
             <div className=" flex flex-col justify-start items-start pb-10 w-full space-y-8 cursor-pointer transition-all duration-150 ease-in-out">
@@ -232,7 +248,7 @@ const DashboardLayout = ({ children }) => {
           </div>
         </aside>
 
-        <main className="dashboard-content bg-grey-whitesmoke w-full lg:ml-52 mlg:pb-14 flex flex-col flex-grow overflow-y-auto">
+        <main className="dashboard-content bg-grey-whitesmoke w-full lg:ml-52 mlg:pb-14 flex flex-col flex-grow overflow-y-auto overflow-x-hidden ">
           {children}
         </main>
       </section>
