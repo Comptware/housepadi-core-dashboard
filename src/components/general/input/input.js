@@ -50,6 +50,7 @@ const Input = ({
   prefix,
   icon,
   labelAlt,
+  labelAltClassName = "text-grey-label",
   ...rest
 }) => {
   const [active, setActive] = useState(false);
@@ -76,11 +77,13 @@ const Input = ({
     <div className="w-full ">
       {label && (
         <div className="flex justify-between items-start w-full space-x-2">
-          <label className="general-input-label text-grey-label text-sm capitalize">
+          <label className="general-input-label text-grey-label text-sm capitalize whitespace-nowrap truncate">
             {label}
           </label>
           {labelAlt && (
-            <label className="general-input-label text-grey-label text-sm">
+            <label
+              className={`general-input-label text-sm whitespace-nowrap truncate ${labelAltClassName}`}
+            >
               {labelAlt}
             </label>
           )}
@@ -207,6 +210,7 @@ Input.propTypes = {
   rest: PropTypes.object,
   icon: PropTypes.element,
   labelAlt: PropTypes.string,
+  labelAltClassName: PropTypes.string,
 };
 
 export default Input;

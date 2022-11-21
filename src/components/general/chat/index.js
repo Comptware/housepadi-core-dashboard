@@ -89,15 +89,14 @@ const Chat = ({
           </div>
         ))}
       </div>
-      {showModal && (
-        <ImageModal
-          active={showModal}
-          toggler={() => setShowModal(false)}
-          photos={[{ url: image, name: "Image attachment" }]}
-          className="mt-8"
-          togglerClass="top-10"
-        />
-      )}
+
+      <ImageModal
+        active={showModal}
+        toggler={() => setShowModal(false)}
+        photos={[{ url: image, name: "Image attachment" }]}
+        className="mt-8"
+        togglerClass="top-10"
+      />
     </div>
   );
 };

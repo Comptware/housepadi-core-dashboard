@@ -7,18 +7,21 @@ import AllListings from "./allListings";
 const Overview = observer(() => {
   const containerRef = useRef(null);
   const listTopRef = useRef(null);
+
+  const { hostBookings, hostBookingsCount, hostListingsCount } = HostStore;
+
   const tabs = [
     {
       title: "Bookings",
       content: <AllBookings />,
+      count: hostBookingsCount,
     },
     {
       title: "Listings",
       content: <AllListings />,
+      count: hostListingsCount,
     },
   ];
-
-  const { hostBookings } = HostStore;
   const [activeTab, setActiveTab] = useState({
     title: tabs[0].title,
     index: 0,
@@ -54,7 +57,7 @@ const Overview = observer(() => {
       <div ref={listTopRef} />
       <div className="flex justify-between items-center w-full border-b-1/2 border-grey-border">
         <div className="flex justify-between items-center" ref={containerRef}>
-          {tabs.map(({ title }, index) => (
+          {tabs.map(({ title, count }, index) => (
             <button
               key={title + index}
               className={`w-[100px] h-fit p-3 text-center whitespace-nowrap text-base hover:bg-grey-lighter transition-all duration-300 ease-in-out rounded-t-lg ${
@@ -64,7 +67,9 @@ const Overview = observer(() => {
               }`}
               onClick={() => setActiveTab({ title, index })}
             >
-              <span className="">{title} </span>
+              <span className="">
+                {title} {`(${count})`}
+              </span>
             </button>
           ))}
         </div>
