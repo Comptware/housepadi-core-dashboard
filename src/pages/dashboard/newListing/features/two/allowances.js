@@ -72,12 +72,11 @@ const Allowances = ({
         </div>
       )}
 
-      {addModal && (
-        <AddAarModal
-          toggleModal={() => setAddModal(false)}
-          type={"allowance"}
-        />
-      )}
+      <AddAarModal
+        toggleModal={() => setAddModal(false)}
+        type={"allowance"}
+        active={addModal}
+      />
     </div>
   ) : null;
 };

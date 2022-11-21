@@ -139,7 +139,7 @@ const Form = () => {
               ))}
             </div>
           </Accordion>
-          {listingFormFour?.card && (
+          {/* {listingFormFour?.card && (
             <div className="flex flex-col justify-start items-start w-full space-y-4">
               <span className="text-grey-text text-base uppercase regular-font">
                 CARD DETAILS
@@ -181,9 +181,9 @@ const Form = () => {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
-          {listingFormFour?.bank_transfer && (
+          {/* {listingFormFour?.bank_transfer && (
             <div className="flex flex-col justify-start items-start w-full space-y-4">
               <span className="text-grey-text text-base uppercase regular-font">
                 BANK DETAILS
@@ -213,7 +213,7 @@ const Form = () => {
                 />
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
       {/* Footer */}

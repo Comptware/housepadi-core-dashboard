@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { FileUploader } from "react-drag-drop-files";
 
+import { extractFileNameFromUrl } from "utils/functions";
 import ImageModal from "../modal/imageModal/ImageModal";
 
 const FileBox = ({
@@ -33,20 +34,6 @@ const FileBox = ({
     if (fileSize > 50) return setError(true);
     setError(false);
   }, [file]);
-
-  const extractFileNameFromUrl = (image) => {
-    let filename = "";
-    if (image?.name) {
-      filename = image?.name;
-    } else if (typeof image === "string") {
-      const startIndex = image?.lastIndexOf("/") + 1;
-      const endIndex = image?.length;
-      filename = image?.slice(startIndex, endIndex);
-    } else {
-      filename = "Image";
-    }
-    return filename;
-  };
 
   return (
     <div className="flex flex-col justify-start items-start space-y-2 w-full min-w-full relative file-box">

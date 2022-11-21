@@ -34,9 +34,9 @@ const UserProfileModal = ({ data, handleOk }) => {
             </div>
 
             <div className="flex justify-between items-center w-full border-t pt-3">
-              <div>
+              {/* <div>
                 <Button redBg text="Report User" />
-              </div>
+              </div> */}
               <div>
                 <Button text="Ok" onClick={handleOk} />
               </div>

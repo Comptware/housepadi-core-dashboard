@@ -67,9 +67,11 @@ const Rules = ({ path, rules, searchQuery, handleCheckboxChange, items }) => {
         </div>
       )}
 
-      {addModal && (
-        <AddAarModal toggleModal={() => setAddModal(false)} type={"rule"} />
-      )}
+      <AddAarModal
+        active={addModal}
+        toggleModal={() => setAddModal(false)}
+        type={"rule"}
+      />
     </div>
   ) : null;
 };

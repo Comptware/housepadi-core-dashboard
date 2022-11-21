@@ -58,8 +58,8 @@ const Toast = () => {
                 icon
               );
             return (
-              <div className="bani-toast">
-                <div className="flex justify-between align-start">
+              <div className="bani-toast w-full">
+                <div className="flex justify-between align-start w-full">
                   <div className="flex justify-between align-start">
                     <div className="bani-toast-icon mr-[20px]">{toastIcon}</div>
                     <div className="bani-toast-message">

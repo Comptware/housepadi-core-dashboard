@@ -72,9 +72,11 @@ const Amenities = ({
         </div>
       )}
 
-      {addModal && (
-        <AddAarModal toggleModal={() => setAddModal(false)} type={"amenity"} />
-      )}
+      <AddAarModal
+        active={addModal}
+        toggleModal={() => setAddModal(false)}
+        type={"amenity"}
+      />
     </div>
   ) : null;
 };

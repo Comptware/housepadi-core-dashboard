@@ -65,36 +65,7 @@ const SettingsHome = () => {
 
         <div className="flex flex-col gap-3">
           <h3 className="text-[#ADB1B8] text-[14px]">NOTIFICATION</h3>
-          <div className="flex justify-between px-6 py-4 md:py-6 bg-white border-[0.5px] border-[#E7EAEE] items-center">
-            <p className="text-[19px] whitespace-nowrap">Push Notification</p>
-            <AppSwitch
-              checked={form.push_notification}
-              onChange={() =>
-                updateSetting("push_notification", !form.push_notification)
-              }
-              loading={
-                updateLoading && loadingStates.includes("push_notification")
-              }
-            />
-          </div>
-          <div className="flex justify-between px-6 py-4 md:py-6 bg-white border-[0.5px] border-[#E7EAEE] items-center">
-            <p className="text-[19px] whitespace-nowrap">
-              Chat Banner Notification
-            </p>
-            <AppSwitch
-              checked={form.chat_banner_notification}
-              onChange={() =>
-                updateSetting(
-                  "chat_banner_notification",
-                  !form.chat_banner_notification
-                )
-              }
-              loading={
-                updateLoading &&
-                loadingStates.includes("chat_banner_notification")
-              }
-            />
-          </div>
+
           <div className="flex justify-between px-6 py-4 md:py-6 bg-white border-[0.5px] border-[#E7EAEE] items-center">
             <p className="text-[19px] whitespace-nowrap">Chat Notification</p>
             <AppSwitch
@@ -135,12 +106,17 @@ const SettingsHome = () => {
             </span>
           </a>
 
-          <div className="flex justify-between px-6 py-4 md:py-6 bg-white border-[0.5px] border-[#E7EAEE] items-center">
+          <a
+            href="mailto:info@getzusco.com"
+            target="_blank"
+            rel="noreferrer"
+            className="flex justify-between px-6 py-4 md:py-6 bg-white border-[0.5px] border-[#E7EAEE] items-center"
+          >
             <p className="text-[19px]">Support & F.A.Q</p>
             <span>
               <AiOutlineRight size={16} />
             </span>
-          </div>
+          </a>
         </div>
       </main>
     </section>

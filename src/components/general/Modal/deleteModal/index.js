@@ -19,11 +19,12 @@ const DeleteModal = ({
   titleAlt,
   isDisabled,
   noToggle,
+  active,
 }) => {
   return (
     <Modal
       size="sm"
-      active
+      active={active}
       toggler={!noToggle && onClose}
       noPadding
       bodyClass="bg-white"
@@ -80,6 +81,7 @@ DeleteModal.propTypes = {
   isDisabled: PropTypes.bool,
   placeholder: PropTypes.string,
   noToggle: PropTypes.bool,
+  active: PropTypes.bool,
 };
 
 export default DeleteModal;

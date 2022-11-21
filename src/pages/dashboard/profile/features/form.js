@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
-import { handleFileType } from "utils/functions";
+import { extractFileNameFromUrl, handleFileType } from "utils/functions";
 import { uploadImageToCloud } from "utils/uploadImagesToCloud";
 import { Button } from "components/general/button";
 import Input from "components/general/input/input";
@@ -16,6 +16,7 @@ import cleanPayload from "utils/cleanPayload";
 import Select from "components/general/input/select";
 import PaystackStore from "stores/paystack";
 import { isEmpty } from "lodash";
+import { object } from "prop-types";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -31,6 +32,8 @@ const Form = () => {
   } = PaystackStore;
   const emptyFiles = {
     agent_identification_document_url: { type: "", url: "" },
+    agent_land_document_url: { type: "", url: "" },
+    agent_license_document_url: { type: "", url: "" },
   };
   const emptyImageModal = {
     show: false,
@@ -59,8 +62,21 @@ const Form = () => {
   }, []);
 
   useEffect(() => {
-    handleFiles();
+    handleFiles("agent_identification_document_url");
   }, [form.agent_identification_document_url]);
+  useEffect(() => {
+    handleFiles("agent_license_document_url");
+  }, [form.agent_license_document_url]);
+  useEffect(() => {
+    handleFiles("agent_land_document_url");
+  }, [form.agent_land_document_url]);
+
+  useEffect(() => {
+    console.log("formDisabled: ", formDisabled());
+  }, [form]);
+  useEffect(() => {
+    handleFindSelectedBank(form?.bank_name);
+  }, [banks]);
 
   useEffect(() => {
     !isEmpty(banks) &&
@@ -79,6 +95,11 @@ const Form = () => {
       profile_image_url,
       email,
       agent_identification_document_url,
+      account_name,
+      account_number,
+      agent_land_document_url,
+      agent_license_document_url,
+      bank_name,
     } = data;
 
     const me = {
@@ -88,39 +109,70 @@ const Form = () => {
       profile_image_url,
       email,
       agent_identification_document_url,
+      account_name,
+      bank_name,
+      account_number,
+      agent_land_document_url,
+      agent_license_document_url,
     };
 
     setForm({ ...me });
   };
-  const handleFiles = () => {
-    const agent_identification_document_url = handleFileType(
-      form?.agent_identification_document_url,
-      "agent_identification_document_url"
-    );
-
-    setFiles({ ...agent_identification_document_url });
+  const handleFiles = (type) => {
+    const val = handleFileType(form[type], type);
+    setFiles((prev) => ({ ...prev, ...val }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setUploading(true);
     const phone_number = "";
-    const profile_image_url = await uploadImageToCloud(form.profile_image_url);
+    console.log("FORM: ", form);
+    const fileUrls = await Promise.all([
+      uploadImageToCloud(form.profile_image_url),
+
+      uploadImageToCloud(form.agent_identification_document_url),
+
+      uploadImageToCloud(form.agent_license_document_url),
+
+      uploadImageToCloud(form.agent_land_document_url),
+    ]);
+
+    const profile_image_url = fileUrls[0];
+    const agent_identification_document_url = fileUrls[1];
+    const agent_license_document_url = fileUrls[2];
+    const agent_land_document_url = fileUrls[3];
     setUploading(false);
-    let payload = { ...form, phone_number, profile_image_url };
+    let payload = {
+      ...form,
+      phone_number,
+      profile_image_url,
+      agent_identification_document_url,
+      agent_license_document_url,
+      agent_land_document_url,
+      bank_name: form?.bank_name || selectedBank?.label,
+      account_name: form?.account_name || userDetails?.account_name,
+    };
     payload = cleanPayload(payload);
-    updateMe({ data: payload, navigate, route: "/dashboard/explore" });
+    updateMe({ data: payload, navigate, route: "/dashboard/me" });
   };
   const handleChange = (prop, val) => {
     setForm({ ...form, [prop]: val });
   };
   const formDisabled = () => {
-    return (
-      !form?.first_name ||
-      !form?.last_name ||
-      !form?.email ||
-      !form?.phone_number
-    );
+    const emptyFormField = Object.values(form).find((item) => item === "");
+
+    if (emptyFormField === "") {
+      return true;
+    }
+    return false;
+  };
+
+  const handleFindSelectedBank = (bank_name) => {
+    const selectedBankMatch =
+      banks?.find(({ label }) => label === bank_name) || "";
+    console.log("selectedBankMatch: ", selectedBankMatch, "banks: ", banks);
+    setSelectedBank(selectedBankMatch);
   };
 
   return (
@@ -194,6 +246,7 @@ const Form = () => {
               isDisabled={loading}
               format="##########"
               isLoading={detailsLoading}
+              labelAltClassName="text-blue-alt"
             />
 
             <Select
@@ -234,7 +287,7 @@ const Form = () => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Button type="button" text="Preview" />
+                  <Button type="button" text="Preview" small />
                 </a>
               ) : (
                 <Button
@@ -276,7 +329,7 @@ const Form = () => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Button type="button" text="Preview" />
+                  <Button type="button" text="Preview" small />
                 </a>
               ) : (
                 <Button
@@ -319,7 +372,7 @@ const Form = () => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Button type="button" text="Preview" />
+                  <Button type="button" text="Preview" small />
                 </a>
               ) : (
                 <Button
@@ -351,13 +404,18 @@ const Form = () => {
         </div>
       )}
       <div className="w-full min-h-[100px]" />
-      {imageModal.show && (
-        <ImageModal
-          active={imageModal.show}
-          toggler={() => setImageModal({ ...emptyImageModal })}
-          photos={[{ url: imageModal.type, name: "hh" }]}
-        />
-      )}
+      {/* {imageModal.show && ( */}
+      <ImageModal
+        active={imageModal.show}
+        toggler={() => setImageModal({ ...emptyImageModal })}
+        photos={[
+          {
+            url: imageModal.type,
+            name: extractFileNameFromUrl(imageModal.type),
+          },
+        ]}
+      />
+      {/* )} */}
     </form>
   );
 };

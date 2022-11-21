@@ -38,6 +38,7 @@ export const uploadImagesToCloud = async (files) => {
 };
 
 export const uploadImageToCloud = async (file) => {
+  if (!file) return;
   let imageUrl = "";
   if (typeof file === "string") {
     imageUrl = file;

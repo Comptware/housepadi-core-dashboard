@@ -146,32 +146,29 @@ const HostListingModal = ({ handleOk, data, page_number }) => {
           />
         </div>
 
-        {showModal && (
-          <DeleteModal
-            noToggle
-            handleDelete={() =>
-              modalData?.actionText === "Block"
-                ? handleBlockListing()
-                : handleRejectListing()
-            }
-            isDeleting={
-              modalData?.actionText === "Block"
-                ? blockListingLoading
-                : acceptOrRejectListingLoading
-            }
-            onClose={() => setShowModal(false)}
-            titleAlt={modalData?.title}
-            onChangeFunc={(val) => modalData?.onChangeFunc(val)}
-            value={
-              modalData?.actionText === "Block" ? blockReason : rejectReason
-            }
-            actionText={modalData?.actionText}
-            isDisabled={
-              modalData?.actionText === "Block" ? !blockReason : !rejectReason
-            }
-            placeholder={modalData?.placeholder}
-          />
-        )}
+        <DeleteModal
+          active={showModal}
+          noToggle
+          handleDelete={() =>
+            modalData?.actionText === "Block"
+              ? handleBlockListing()
+              : handleRejectListing()
+          }
+          isDeleting={
+            modalData?.actionText === "Block"
+              ? blockListingLoading
+              : acceptOrRejectListingLoading
+          }
+          onClose={() => setShowModal(false)}
+          titleAlt={modalData?.title}
+          onChangeFunc={(val) => modalData?.onChangeFunc(val)}
+          value={modalData?.actionText === "Block" ? blockReason : rejectReason}
+          actionText={modalData?.actionText}
+          isDisabled={
+            modalData?.actionText === "Block" ? !blockReason : !rejectReason
+          }
+          placeholder={modalData?.placeholder}
+        />
       </ModalBody>
       <ModalFooter>
         <div className="flex justify-between items-center w-full p-[18px]">

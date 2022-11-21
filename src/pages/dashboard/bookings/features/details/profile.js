@@ -43,7 +43,7 @@ const Profile = () => {
 
             <Link
               className="text-xs text-blue-alt underline cursor-pointer"
-              to={`/dashboard/bookings/user/${currentBooking?.id}`}
+              to={`/dashboard/users/${currentBooking?.user?.id}`}
             >
               View Profile
             </Link>

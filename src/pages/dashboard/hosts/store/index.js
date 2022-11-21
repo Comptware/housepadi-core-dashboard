@@ -61,7 +61,7 @@ class HostStore {
     this.hostListingsLoading = true;
     try {
       let res = await apis.getHostListings(data, page_number);
-      this.hostListingsCount = res?.total;
+      this.hostListingsCount = res?.total || 0;
       res = res?.data;
       this.hostListings = res || [];
       return res;
@@ -77,7 +77,7 @@ class HostStore {
     this.hostBookingsLoading = true;
     try {
       let res = await apis.getHostBookings(data, page_number);
-      this.hostBookingsCount = res?.total;
+      this.hostBookingsCount = res?.total || 0;
       res = res?.data;
       this.hostBookings = res || [];
       return res;

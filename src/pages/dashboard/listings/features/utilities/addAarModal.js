@@ -14,7 +14,7 @@ import FileInput from "components/general/input/fileInput";
 import { handleFileType } from "utils/functions";
 import ImageModal from "components/general/modal/imageModal/ImageModal";
 
-const AddAarModal = ({ toggleModal, type }) => {
+const AddAarModal = ({ toggleModal, type, active }) => {
   const { createAAR, getAAR } = ListingStore;
   const emptyFiles = {
     icon_url: { type: "", url: "" },
@@ -67,7 +67,7 @@ const AddAarModal = ({ toggleModal, type }) => {
         size="sm"
         noPadding
         bodyClass="bg-white py-6 px-6"
-        active
+        active={active}
       >
         <ModalHeader>
           <p className="text-blue text-2xl font-bold capitalize">
@@ -154,6 +154,7 @@ const AddAarModal = ({ toggleModal, type }) => {
 AddAarModal.propTypes = {
   type: PropTypes.string,
   toggleModal: PropTypes.func,
+  active: PropTypes.bool,
 };
 
 export default observer(AddAarModal);

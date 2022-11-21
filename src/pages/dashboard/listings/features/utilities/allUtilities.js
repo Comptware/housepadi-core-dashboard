@@ -69,18 +69,21 @@ const AllUtilities = observer(({ data, type }) => {
       )}
 
       <div className="w-full min-h-[400px]" />
-      {deleteModal && (
-        <DeleteModal
-          handleDelete={handleDelete}
-          isDeleting={aarLoading}
-          onClose={() => setDeleteModal(null)}
-          title={`You are about to delete ${deleteModal?.name}`}
-          text={`This ${type} will be permanently removed from all utilities, Are you sure?`}
-        />
-      )}
-      {addModal && (
-        <AddAarModal toggleModal={() => setAddModal(false)} type={type} />
-      )}
+
+      <DeleteModal
+        active={deleteModal}
+        handleDelete={handleDelete}
+        isDeleting={aarLoading}
+        onClose={() => setDeleteModal(null)}
+        title={`You are about to delete ${deleteModal?.name}`}
+        text={`This ${type} will be permanently removed from all utilities, Are you sure?`}
+      />
+
+      <AddAarModal
+        active={addModal}
+        toggleModal={() => setAddModal(false)}
+        type={type}
+      />
     </div>
   );
 });

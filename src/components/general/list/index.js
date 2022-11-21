@@ -26,10 +26,13 @@ const List = ({ listing }) => {
             }}
           />
 
-          <span className="text-[10px] text-grey-text">
+          <span className="text-[10px] text-grey-text whitespace-nowrap truncate ">
             {listing?.user?.first_name
               ? listing?.user?.first_name + " " + listing?.user?.last_name
               : "N/A"}
+          </span>
+          <span className="text-[10px] text-grey-text whitespace-nowrap truncate ">
+            {moment(listing?.updated_at).fromNow()}
           </span>
         </div>
         <div className="flex flex-col justify-center items-start space-y-3">

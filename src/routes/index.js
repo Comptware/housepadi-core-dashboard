@@ -25,6 +25,10 @@ import Utilities from "pages/dashboard/listings/features/utilities";
 import Hosts from "pages/dashboard/hosts";
 import HostsHome from "pages/dashboard/hosts/features";
 import HostProfile from "pages/dashboard/hosts/features/hostProfile";
+
+import Users from "pages/dashboard/users";
+import UsersHome from "pages/dashboard/users/features";
+import UserProfile from "pages/dashboard/users/features/userProfile";
 const Router = () => {
   return (
     <>
@@ -95,6 +99,20 @@ const Router = () => {
         >
           <Route path="" element={<HostsHome />} />
           <Route path=":id" element={<HostProfile />} />
+        </Route>
+        {/* end agents */}
+
+        {/* users */}
+        <Route
+          path="/dashboard/users"
+          element={
+            <AuthRoute path="">
+              <Users />
+            </AuthRoute>
+          }
+        >
+          <Route path="" element={<UsersHome />} />
+          <Route path=":id" element={<UserProfile />} />
         </Route>
         {/* end agents */}
 

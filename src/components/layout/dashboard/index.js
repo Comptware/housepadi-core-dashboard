@@ -23,6 +23,7 @@ import { ReactComponent as Linkedin } from "assets/icons/linkedin.svg";
 
 import ListingStore from "pages/dashboard/listings/store";
 import CommonStore from "stores/common";
+import SettingsStore from "pages/dashboard/settings/store";
 import HomeStore from "pages/dashboard/home/store";
 import notificationAlertSound from "assets/audios/quick-alert.wav";
 import { getUserInfoFromStorage } from "utils/storage";
@@ -36,6 +37,7 @@ const DashboardLayout = ({ children }) => {
   const { logout } = useAuth();
   const { setListingDataSet } = ListingStore;
   const { getMe, me } = CommonStore;
+  const { getSettings, settings } = SettingsStore;
   const userInfo = getUserInfoFromStorage();
   const [sidenavOpen, setSidenavOpen] = useState(false);
 
@@ -73,6 +75,12 @@ const DashboardLayout = ({ children }) => {
     {
       title: "Agents",
       link: "/dashboard/agents",
+      icon: <Agent className="fill-current" />,
+    },
+
+    {
+      title: "Users",
+      link: "/dashboard/users",
       icon: <Agent className="fill-current" />,
     },
     {
@@ -150,14 +158,16 @@ const DashboardLayout = ({ children }) => {
           }
         });
 
-        playAudio(notificationAlertAudio);
+        settings?.chat_notification && playAudio(notificationAlertAudio);
       }
       loaded = true;
     });
   };
 
   useEffect(() => {
+    getMe();
     getConversations();
+    getSettings();
   }, []);
 
   return (

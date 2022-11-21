@@ -1,8 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Switch from "react-switch";
-const AppSwitch = ({ checked, onChange, disabled, icon, title, label }) => {
-  return (
+
+import { ReactComponent as Loader } from "assets/icons/loader/loader.svg";
+
+const AppSwitch = ({
+  checked,
+  onChange,
+  disabled,
+  icon,
+  title,
+  label,
+  loading,
+}) => {
+  return loading ? (
+    <Loader />
+  ) : (
     <div className={`flex justify-between items-start w-full h-fit space-x-4`}>
       <div className={`flex justify-start items-start w-fit space-x-2`}>
         {icon}
@@ -40,5 +53,6 @@ AppSwitch.propTypes = {
   checked: PropTypes.bool,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
+  loading: PropTypes.bool,
 };
 export default AppSwitch;

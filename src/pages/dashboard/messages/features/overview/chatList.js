@@ -51,6 +51,8 @@ const ChatList = ({ data }) => {
           );
         }
       )}
+
+      <div className="flex mb-14" />
     </div>
   );
 };

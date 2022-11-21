@@ -111,15 +111,16 @@ const NewLising = () => {
         <h1 className="text-black text-lg regular-font mb-2 w-full text-left max-w-[970px] px-5">
           Add New Listing
         </h1>
-        {showModal && (
-          <DeleteModal
-            handleDelete={handleDeleteListing}
-            isDeleting={loading}
-            onClose={() => setShowModal(false)}
-            title="You are about to delete this listing"
-            text="This listing will be permanently removed from your listings, Are you sure?"
-          />
-        )}
+
+        <DeleteModal
+          active={showModal}
+          handleDelete={handleDeleteListing}
+          isDeleting={loading}
+          onClose={() => setShowModal(false)}
+          title="You are about to delete this listing"
+          text="This listing will be permanently removed from your listings, Are you sure?"
+        />
+
         <Outlet />
       </NewListingLayout>
     </div>

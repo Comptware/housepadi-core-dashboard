@@ -44,12 +44,7 @@ const UserProfile = () => {
         </span>
       </div>
 
-      <p className="text-base text-grey-text text-left mb-5 w-full ">
-        Manage PaymentManage Payments Manage 1Manage Paymentsss Manage
-        PaymentManage
-      </p>
-
-      <p className="text-[13px] text-grey-text text-left mb-5 w-full">
+      <p className="text-[13px] text-grey-text text-left w-full">
         Quick actions
       </p>
 

@@ -11,7 +11,7 @@ import ModalHeader from "components/general/modal/modalHeader/modalHeader";
 import ModalFooter from "components/general/modal/modalFooter/modalFooter";
 import DeleteModal from "components/general/modal/deleteModal";
 import ImageModal from "components/general/modal/imageModal/ImageModal";
-const HostProfileModal = ({ handleOk }) => {
+const HostProfileModal = ({ handleOk, active }) => {
   const navigate = useNavigate();
   const { activeHost, acceptOrRejectHost, acceptOrRejectHostLoading } =
     HostStore;
@@ -28,7 +28,13 @@ const HostProfileModal = ({ handleOk }) => {
     : "doc";
 
   return (
-    <Modal size="sm" active noPadding bodyClass="bg-white" toggler={handleOk}>
+    <Modal
+      size="sm"
+      active={active}
+      noPadding
+      bodyClass="bg-white"
+      toggler={handleOk}
+    >
       <ModalHeader>
         {activeHost?.first_name
           ? activeHost?.first_name + " " + activeHost?.last_name
@@ -123,30 +129,29 @@ const HostProfileModal = ({ handleOk }) => {
           />
         )}
 
-        {showRejectModal && (
-          <DeleteModal
-            noToggle
-            handleDelete={() => {
-              acceptOrRejectHost(
-                {
-                  ...payload,
-                  agent_verified_status: "rejected",
-                  agent_verified_reason: reason,
-                },
-                activeHostPayload,
-                handleOk
-              );
-            }}
-            isDeleting={acceptOrRejectHostLoading}
-            onClose={() => setShowRejectModal(false)}
-            titleAlt={`Reject ${activeHost?.first_name}'s Verification`}
-            onChangeFunc={(val) => setReason(val)}
-            value={reason}
-            actionText="Reject"
-            isDisabled={!reason}
-            placeholder="Enter a reason for rejecting this agent's verification"
-          />
-        )}
+        <DeleteModal
+          active={showRejectModal}
+          noToggle
+          handleDelete={() => {
+            acceptOrRejectHost(
+              {
+                ...payload,
+                agent_verified_status: "rejected",
+                agent_verified_reason: reason,
+              },
+              activeHostPayload,
+              handleOk
+            );
+          }}
+          isDeleting={acceptOrRejectHostLoading}
+          onClose={() => setShowRejectModal(false)}
+          titleAlt={`Reject ${activeHost?.first_name}'s Verification`}
+          onChangeFunc={(val) => setReason(val)}
+          value={reason}
+          actionText="Reject"
+          isDisabled={!reason}
+          placeholder="Enter a reason for rejecting this agent's verification"
+        />
       </ModalBody>
       <ModalFooter>
         <div className="flex justify-between items-center w-full p-[18px]">
@@ -161,6 +166,7 @@ const HostProfileModal = ({ handleOk }) => {
 
 HostProfileModal.propTypes = {
   handleOk: PropTypes.func,
+  active: PropTypes.bool,
 };
 
 export default observer(HostProfileModal);

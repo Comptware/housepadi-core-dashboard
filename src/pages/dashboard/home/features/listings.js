@@ -45,17 +45,7 @@ const Listings = () => {
   };
   return (
     <div className="flex flex-col justify-between items-end w-full h-fit space-y-10 pb-10 mb-6 border-b-1/2 border-grey-border">
-      <Link
-        to="/new-listing/step-one"
-        className="flex flex-col justify-end items-end"
-      >
-        <AddButton
-          text="Create New Listing"
-          onClick={() => resetlistingForm()}
-        />
-      </Link>
-
-      <div className="flex flex-col md:flex-row justify-between items-start w-full h-fit space-y-10 md:space-x-10 md:space-y-0">
+      <div className="flex flex-col-reverse md:flex-row justify-between items-start w-full h-fit gap-10 md:space-x-10 md:space-y-0">
         <div className="flex justify-start items-center w-full basis-[50%] space-x-6">
           <div className="w-[105px] h-[105px] relative">
             <Doughnut data={data} options={options} />
@@ -86,7 +76,17 @@ const Listings = () => {
             </Link>
           </div>
         </div>
-        <div className="flex justify-start items-center w-full basis-[50%] space-x-6">
+
+        <Link
+          to="/new-listing/step-one"
+          className="flex flex-col justify-end items-end"
+        >
+          <AddButton
+            text="Create New Listing"
+            onClick={() => resetlistingForm()}
+          />
+        </Link>
+        {/* <div className="flex justify-start items-center w-full basis-[50%] space-x-6">
           <div className="w-[105px] h-[105px] relative">
             <Doughnut data={data} options={options} />
             <Tippy content={`Total Income: ${"₦0.00"}`}>
@@ -105,7 +105,7 @@ const Listings = () => {
               View all transactions
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

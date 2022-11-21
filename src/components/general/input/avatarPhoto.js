@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { FileUploader } from "react-drag-drop-files";
 import { DEFAULT_AVATAR } from "utils/constants";
 import { ReactComponent as EditSpan } from "assets/icons/edit-span.svg";
+import { extractFileNameFromUrl } from "utils/functions";
 import ImageModal from "../modal/imageModal/ImageModal";
 
 const AvatarPhoto = ({
@@ -28,19 +29,6 @@ const AvatarPhoto = ({
     setError(false);
   }, [file]);
 
-  const extractFileNameFromUrl = (image) => {
-    let filename = "";
-    if (image?.name) {
-      filename = image?.name;
-    } else if (typeof image === "string") {
-      const startIndex = image?.lastIndexOf("/") + 1;
-      const endIndex = image?.length;
-      filename = image?.slice(startIndex, endIndex);
-    } else {
-      filename = "Image";
-    }
-    return filename;
-  };
   const handleImageUrl = () => {
     let url = DEFAULT_AVATAR;
     if (file) {
@@ -109,15 +97,11 @@ const AvatarPhoto = ({
         )}
       </button>
 
-      {showModal && (
-        <ImageModal
-          active={showModal}
-          toggler={() => setShowModal(false)}
-          photos={[
-            { url: handleImageUrl(), name: extractFileNameFromUrl(file) },
-          ]}
-        />
-      )}
+      <ImageModal
+        active={showModal}
+        toggler={() => setShowModal(false)}
+        photos={[{ url: handleImageUrl(), name: extractFileNameFromUrl(file) }]}
+      />
     </div>
   );
 };
