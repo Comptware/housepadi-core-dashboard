@@ -121,10 +121,12 @@ const UserProfile = () => {
         togglerClass="top-10"
       />
 
-      <HostProfileModal
-        active={showDocModal}
-        handleOk={() => setShowDocModal(false)}
-      />
+      {showDocModal && (
+        <HostProfileModal
+          active={showDocModal}
+          handleOk={() => setShowDocModal(false)}
+        />
+      )}
     </div>
   );
 };

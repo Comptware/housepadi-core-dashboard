@@ -15,21 +15,33 @@ const HostProfileModal = ({ handleOk, active }) => {
   const navigate = useNavigate();
   const { activeHost, acceptOrRejectHost, acceptOrRejectHostLoading } =
     HostStore;
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState("");
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [reason, setReason] = useState("");
   const activeHostPayload = { url: activeHost?.id, navigate, route: -1 };
   const payload = { agent_id: activeHost?.id };
   const imgTypes = [".jpg", ".jpeg", ".png"];
-  const docType = imgTypes.find((item) =>
+  const identificationDocType = imgTypes.find((item) =>
     activeHost?.agent_identification_document_url?.includes(item)
+  )
+    ? "img"
+    : "doc";
+
+  const licenseDocType = imgTypes.find((item) =>
+    activeHost?.agent_license_document_url?.includes(item)
+  )
+    ? "img"
+    : "doc";
+
+  const landDocType = imgTypes.find((item) =>
+    activeHost?.agent_land_document_url?.includes(item)
   )
     ? "img"
     : "doc";
 
   return (
     <Modal
-      size="sm"
+      size="md"
       active={active}
       noPadding
       bodyClass="bg-white"
@@ -43,33 +55,79 @@ const HostProfileModal = ({ handleOk, active }) => {
       </ModalHeader>
       <ModalBody>
         <div className="flex flex-col justify-start items-start w-full p-[18px] bg-white">
-          <div className="flex flex-col space-y-2 pt-3 w-full">
+          <div className="flex flex-col items-center space-y-2 pt-3 w-full">
             {activeHost?.agent_identification_document_url &&
-              (docType === "doc" ? (
+              (identificationDocType === "doc" ? (
                 <a
                   href={activeHost?.agent_identification_document_url}
                   target="_blank"
                   rel="noreferrer"
+                  className="text-blue-alt text-sm underline"
                 >
-                  <Button
-                    borderColor="border-blue-alt"
-                    textColor="text-blue-alt"
-                    type="button"
-                    text="View Verification Document"
-                    fullWidth
-                    isOutline
-                  />
+                  View Agent's Identification Document
                 </a>
               ) : (
-                <Button
-                  borderColor="border-blue-alt"
-                  textColor="text-blue-alt"
-                  text="View Verification Document"
-                  fullWidth
-                  isOutline
-                  onClick={() => setShowModal(true)}
-                />
+                <button
+                  onClick={() =>
+                    setShowModal({
+                      name: "Agent's Identification Document",
+                      type: "agent_identification_document_url",
+                    })
+                  }
+                  className="text-blue-alt text-sm underline"
+                >
+                  View Agent's Identification Document
+                </button>
               ))}
+
+            {activeHost?.agent_license_document_url &&
+              (licenseDocType === "doc" ? (
+                <a
+                  href={activeHost?.agent_license_document_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-alt text-sm underline"
+                >
+                  View Agent's License Document
+                </a>
+              ) : (
+                <button
+                  onClick={() =>
+                    setShowModal({
+                      name: "Agent's License Document",
+                      type: "agent_license_document_url",
+                    })
+                  }
+                  className="text-blue-alt text-sm underline"
+                >
+                  View Agent's License Document
+                </button>
+              ))}
+
+            {activeHost?.agent_land_document_url &&
+              (landDocType === "doc" ? (
+                <a
+                  href={activeHost?.agent_land_document_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-alt text-sm underline"
+                >
+                  View Agent's Land Document
+                </a>
+              ) : (
+                <button
+                  onClick={() =>
+                    setShowModal({
+                      name: "Agent's Land Document",
+                      type: "agent_land_document_url",
+                    })
+                  }
+                  className="text-blue-alt text-sm underline"
+                >
+                  View Agent's Land Document
+                </button>
+              ))}
+
             {activeHost?.agent_verified_status !== "in-progress" && (
               <Button
                 yellowBg
@@ -112,22 +170,24 @@ const HostProfileModal = ({ handleOk, active }) => {
                 text="Reject Verification"
                 onClick={() => setShowRejectModal(true)}
                 isLoading={acceptOrRejectHostLoading}
+                fullWidth
               />
             )}
           </div>
         </div>
-        {showModal && (
-          <ImageModal
-            active={showModal}
-            toggler={() => setShowModal(false)}
-            photos={[
-              {
-                url: activeHost?.agent_identification_document_url,
-                name: "Verification document",
-              },
-            ]}
-          />
-        )}
+
+        <ImageModal
+          active={!!showModal}
+          toggler={() => setShowModal("")}
+          size="sm"
+          togglerClass="-right-[20px]"
+          photos={[
+            {
+              url: activeHost[showModal?.type],
+              name: showModal?.name,
+            },
+          ]}
+        />
 
         <DeleteModal
           active={showRejectModal}

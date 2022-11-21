@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+import { isEmpty } from "lodash";
 
 import { extractFileNameFromUrl, handleFileType } from "utils/functions";
 import { uploadImageToCloud } from "utils/uploadImagesToCloud";
@@ -15,8 +16,6 @@ import CircleLoader from "components/general/circleLoader/circleLoader";
 import cleanPayload from "utils/cleanPayload";
 import Select from "components/general/input/select";
 import PaystackStore from "stores/paystack";
-import { isEmpty } from "lodash";
-import { object } from "prop-types";
 
 const Form = () => {
   const navigate = useNavigate();
@@ -72,9 +71,6 @@ const Form = () => {
   }, [form.agent_land_document_url]);
 
   useEffect(() => {
-    console.log("formDisabled: ", formDisabled());
-  }, [form]);
-  useEffect(() => {
     handleFindSelectedBank(form?.bank_name);
   }, [banks]);
 
@@ -127,7 +123,6 @@ const Form = () => {
     e.preventDefault();
     setUploading(true);
     const phone_number = "";
-    console.log("FORM: ", form);
     const fileUrls = await Promise.all([
       uploadImageToCloud(form.profile_image_url),
 
@@ -171,7 +166,6 @@ const Form = () => {
   const handleFindSelectedBank = (bank_name) => {
     const selectedBankMatch =
       banks?.find(({ label }) => label === bank_name) || "";
-    console.log("selectedBankMatch: ", selectedBankMatch, "banks: ", banks);
     setSelectedBank(selectedBankMatch);
   };
 
@@ -188,6 +182,7 @@ const Form = () => {
           isEdit
         />
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 xl:gap-14 justify-between items-start w-full">
         <div className="flex flex-col justify-start items-start w-full h-fit relative gap-5">
           <span className="text-grey-text text-base uppercase regular-font">

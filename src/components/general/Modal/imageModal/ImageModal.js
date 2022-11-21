@@ -6,10 +6,17 @@ import { Slide } from "react-slideshow-image";
 import Modal from "../modal/modal";
 import ModalBody from "../modalBody/modalBody";
 
-const ImageModal = ({ active, toggler, photos, className, togglerClass }) => {
+const ImageModal = ({
+  active,
+  toggler,
+  photos,
+  className,
+  togglerClass,
+  size = "md",
+}) => {
   return (
     <Modal
-      size="md"
+      size={size}
       active={active}
       toggler={toggler}
       noPadding
@@ -53,5 +60,6 @@ ImageModal.propTypes = {
   photos: PropTypes.array,
   className: PropTypes.string,
   togglerClass: PropTypes.string,
+  size: PropTypes.string,
 };
 export default ImageModal;
