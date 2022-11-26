@@ -25,6 +25,12 @@ const UserProfile = () => {
     blocked_reason: reason,
   };
   const activeHostPayload = { url: activeHost?.id, navigate, route: -1 };
+
+  const showManageButton = !!(
+    activeHost?.agent_identification_document_url ||
+    activeHost?.agent_license_document_url ||
+    activeHost?.agent_land_document_url
+  );
   return (
     <div className="flex flex-col justify-start items-start w-full h-full border-r-1/2 border-grey-border py-8 px-7 space-y-2">
       <div className="flex flex-col justify-start items-start space-y-1 w-full relative pb-6">
@@ -70,7 +76,7 @@ const UserProfile = () => {
         </div>
       </div>
 
-      {activeHost?.agent_identification_document_url && (
+      {showManageButton && (
         <Button
           text="Manage agent verification"
           small
