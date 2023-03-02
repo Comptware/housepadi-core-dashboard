@@ -4,13 +4,13 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
 import Button from "components/general/button/button";
-import Modal from "components/general/modal/modal/modal";
-import ModalBody from "components/general/modal/modalBody/modalBody";
+import Modal from "components/general/Modal/modal/modal";
+import ModalBody from "components/general/Modal/modalBody/modalBody";
 import HostStore from "pages/dashboard/hosts/store";
-import ModalHeader from "components/general/modal/modalHeader/modalHeader";
-import ModalFooter from "components/general/modal/modalFooter/modalFooter";
+import ModalHeader from "components/general/Modal/modalHeader/modalHeader";
+import ModalFooter from "components/general/Modal/modalFooter/modalFooter";
 import { ReactComponent as Report } from "assets/icons/report.svg";
-import DeleteModal from "components/general/modal/deleteModal";
+import DeleteModal from "components/general/Modal/deleteModal";
 
 const HostListingModal = ({ handleOk, data, page_number }) => {
   const {

@@ -11,7 +11,7 @@ import CommonStore from "stores/common";
 import AvatarPhoto from "components/general/input/avatarPhoto";
 import PhoneNumber from "components/general/phoneNumber/phoneNumber";
 import FileInput from "components/general/input/fileInput";
-import ImageModal from "components/general/modal/imageModal/ImageModal";
+import ImageModal from "components/general/Modal/imageModal/ImageModal";
 import CircleLoader from "components/general/circleLoader/circleLoader";
 import cleanPayload from "utils/cleanPayload";
 import Select from "components/general/input/select";

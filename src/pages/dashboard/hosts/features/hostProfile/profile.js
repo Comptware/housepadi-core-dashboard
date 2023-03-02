@@ -8,10 +8,10 @@ import { DEFAULT_AVATAR } from "utils/constants";
 import { Agent } from "assets/icons";
 import { ReactComponent as Report } from "assets/icons/report.svg";
 import { determineHostType } from "utils/hosts";
-import DeleteModal from "components/general/modal/deleteModal";
+import DeleteModal from "components/general/Modal/deleteModal";
 import HostStore from "../../store";
 import HostProfileModal from "./hostProfileModal";
-import ImageModal from "components/general/modal/imageModal/ImageModal";
+import ImageModal from "components/general/Modal/imageModal/ImageModal";
 
 const UserProfile = () => {
   const navigate = useNavigate();

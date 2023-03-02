@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { DEFAULT_AVATAR } from "utils/constants";
-import ImageModal from "../modal/imageModal/ImageModal";
+import ImageModal from "../Modal/imageModal/ImageModal";
 
 const Chat = ({
   image,
