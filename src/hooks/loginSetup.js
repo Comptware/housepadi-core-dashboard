@@ -19,7 +19,7 @@ function useLoginSetup() {
       saveUserInfoToStorage(rest);
       setAuthenticatedUser(user);
       clearAccountCreation();
-      navigate(route || "/dashboard/overview", { replace: true });
+      navigate(route || "/dashboard/home", { replace: true });
     }
   };
 

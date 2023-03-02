@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 const CheckBox = ({ checked, onClick, isBlack }) => {
   const checkedClasss = isBlack
     ? "bg-black border-grey-text"
-    : "bg-blue-alt border-blue";
+    : "bg-green border-blue";
   const unCheckedClasss = isBlack
     ? "bg-white border-grey-text"
     : "bg-white border-blue";

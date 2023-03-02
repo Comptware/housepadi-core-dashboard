@@ -74,8 +74,8 @@ const HostListingModal = ({ handleOk, data, page_number }) => {
           <div className="flex flex-col space-y-2 pt-3 w-full border-b border-grey-border pb-3 mb-4">
             <Link to={`/new-listing/step-one/${data?.id}`}>
               <Button
-                borderColor="border-blue-alt"
-                textColor="text-blue-alt"
+                borderColor="border-green"
+                textColor="text-green"
                 type="button"
                 text="View Listing"
                 fullWidth

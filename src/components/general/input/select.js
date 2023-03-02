@@ -24,7 +24,7 @@ const Select = ({
       ...base,
       height: "44px",
       borderRadius: 8,
-      border: "1px solid #E1E1E1 !important",
+      border: "1px solid #909090 !important",
       cursor: "pointer",
     }),
     indicatorSeparator: () => ({

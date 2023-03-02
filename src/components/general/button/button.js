@@ -35,7 +35,7 @@ const Button = ({
     isOutline
       ? `bg-transparent hover:bg-grey-light ${
           isDisabled ? "bg-white/[.2]" : ""
-        } ${textColor || "blue-alt"} border ${borderColor || "border-white"}`
+        } ${textColor || "green"} border ${borderColor || "border-white"}`
       : whiteBg
       ? `bg-white ${isDisabled ? "bg-white/[.2]" : ""} text-${
           textColor || "grey-text"
@@ -50,8 +50,8 @@ const Button = ({
       ? `bg-yellow ${isDisabled ? "bg-yellow/[.2]" : ""} text-white`
       : ` ${
           isDisabled
-            ? "bg-blue-alt/[.2] border-blue-alt"
-            : "bg-blue-alt border-blue-alt hover:bg-blue-hover shadow-[0_4px_4px_rgba(0,0,0,0.25)] drop-shadow-[6px_12px_30px_rgba(50,149,217,0.24)]"
+            ? "bg-green/[.2] border-green"
+            : "bg-green border-green hover:bg-green-hover shadow-[0_4px_4px_rgba(0,0,0,0.25)] drop-shadow-[6px_12px_30px_rgba(50,149,217,0.24)]"
         } text-white`
   }`;
   return (

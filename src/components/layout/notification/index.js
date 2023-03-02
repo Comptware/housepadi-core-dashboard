@@ -67,19 +67,19 @@ const NotificationPane = ({ className, onClose }) => {
                 const body =
                   notification_type === "message" ? (
                     <p>
-                      From <span className="text-blue-alt">{userName} </span>
+                      From <span className="text-green">{userName} </span>
                     </p>
                   ) : notification_type === "agent" ? (
                     first_name + " " + last_name
                   ) : notification_type === "booking" && paid ? (
                     <p>
                       <span className="text-green">Paid </span> booking for{" "}
-                      <span className="text-blue-alt">{shortlet?.name} </span>{" "}
+                      <span className="text-green">{shortlet?.name} </span>{" "}
                     </p>
                   ) : notification_type === "booking" && !paid ? (
                     <p>
                       <span className="text-red-alt">Unpaid </span> booking for{" "}
-                      <span className="text-blue-alt">{shortlet?.name} </span>{" "}
+                      <span className="text-green">{shortlet?.name} </span>{" "}
                     </p>
                   ) : (
                     ""
@@ -113,7 +113,7 @@ const NotificationPane = ({ className, onClose }) => {
                       <div className="text-grey-placeholder text-[9px] whitespace-nowrap">
                         {moment(dateCreated).fromNow()}
                       </div>
-                      <span className="text-xs text-blue-alt">view</span>
+                      <span className="text-xs text-green">view</span>
                     </div>
                   </Link>
                 );

@@ -24,7 +24,7 @@ const UserProfile = () => {
           </div>
         )}
         {!loadingFetchMe && (
-          <div className="w-fit h-fit p-[4px] rounded-full border-b border-l border-blue-alt">
+          <div className="w-fit h-fit p-[4px] rounded-full border-b border-l border-green">
             <div
               className="w-[56px] h-[56px] rounded-full"
               style={{

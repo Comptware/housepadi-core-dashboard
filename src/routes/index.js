@@ -49,7 +49,7 @@ const Router = () => {
 
         {/* orders */}
         <Route
-          path="/dashboard/overview"
+          path="/dashboard/home"
           element={
             <AuthRoute path="">
               <DashboardHome />
@@ -60,7 +60,7 @@ const Router = () => {
         </Route>
         {/* listings */}
         <Route
-          path="/dashboard/listings"
+          path="/dashboard/meals"
           element={
             <AuthRoute path="">
               <Listings />
@@ -74,7 +74,7 @@ const Router = () => {
 
         {/* bookings */}
         <Route
-          path="/dashboard/bookings"
+          path="/dashboard/dry-cleaning"
           element={
             <AuthRoute path="">
               <Bookings />

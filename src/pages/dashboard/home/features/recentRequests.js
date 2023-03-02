@@ -29,7 +29,7 @@ const RecentRequests = () => {
       {!loading && (
         <Link
           to="/dashboard/bookings"
-          className="flex justify-start items-center text-base text-blue-alt underline pb-10"
+          className="flex justify-start items-center text-base text-green underline pb-10"
         >
           View all bookings
           <ArrowRight className="ml-2" />

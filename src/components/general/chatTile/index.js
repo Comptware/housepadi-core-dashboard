@@ -24,7 +24,7 @@ const ChatTile = ({
     >
       <div className="flex justify-start items-center w-fit space-x-6">
         <div className="flex flex-col justify-center items-start space-y-1">
-          <div className="w-fit h-fit p-[4px] rounded-full border border-blue-alt">
+          <div className="w-fit h-fit p-[4px] rounded-full border border-green">
             <div
               className="w-[35px] h-[35px] sm:w-[50px] sm:h-[50px] rounded-full"
               style={{

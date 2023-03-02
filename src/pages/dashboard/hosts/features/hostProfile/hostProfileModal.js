@@ -62,7 +62,7 @@ const HostProfileModal = ({ handleOk, active }) => {
                   href={activeHost?.agent_identification_document_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-blue-alt text-sm underline"
+                  className="text-green text-sm underline"
                 >
                   View Agent's Identification Document
                 </a>
@@ -74,7 +74,7 @@ const HostProfileModal = ({ handleOk, active }) => {
                       type: "agent_identification_document_url",
                     })
                   }
-                  className="text-blue-alt text-sm underline"
+                  className="text-green text-sm underline"
                 >
                   View Agent's Identification Document
                 </button>
@@ -86,7 +86,7 @@ const HostProfileModal = ({ handleOk, active }) => {
                   href={activeHost?.agent_license_document_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-blue-alt text-sm underline"
+                  className="text-green text-sm underline"
                 >
                   View Agent's License Document
                 </a>
@@ -98,7 +98,7 @@ const HostProfileModal = ({ handleOk, active }) => {
                       type: "agent_license_document_url",
                     })
                   }
-                  className="text-blue-alt text-sm underline"
+                  className="text-green text-sm underline"
                 >
                   View Agent's License Document
                 </button>
@@ -110,7 +110,7 @@ const HostProfileModal = ({ handleOk, active }) => {
                   href={activeHost?.agent_land_document_url}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-blue-alt text-sm underline"
+                  className="text-green text-sm underline"
                 >
                   View Agent's Land Document
                 </a>
@@ -122,7 +122,7 @@ const HostProfileModal = ({ handleOk, active }) => {
                       type: "agent_land_document_url",
                     })
                   }
-                  className="text-blue-alt text-sm underline"
+                  className="text-green text-sm underline"
                 >
                   View Agent's Land Document
                 </button>

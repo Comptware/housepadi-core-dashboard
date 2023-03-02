@@ -5,11 +5,12 @@ import { string, bool, node } from "prop-types";
 import { Navigate } from "react-router-dom";
 
 export const AuthRoute = ({ path, notProtected, children, ...rest }) => {
-  const { isAuthenticated } = useAuth();
+  // const { isAuthenticated } = useAuth();
+  const isAuthenticated = true;
   if (notProtected && isAuthenticated) {
     return (
       <DashboardLayout>
-        <Navigate replace to="/dashboard/overview" />;
+        <Navigate replace to="/dashboard/home" />;
       </DashboardLayout>
     );
   }

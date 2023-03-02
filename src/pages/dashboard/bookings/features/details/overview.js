@@ -68,7 +68,7 @@ const Overview = () => {
         <div className="flex flex-col justify-start items-start space-y-2">
           <h1 className="text-grey-text text-xs uppercase">Number of guests</h1>
           <span className="text-base text-black regular-font">
-            {currentBooking?.shortlet?.number_of_guests}
+            {currentBooking?.number_of_guests}
           </span>
         </div>
       </div>

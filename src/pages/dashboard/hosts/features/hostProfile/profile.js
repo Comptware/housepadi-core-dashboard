@@ -37,7 +37,7 @@ const UserProfile = () => {
         <div className="flex justify-start items-center w-fit space-x-6 pt-3">
           <div
             onClick={() => setShowImageModal(true)}
-            className="w-fit h-fit p-[4px] rounded-full border-b border-l border-blue-alt cursor-pointer "
+            className="w-fit h-fit p-[4px] rounded-full border-b border-l border-green cursor-pointer "
           >
             <div
               className="w-[56px] h-[56px] rounded-full"

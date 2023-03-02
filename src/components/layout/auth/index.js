@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import { ReactComponent as ZuscoLogo } from "assets/icons/logo/logo_black.svg";
+import { ReactComponent as ZuscoLogo } from "assets/icons/logo/logo-green.svg";
 
 const AuthLayout = ({ children }) => {
   return (

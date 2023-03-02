@@ -24,7 +24,7 @@ const Rules = ({ path, rules, searchQuery, handleCheckboxChange, items }) => {
           </span>
           <button
             type="button"
-            className="text-blue-alt text-xs underline regular-font"
+            className="text-green text-xs underline regular-font"
             onClick={() => setAddModal(true)}
           >
             Create rule

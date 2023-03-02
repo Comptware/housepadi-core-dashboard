@@ -7,11 +7,11 @@ const EditButton = ({ onClick, text }) => (
   <Button
     {...{ onClick }}
     text={text}
-    textColor="text-blue-alt"
+    textColor="text-green"
     icon={<Edit />}
     isOutline
     fullWidth
-    borderColor="border-blue-alt"
+    borderColor="border-green"
   />
 );
 

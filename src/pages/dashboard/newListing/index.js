@@ -77,7 +77,7 @@ const NewLising = () => {
                   !listingFormOne?.name || loading
                     ? "cursor-not-allowed opacity-50"
                     : ""
-                } text-base text-blue-alt underline`}
+                } text-base text-green underline`}
                 onClick={saveAndExit}
                 disabled={!listingFormOne?.name || loading}
               >

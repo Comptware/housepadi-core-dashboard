@@ -12,7 +12,7 @@ import {
   Dashboard,
   Settings,
   Listings,
-  Messages,
+  Meals,
   BookAStay,
   Agent,
 } from "assets/icons";
@@ -52,64 +52,33 @@ const DashboardLayout = ({ children }) => {
     audioFile?.play();
   };
 
-  useInterval(() => {
-    getNotificationData(1, () => playAudio(notificationAlertAudio));
-  }, 5000);
+  // useInterval(() => {
+  //   getNotificationData(1, () => playAudio(notificationAlertAudio));
+  // }, 5000);
 
   const dashboardLinks = [
     {
-      title: "Overview",
-      link: "/dashboard/overview",
-      icon: <Dashboard className="fill-current" />,
+      title: "Dashboard",
+      link: "/dashboard/home",
+      icon: <Dashboard className="stroke-current" />,
     },
     {
-      title: "Listings",
-      link: "/dashboard/listings",
-      icon: <Listings className="fill-current" />,
+      title: "Meal Orders",
+      link: "/dashboard/meals",
+      icon: <Meals className="stroke-current" />,
     },
     {
-      title: "Bookings",
-      link: "/dashboard/bookings",
+      title: "Dry Cleaning Orders",
+      link: "/dashboard/dry-cleaning",
       icon: <BookAStay className="fill-current" />,
-    },
-
-    {
-      title: "Agents",
-      link: "/dashboard/agents",
-      icon: <Agent className="fill-current" />,
-    },
-
-    {
-      title: "Users",
-      link: "/dashboard/users",
-      icon: <Agent className="fill-current" />,
-    },
-    {
-      title: "Messages",
-      link: "/dashboard/messages",
-      icon: <Messages className="fill-current" />,
     },
   ];
 
   const listingLinks = [
     {
-      title: me?.first_name
-        ? me.first_name + " " + me.last_name
-        : "Edit Profile",
-      link: "/dashboard/me",
-      icon: (
-        <img
-          className={` w-[25px] h-[25px] border rounded-full `}
-          src={me?.profile_image_url || DEFAULT_AVATAR}
-          alt=""
-        />
-      ),
-    },
-
-    {
       title: "Settings",
       link: "/dashboard/settings",
-      icon: <Settings className="fill-current" />,
+      icon: <Settings className="stroke-current" />,
     },
     {
       title: "Logout",
@@ -117,7 +86,7 @@ const DashboardLayout = ({ children }) => {
       click: () => {
         logout();
       },
-      icon: <Logout className="fill-current" />,
+      icon: <Logout className="fill-current w-3.5 mr-1" />,
     },
   ];
 
@@ -177,7 +146,7 @@ const DashboardLayout = ({ children }) => {
 
       <section className="w-full h-full flex flex-row flex-grow max-w-9xl mx-auto relative mt-[70px] overflow-hidden">
         <aside
-          className={`dashboard-sidenav w-52 pt-[20px] pb-28 h-full flex flex-col flex-grow absolute left-0 top-0 bottom-0 z-[999] mlg:z-50 bg-white
+          className={`dashboard-sidenav w-[250px] pt-[20px] pb-28 h-full flex flex-col flex-grow absolute left-0 top-0 bottom-0 z-[999] mlg:z-50 bg-white
          overflow-y-scroll border-r-1/2 border-grey-border
          transition-transform duration-150 ease-in-out 
           ${
@@ -185,9 +154,9 @@ const DashboardLayout = ({ children }) => {
           } lg:translate-x-0
          `}
         >
-          <div className="flex flex-col justify-between items-start w-full h-full px-10">
-            <div className="flex flex-col justify-start items-start pb-10 w-full space-y-8 cursor-pointer transition-all duration-150 ease-in-out">
-              <span className="text-grey uppercase text-sm pt-6">
+          <div className="flex flex-col justify-between items-start w-full h-full pl-8 pr-4">
+            <div className="flex flex-col justify-start items-start pb-10 w-full space-y-2 cursor-pointer transition-all duration-150 ease-in-out">
+              <span className="text-grey uppercase text-sm pt-6 px-5">
                 DASHBOARD
               </span>
               {dashboardLinks.map(({ title, icon, link }) => (
@@ -195,10 +164,12 @@ const DashboardLayout = ({ children }) => {
                   to={link}
                   key={title}
                   onClick={() => setSidenavOpen(false)}
+                  className="w-full"
                 >
                   <div
-                    className={`flex justify-center items-center hover:text-blue text-grey text-sm space-x-2 ${
-                      location.pathname.includes(link) && "!text-blue-alt"
+                    className={`flex justify-start items-center hover:!text-green-hover text-grey text-sm space-x-2 px-5 py-3 rounded-lg w-full ${
+                      location.pathname.includes(link) &&
+                      "!text-black bg-grey-dark"
                     }`}
                   >
                     {icon}
@@ -206,21 +177,6 @@ const DashboardLayout = ({ children }) => {
                   </div>
                 </Link>
               ))}
-
-              <Link
-                to="/dashboard/listings/utilities"
-                onClick={() => setSidenavOpen(false)}
-                className="mlg:hidden"
-              >
-                <div
-                  className={`flex justify-center items-center hover:text-blue text-grey text-sm space-x-2 ${
-                    location.pathname.includes("/utilities") && "!text-blue-alt"
-                  }`}
-                >
-                  <FaSwimmingPool className="fill-current" />
-                  <span className="text-current">Utilities</span>
-                </div>
-              </Link>
             </div>
 
             <div className=" flex flex-col justify-start items-start pb-10 w-full space-y-8 cursor-pointer transition-all duration-150 ease-in-out">
@@ -235,8 +191,8 @@ const DashboardLayout = ({ children }) => {
                   }}
                 >
                   <div
-                    className={`flex justify-center items-center hover:text-blue text-grey text-sm space-x-2 ${
-                      location.pathname.includes(link) && "!text-blue-alt "
+                    className={`flex justify-center items-center hover:!text-green-hover text-grey text-sm space-x-2 ${
+                      location.pathname.includes(link) && "!text-black"
                     }`}
                   >
                     {icon}
@@ -248,7 +204,7 @@ const DashboardLayout = ({ children }) => {
           </div>
         </aside>
 
-        <main className="dashboard-content bg-grey-whitesmoke w-full lg:ml-52 mlg:pb-14 flex flex-col flex-grow overflow-y-auto overflow-x-hidden ">
+        <main className="dashboard-content bg-grey-whitesmoke w-full lg:ml-[250px] mlg:pb-14 flex flex-col flex-grow overflow-y-auto overflow-x-hidden ">
           {children}
         </main>
       </section>

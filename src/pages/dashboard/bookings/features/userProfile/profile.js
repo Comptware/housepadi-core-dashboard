@@ -111,7 +111,7 @@ const UserProfile = () => {
     <div className="flex flex-col justify-start items-start w-full h-full border-r-1/2 border-grey-border py-8 px-7 space-y-2">
       <div className="flex flex-col justify-start items-start space-y-1 w-full relative pb-6">
         <div className="flex justify-start items-center w-fit space-x-6 pt-3">
-          <div className="w-fit h-fit p-[4px] rounded-full border-b border-l border-blue-alt">
+          <div className="w-fit h-fit p-[4px] rounded-full border-b border-l border-green">
             <div
               className="w-[56px] h-[56px] rounded-full"
               style={{

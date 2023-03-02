@@ -218,8 +218,8 @@ const Form = () => {
           type="button"
           isDisabled
           isOutline
-          textColor="text-blue-alt"
-          borderColor="border-blue-alt"
+          textColor="text-green"
+          borderColor="border-green"
         />
         <Button
           text="Save & Finish"

@@ -241,7 +241,7 @@ const Form = () => {
               isDisabled={loading}
               format="##########"
               isLoading={detailsLoading}
-              labelAltClassName="text-blue-alt"
+              labelAltClassName="text-green"
             />
 
             <Select

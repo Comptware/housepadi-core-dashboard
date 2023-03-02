@@ -7,6 +7,9 @@ export const HOUSE_TYPES = [
   { value: "duplex", label: "Duplex" },
   { value: "flat", label: "Flat" },
   { value: "bungalow", label: "Bungalow" },
+  { value: "terraced_house", label: "Terraced House" },
+  { value: "detached_house", label: "Detached House" },
+  { value: "semi_detached_house", label: "Semi-detached House" },
 ];
 
 export const SPACES = [
@@ -45,7 +48,25 @@ export const GUEST_PAYMENTS = [
   },
 ];
 
+export const DASBOARD_DATA_TYPES = {
+  TOTAL_ORDERS: "Total Orders",
+  AVERAGE_ORDER_VALUE: "Average Order Value",
+  AVERAGE_DAILY_ORDERS: "Average Daily Orders",
+  HIGHEST_ORDER_AMOUNT: "Highest Order Amount",
+  LOWEST_ORDER_AMOUNT: "Lowest Order Amount",
+};
+export const DASHBOARD_FILTER = [
+  { value: "category", label: "Sort values by category" },
+];
+export const DATE_FILTER = [
+  { value: "7", label: "Last 7 days" },
+  { value: "30", label: "Last 30 days" },
+  { value: "last_quarter", label: "Last quarter" },
+  { value: "last_year", label: "Last year" },
+  { value: "custom", label: "Custom Date" },
+];
+
 export const DEFAULT_AVATAR =
   "https://res.cloudinary.com/olamilekan1/image/upload/v1658528808/avatar-default.png";
 
-  export const pageCount = 10;
+export const pageCount = 10;

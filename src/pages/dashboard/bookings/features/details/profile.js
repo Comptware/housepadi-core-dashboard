@@ -42,7 +42,7 @@ const Profile = () => {
             </span>
 
             <Link
-              className="text-xs text-blue-alt underline cursor-pointer"
+              className="text-xs text-green underline cursor-pointer"
               to={`/dashboard/users/${currentBooking?.user?.id}`}
             >
               View Profile

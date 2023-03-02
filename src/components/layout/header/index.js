@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
 import HomeStore from "pages/dashboard/home/store";
-import { ReactComponent as Logo } from "assets/icons/logo/logo_black.svg";
+import { ReactComponent as Logo } from "assets/icons/logo/logo-green.svg";
 import { ReactComponent as Notification } from "assets/icons/notification.svg";
 import CommonStore from "stores/common";
 import Toast from "../../general/toast/toast";

@@ -43,6 +43,7 @@ module.exports = {
           label: "#2A2B2C",
           black: "#1D2924",
           grey: "#98A4AF",
+          dark: "#DEDEDE",
         },
         purple: {
           DEFAULT: "#5448C8",
@@ -55,9 +56,10 @@ module.exports = {
           alt: "#CE1313",
         },
         green: {
-          DEFAULT: "#4CAF50",
+          DEFAULT: "#7DD13A",
           deep: "#5FAD56",
           light: "#E5F2E3",
+          hover: "#6eb930",
         },
         yellow: {
           DEFAULT: "#FFB413",

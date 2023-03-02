@@ -11,7 +11,7 @@ import {
   SignifierFour,
 } from "assets/icons";
 
-import { ReactComponent as Logo } from "assets/icons/logo/logo_black.svg";
+import { ReactComponent as Logo } from "assets/icons/logo/logo-green.svg";
 import { ReactComponent as Notification } from "assets/icons/notification.svg";
 import ListingStore from "pages/dashboard/listings/store";
 
@@ -97,9 +97,9 @@ const NewListingLayout = ({ children }) => {
                 >
                   <div
                     className={`flex justify-center items-center hover:text-blue text-grey-black text-sm space-x-2 
-                    ${
-                      location.pathname.includes(link) && "!text-blue-alt"
-                    }    ${complete && "text-green"}`}
+                    ${location.pathname.includes(link) && "!text-green"}    ${
+                      complete && "text-green"
+                    }`}
                   >
                     <span className="w-[40px]">{icon}</span>
 
