@@ -3,8 +3,6 @@
  */
 import { makeAutoObservable } from "mobx";
 
-
-class BookingStore {
-  }
+class BookingStore {}
 
 export default new BookingStore();

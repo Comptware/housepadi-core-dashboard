@@ -45,6 +45,7 @@ class AuthStore {
       this.loading = false;
     }
   };
+
   setCurrentUser = (data) => {
     this.user = data;
   };

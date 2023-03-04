@@ -37,7 +37,7 @@ class HomeStore {
 
   // Get Bookings
   getBookings = async (page_number, noLoader) => {
-    this.loading = noLoader ? false : true;
+    this.loading = !noLoader;
     try {
       let res = await apis.getBookings(page_number || 1);
       this.bookingsCount = res?.total;

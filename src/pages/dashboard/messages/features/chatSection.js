@@ -72,7 +72,7 @@ const ChatSection = () => {
     setSending(true);
 
     try {
-      let chatsPath = currentChatRef;
+      const chatsPath = currentChatRef;
       let profile_image_url;
       if (form?.image) {
         profile_image_url = await uploadImageToCloud(form?.image);

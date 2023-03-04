@@ -141,7 +141,7 @@ const DashboardLayout = ({ children }) => {
   }, []);
 
   return (
-    <div className="w-screen min-h-screen h-screen flex flex-grow flex-col relative">
+    <div className="w-screen min-h-screen flex flex-grow flex-col relative">
       <Header />
 
       <section className="w-full h-full flex flex-row flex-grow max-w-9xl mx-auto relative mt-[70px] overflow-hidden">
@@ -180,7 +180,7 @@ const DashboardLayout = ({ children }) => {
             </div>
 
             <div className=" flex flex-col justify-start items-start pb-10 w-full space-y-8 cursor-pointer transition-all duration-150 ease-in-out">
-              <span className="text-grey uppercase text-sm  pt-6">ACtions</span>
+              <span className="text-grey uppercase text-sm  pt-6">Actions</span>
               {listingLinks.map(({ title, icon, link, click }) => (
                 <Link
                   to={link}
