@@ -15,7 +15,7 @@ const SelectInput = ({ array, label, stat, opt, filter, setFilter }) => {
               : stat === "Cancelled"
               ? "bg-[#FBCFD4] text-[#C30D21] border-[#C30D21]"
               : ""
-          } flex text-[12px] items-center border-[#909090] rounded-full gap-[2px] py-[5px] p-[10px] `}
+          } flex text-[12px] items-center  rounded-full gap-[2px] py-[5px] p-[10px] `}
         >
           {stat}
           <div>
