@@ -12,7 +12,8 @@
     "no-undef": "off",
     "no-constant-condition": "off",
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "camelcase": "off"
   },
   "parser": "@babel/eslint-parser",
   "parserOptions": {

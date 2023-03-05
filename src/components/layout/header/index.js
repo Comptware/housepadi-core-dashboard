@@ -1,38 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
-import HomeStore from "pages/dashboard/home/store";
-import { ReactComponent as Logo } from "assets/icons/logo/logo-green.svg";
-import { ReactComponent as Notification } from "assets/icons/notification.svg";
+import { ReactComponent as Logo } from "assets/icons/logo.svg";
+import { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
 import CommonStore from "stores/common";
-import Toast from "../../general/toast/toast";
-import NotificationPane from "../notification";
 import Hamburger from "../hamburger";
+import { Avatar } from "assets/images/exports";
 
 const Header = () => {
-  const { notificationItems } = HomeStore;
   const { sidenavOpen, setSidenavOpen } = CommonStore;
-  const [notificationPaneOpen, setNotificationPaneOpen] = useState(false);
   return (
-    <header className="flex flex-row justify-between items-center w-full py-4 fixed left-0 right-0 top-0 border-b-1/2 border-grey-border z-[99] h-[70px] bg-white">
-      <div className="relative flex flex-row justify-between items-center mx-auto w-full px-3 sm:px-10 ">
-        <Link className="h-8 w-[110px] !my-0" to="/">
-          <Logo className="w-full h-full z-90" />
-        </Link>
-        <Toast />
+    <header className="flex flex-col justify-center items-center w-full py-4 fixed border-b-1/2 border-[#c8c8c8] text-black z-[99] h-[92px] bg-white">
+      <div className="flex justify-between w-full items-center 4xs:px-10 mlg:px-0">
+        <div className="relative flex justify-between items-center mx-auto w-full mlg:pr-[40px] 4xs:px-10">
+          <Link to="/">
+            <Logo className="w-[173px] h-[35px]" />
+          </Link>
 
-        <div className="flex flex-row justify-start items-center space-x-[20px]">
-          <button
-            onClick={() => setNotificationPaneOpen(true)}
-            className="relative"
-          >
-            {notificationItems?.length > 0 && (
-              <div className="absolute right-[15px] top-[17px] bg-red-alt rounded-full w-[5px] h-[5px]" />
-            )}
-            <Notification className="hover:fill-grey-lighter transition-all duration-300 ease-in-out cursor-pointer" />
-          </button>
-
+          <div className="mlg:flex 4xs:hidden mlg:flex-row gap-[16px] items-center">
+            <div className="flex gap-[24px] items-center">
+              <div className="flex gap-[10px] items-center w-[306px] py-[8px] rounded-full border border-[#acacac] px-[26px]">
+                <SearchIcon />
+                <input
+                  placeholder="Search by Order Code"
+                  className="placeholder:text-[14px] text-black outline-none placeholder:text-[#c8c8c8]"
+                />
+              </div>
+              <div className="flex">
+                <div>
+                  <div className="font-medium text-[#2d2d2d]">Iruene Seyi</div>
+                  <div className="text-[11px] text-[#acacac]">
+                    Kitchen Staff
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-full border-[2px] border-[#C30D21]">
+                <img src={Avatar} className="w-[44px] h-44px]" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="4xs:flex lg:hidden">
           <Hamburger
             click={() => {
               setSidenavOpen(!sidenavOpen);
@@ -40,12 +49,6 @@ const Header = () => {
             className={sidenavOpen ? "ham_crossed" : ""}
           />
         </div>
-      </div>
-
-      <div className="relative">
-        {notificationPaneOpen && (
-          <NotificationPane onClose={() => setNotificationPaneOpen(false)} />
-        )}
       </div>
     </header>
   );

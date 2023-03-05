@@ -36,7 +36,7 @@ const SettingsHome = () => {
   const updateSetting = async (prop, val) => {
     setLoadingStates((prev) => [...prev, prop]);
     await updateSettings({ [prop]: val });
-    setLoadingStates((prev) => prev.filter((state) => state != prop));
+    setLoadingStates((prev) => prev.filter((state) => state !== prop));
   };
   return (
     <section className="py-6 pl-6 pr-6 sm:pr-12">

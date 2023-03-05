@@ -103,7 +103,6 @@ class HomeStore {
       return res;
     } catch (error) {
       this.error = error;
-    } finally {
     }
   };
 

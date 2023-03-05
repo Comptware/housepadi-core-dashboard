@@ -103,6 +103,7 @@ module.exports = {
         "4xs": "300px",
         "3xs": "380px",
         "2xs": "475px",
+        "1xs": "555px",
         xs: "705px",
         mlg: "1024px",
         max: "100rem",
