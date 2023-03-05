@@ -18,9 +18,9 @@ const DashBoard = () => {
   const [sliceIndex, setSliceIndex] = useState(4);
 
   const { getBookings } = HomeStore;
-  useEffect(() => {
-    getBookings(1);
-  }, []);
+  // useEffect(() => {
+  //   getBookings(1);
+  // }, []);
 
   useEffect(() => {
     const handleResize = () => {

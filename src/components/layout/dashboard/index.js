@@ -26,9 +26,9 @@ const DashboardLayout = ({ children }) => {
     HomeStore;
   const userInfo = getUserInfoFromStorage();
 
-  useEffect(() => {
-    setListingDataSet(false);
-  }, []);
+  // useEffect(() => {
+  //   setListingDataSet(false);
+  // }, []);
 
   const notificationAlertAudio = new Audio(notificationAlertSound);
   const playAudio = (audioFile) => {
@@ -40,8 +40,11 @@ const DashboardLayout = ({ children }) => {
       title: "Logout",
       link: "/auth/login",
       click: () => {
-        logout();
+        sessionStorage.clear();
       },
+      // click: () => {
+      //   logout();
+      // },
       icon: <Logout className="w-3.5 mr-1" />,
     },
   ];
@@ -90,11 +93,11 @@ const DashboardLayout = ({ children }) => {
     });
   };
 
-  useEffect(() => {
-    getMe();
-    getConversations();
-    getSettings();
-  }, []);
+  // useEffect(() => {
+  //   getMe();
+  //   getConversations();
+  //   getSettings();
+  // }, []);
 
   return (
     <div className="overflow-x-hidden relative">
@@ -130,11 +133,14 @@ const DashboardLayout = ({ children }) => {
             ))}
           </div>
           <div className="flex pl-8 pr-4 border-t border-[#e0e0e0] pt-[24px] flex-col justify-start items-start w-full  cursor-pointer transition-all duration-150 ease-in-out">
-            {listingLinks.map(({ title, icon, link }) => (
+            {listingLinks.map(({ title, icon, link, click }) => (
               <Link
                 to={link}
                 key={title}
-                onClick={() => setSidenavOpen(false)}
+                onClick={() => {
+                  setSidenavOpen(false);
+                  click();
+                }}
                 className="w-full"
               >
                 <div className="flex justify-start items-center bg-[#FBCFD4] text-[#EA0F27] text-sm space-x-2 px-5 py-3 rounded-lg w-full">

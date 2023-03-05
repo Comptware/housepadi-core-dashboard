@@ -16,9 +16,9 @@ const UserBookingsProfile = observer(() => {
   const { handleFindHost, searchLoading } = HostStore;
   const path = findPath(location, "/dashboard/agents");
 
-  useEffect(() => {
-    handleFindHost({ url: path.path, navigate, route: -1 });
-  }, []);
+  // useEffect(() => {
+  //   handleFindHost({ url: path.path, navigate, route: -1 });
+  // }, []);
 
   return (
     <div className="flex flex-col justify-start items-start h-full w-full">

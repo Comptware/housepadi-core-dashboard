@@ -14,13 +14,13 @@ const Overview = () => {
     grandTotal: "",
   });
 
-  useEffect(() => {
-    currentBooking?.check_in_date &&
-      calcDateDiff(
-        new Date(currentBooking?.check_in_date),
-        new Date(currentBooking?.check_out_date)
-      );
-  }, [currentBooking]);
+  // useEffect(() => {
+  //   currentBooking?.check_in_date &&
+  //     calcDateDiff(
+  //       new Date(currentBooking?.check_in_date),
+  //       new Date(currentBooking?.check_out_date)
+  //     );
+  // }, [currentBooking]);
   const calcDateDiff = (startDate, endDate) => {
     const date1 = new Date(moment(startDate).format("l"));
     const date2 = new Date(moment(endDate).format("l"));

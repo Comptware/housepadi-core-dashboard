@@ -45,9 +45,9 @@ const UserProfile = () => {
   };
   const activeUserPayload = { url: activeUser?.id, navigate, route: -1 };
 
-  useEffect(() => {
-    activeUser?.id && getConversations();
-  }, [activeUser?.id]);
+  // useEffect(() => {
+  //   activeUser?.id && getConversations();
+  // }, [activeUser?.id]);
 
   const getConversations = async () => {
     setLoading(true);

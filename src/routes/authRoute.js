@@ -6,8 +6,9 @@ import { Navigate } from "react-router-dom";
 
 export const AuthRoute = ({ path, notProtected, children, ...rest }) => {
   // const { isAuthenticated } = useAuth();
-  const isAuthenticated = true;
-  if (notProtected && isAuthenticated) {
+  const user = sessionStorage.getItem("user");
+  console.log(notProtected);
+  if (notProtected && user) {
     return (
       <DashboardLayout>
         <Navigate replace to="/dashboard/home" />;
@@ -15,7 +16,7 @@ export const AuthRoute = ({ path, notProtected, children, ...rest }) => {
     );
   }
 
-  if (!isAuthenticated && !notProtected) {
+  if (!user && !notProtected) {
     return (
       <Navigate
         replace

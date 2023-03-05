@@ -17,13 +17,13 @@ const SettingsHome = () => {
   const { getSettings, settings, updateLoading, updateSettings } =
     SettingsStore;
 
-  useEffect(() => {
-    getSettings();
-  }, []);
+  // useEffect(() => {
+  //   getSettings();
+  // }, []);
 
-  useEffect(() => {
-    handleFormUpdate();
-  }, [settings]);
+  // useEffect(() => {
+  //   handleFormUpdate();
+  // }, [settings]);
 
   const handleFormUpdate = () => {
     setForm({

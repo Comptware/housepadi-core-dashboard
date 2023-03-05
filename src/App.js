@@ -7,9 +7,9 @@ import "tippy.js/dist/tippy.css";
 function App() {
   const { initUserSession } = useAuth();
 
-  useEffect(() => {
-    initUserSession();
-  }, []);
+  // useEffect(() => {
+  //   initUserSession();
+  // }, []);
 
   return (
     <div className="App">

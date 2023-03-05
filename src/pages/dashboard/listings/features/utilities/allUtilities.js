@@ -14,9 +14,9 @@ const AllUtilities = observer(({ data, type }) => {
   const [deleteModal, setDeleteModal] = useState(null);
   const [addModal, setAddModal] = useState(false);
 
-  useEffect(() => {
-    getAAR();
-  }, []);
+  // useEffect(() => {
+  //   getAAR();
+  // }, []);
 
   const handleDelete = async () => {
     setDeleteModal(null);

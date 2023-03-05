@@ -15,9 +15,9 @@ const Overview = () => {
   const [conversations, setConversations] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    getConversations();
-  }, [chats]);
+  // useEffect(() => {
+  //   getConversations();
+  // }, [chats]);
 
   const tabs = [
     {

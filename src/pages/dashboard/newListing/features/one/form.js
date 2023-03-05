@@ -40,13 +40,13 @@ const Form = () => {
 
   const [saveType, setSaveType] = useState("");
 
-  useEffect(() => {
-    path && !listingDataSet && handleFindListing(path, navigate);
-  }, [path]);
+  // useEffect(() => {
+  //   path && !listingDataSet && handleFindListing(path, navigate);
+  // }, [path]);
 
-  useEffect(() => {
-    handleSortAddress();
-  }, [selectedAddress]);
+  // useEffect(() => {
+  //   handleSortAddress();
+  // }, [selectedAddress]);
 
   const handleSortAddress = () => {
     if (selectedAddress?.value) {

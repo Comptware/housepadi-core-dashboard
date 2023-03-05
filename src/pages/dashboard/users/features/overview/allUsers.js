@@ -15,9 +15,9 @@ const AllUsers = observer(({ data }) => {
   const { loading, userCount, getUsers } = UserStore;
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    currentPage > 1 && getUsers(currentPage);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   currentPage > 1 && getUsers(currentPage);
+  // }, [currentPage]);
 
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit p-3 sm:p-6 max-h-fit ">

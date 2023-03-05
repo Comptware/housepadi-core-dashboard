@@ -13,9 +13,9 @@ const AllBookings = observer(({ data }) => {
   const { loading, getBookings, bookingsCount, bookings } = HomeStore;
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    getBookings(currentPage);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   getBookings(currentPage);
+  // }, [currentPage]);
 
   useEffect(() => {
     return scrollToListTop();

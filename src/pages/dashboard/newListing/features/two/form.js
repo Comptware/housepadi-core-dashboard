@@ -41,14 +41,14 @@ const Form = () => {
   const [saveType, setSaveType] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    !listingFormOne && navigate("/new-listing/step-one", { replace: false });
-    getAAR();
-  }, []);
+  // useEffect(() => {
+  //   !listingFormOne && navigate("/new-listing/step-one", { replace: false });
+  //   getAAR();
+  // }, []);
 
-  useEffect(() => {
-    path && !listingDataSet && handleFindListing(path, navigate);
-  }, [path]);
+  // useEffect(() => {
+  //   path && !listingDataSet && handleFindListing(path, navigate);
+  // }, [path]);
 
   const saveAndContinue = (e) => {
     e.preventDefault();

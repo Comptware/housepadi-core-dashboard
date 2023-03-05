@@ -12,9 +12,9 @@ import { DEFAULT_AVATAR } from "utils/constants";
 const UserProfile = () => {
   const { loadingFetchMe, getMe, me } = CommonStore;
 
-  useEffect(() => {
-    !me && getMe();
-  }, []);
+  // useEffect(() => {
+  //   !me && getMe();
+  // }, []);
   return (
     <div className="flex flex-col justify-start items-start w-full h-full bg-white py-8 px-7 border-b-1/2 border-grey-border">
       <div className="flex justify-start items-center w-fit mb-5 space-x-4 relative">

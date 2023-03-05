@@ -51,21 +51,21 @@ const ChatSection = () => {
 
   const userInfo = getUserInfoFromStorage();
 
-  useEffect(() => {
-    scrollToChatBase();
-  }, [chats, loading]);
+  // useEffect(() => {
+  //   scrollToChatBase();
+  // }, [chats, loading]);
 
-  useEffect(() => {
-    chats && updateUserReadStatus();
-  }, [chats]);
+  // useEffect(() => {
+  //   chats && updateUserReadStatus();
+  // }, [chats]);
 
-  useEffect(() => {
-    form.image && setShowModal(true);
-  }, [form.image]);
+  // useEffect(() => {
+  //   form.image && setShowModal(true);
+  // }, [form.image]);
 
-  useEffect(() => {
-    currentChat?.userId && getConversations(currentChat?.userId);
-  }, [currentChat]);
+  // useEffect(() => {
+  //   currentChat?.userId && getConversations(currentChat?.userId);
+  // }, [currentChat]);
 
   const sendMessage = async (e) => {
     e.preventDefault();

@@ -13,9 +13,9 @@ const Header = () => {
   return (
     <header className="flex flex-col justify-center items-center w-full py-4 fixed border-b-1/2 border-[#c8c8c8] text-black z-[99] h-[92px] bg-white">
       <div className="flex justify-between w-full items-center 4xs:px-10 mlg:px-0">
-        <div className="relative flex justify-between items-center mx-auto w-full mlg:pr-[40px] 4xs:px-10">
+        <div className="relative flex justify-between items-center mx-auto w-full mlg:pr-[40px] mlg:pl-[54px]">
           <Link to="/">
-            <Logo className="w-[173px] h-[35px]" />
+            <Logo className="h-[35px]" />
           </Link>
 
           <div className="mlg:flex 4xs:hidden mlg:flex-row gap-[16px] items-center">

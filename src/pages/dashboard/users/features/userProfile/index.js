@@ -16,9 +16,9 @@ const UserBookingsProfile = observer(() => {
   const { handleFindUser, searchLoading } = UserStore;
   const path = findPath(location, "/dashboard/users");
 
-  useEffect(() => {
-    handleFindUser({ url: path.path, navigate, route: -1 });
-  }, []);
+  // useEffect(() => {
+  //   handleFindUser({ url: path.path, navigate, route: -1 });
+  // }, []);
 
   return (
     <div className="flex flex-col justify-start items-start h-full w-full">
