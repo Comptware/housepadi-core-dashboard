@@ -15,24 +15,11 @@ const ListingsHome = () => {
     "Completed",
     "Cancelled",
   ];
-  const { pending, progress, cancel, complete } = orders?.reduce(
-    (acc, order) => {
-      switch (order?.status) {
-        case "Pending":
-          return { ...acc, pending: [...acc.pending, order] };
-        case "In Progress":
-          return { ...acc, progress: [...acc.progress, order] };
-        case "Cancelled":
-          return { ...acc, cancel: [...acc.cancel, order] };
-        case "Completed":
-          return { ...acc, complete: [...acc.complete, order] };
-        default:
-          return acc;
-      }
-    },
-    { pending: [], progress: [], cancel: [], complete: [] }
-  );
 
+  const pending = orders.filter((order) => order.status === "Pending");
+  const progress = orders.filter((order) => order.status === "In Progress");
+  const cancel = orders.filter((order) => order.status === "Cancelled");
+  const complete = orders.filter((order) => order.status === "Completed");
   return (
     <div className="text-black w-full">
       <div className="flex mlg:flex-row 4xs:flex-col-reverse 4xs:gap-[25px] justify-between 4xs:items-start 1xs:items-center mlg:items-end border-b pb-[8px] border-b-[#acacac] w-full">
