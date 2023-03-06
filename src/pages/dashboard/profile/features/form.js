@@ -11,7 +11,7 @@ import CommonStore from "stores/common";
 import AvatarPhoto from "components/general/input/avatarPhoto";
 import PhoneNumber from "components/general/phoneNumber/phoneNumber";
 import FileInput from "components/general/input/fileInput";
-import ImageModal from "components/general/modal/imageModal/ImageModal";
+import ImageModal from "components/general/Modal/imageModal/ImageModal";
 import CircleLoader from "components/general/circleLoader/circleLoader";
 import cleanPayload from "utils/cleanPayload";
 import Select from "components/general/input/select";
@@ -56,30 +56,30 @@ const Form = () => {
   const [imageModal, setImageModal] = useState({ ...emptyImageModal });
   const [selectedBank, setSelectedBank] = useState("");
 
-  useEffect(() => {
-    handleSetForm();
-  }, []);
+  // useEffect(() => {
+  //   handleSetForm();
+  // }, []);
 
-  useEffect(() => {
-    handleFiles("agent_identification_document_url");
-  }, [form.agent_identification_document_url]);
-  useEffect(() => {
-    handleFiles("agent_license_document_url");
-  }, [form.agent_license_document_url]);
-  useEffect(() => {
-    handleFiles("agent_land_document_url");
-  }, [form.agent_land_document_url]);
+  // useEffect(() => {
+  //   handleFiles("agent_identification_document_url");
+  // }, [form.agent_identification_document_url]);
+  // useEffect(() => {
+  //   handleFiles("agent_license_document_url");
+  // }, [form.agent_license_document_url]);
+  // useEffect(() => {
+  //   handleFiles("agent_land_document_url");
+  // }, [form.agent_land_document_url]);
 
-  useEffect(() => {
-    handleFindSelectedBank(form?.bank_name);
-  }, [banks]);
+  // useEffect(() => {
+  //   handleFindSelectedBank(form?.bank_name);
+  // }, [banks]);
 
-  useEffect(() => {
-    !isEmpty(banks) &&
-      selectedBank?.value &&
-      form?.account_number?.length > 9 &&
-      getUserBankDetails(form?.account_number, selectedBank?.value);
-  }, [form?.account_number, selectedBank]);
+  // useEffect(() => {
+  //   !isEmpty(banks) &&
+  //     selectedBank?.value &&
+  //     form?.account_number?.length > 9 &&
+  //     getUserBankDetails(form?.account_number, selectedBank?.value);
+  // }, [form?.account_number, selectedBank]);
 
   const handleSetForm = async () => {
     const res = await Promise.all([getMe(), getBanks()]);

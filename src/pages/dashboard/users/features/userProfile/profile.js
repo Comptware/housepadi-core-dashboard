@@ -15,12 +15,12 @@ import { Button } from "components/general/button";
 import { DEFAULT_AVATAR } from "utils/constants";
 import { ReactComponent as Report } from "assets/icons/report.svg";
 import { ReactComponent as Message } from "assets/icons/btn-message.svg";
-import DeleteModal from "components/general/modal/deleteModal";
+import DeleteModal from "components/general/Modal/deleteModal";
 import MessagesStore from "pages/dashboard/messages/store";
 import { getUserInfoFromStorage } from "utils/storage";
 import db from "services/firebase.config";
 import cleanPayload, { checkPayloadEmptyField } from "utils/cleanPayload";
-import ImageModal from "components/general/modal/imageModal/ImageModal";
+import ImageModal from "components/general/Modal/imageModal/ImageModal";
 import UserStore from "../../store";
 
 const UserProfile = () => {
@@ -45,9 +45,9 @@ const UserProfile = () => {
   };
   const activeUserPayload = { url: activeUser?.id, navigate, route: -1 };
 
-  useEffect(() => {
-    activeUser?.id && getConversations();
-  }, [activeUser?.id]);
+  // useEffect(() => {
+  //   activeUser?.id && getConversations();
+  // }, [activeUser?.id]);
 
   const getConversations = async () => {
     setLoading(true);

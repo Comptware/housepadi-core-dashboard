@@ -26,6 +26,50 @@
 }
 
 @font-face {
+  font-family: "NoirPro";
+  src: url("./assets/fonts/NoirPro-Regular.woff2") format("woff2"),
+    url("./assets/fonts/NoirPro-Regular.woff") format("woff"),
+    url("./assets/fonts/NoirPro-Regular.ttf") format("truetype"),
+    url("./assets/fonts/NoirPro-Regular.eot") format("eot");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NoirPro";
+  src: url("./assets/fonts/NoirPro-Medium.woff2") format("woff2"),
+    url("./assets/fonts/NoirPro-Medium.woff") format("woff"),
+    url("./assets/fonts/NoirPro-Medium.ttf") format("truetype"),
+    url("./assets/fonts/NoirPro-Medium.eot") format("eot");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NoirPro";
+  src: url("./assets/fonts/NoirPro-Bold.woff2") format("woff2"),
+    url("./assets/fonts/NoirPro-Bold.woff") format("woff"),
+    url("./assets/fonts/NoirPro-Bold.ttf") format("truetype"),
+    url("./assets/fonts/NoirPro-Bold.eot") format("eot");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NoirPro";
+  src: url("./assets/fonts/NoirPro-Heavy.woff2") format("woff2"),
+    url("./assets/fonts/NoirPro-Heavy.woff") format("woff"),
+    url("./assets/fonts/NoirPro-Heavy.ttf") format("truetype"),
+    url("./assets/fonts/NoirPro-Heavy.eot") format("eot");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "GTWalsheimProRegular";
   src: url("./assets/fonts/GTWalsheimPro-Regular.woff2") format("woff2"),
     url("./assets/fonts/GTWalsheimPro-Regular.woff") format("woff"),
@@ -72,7 +116,7 @@ body {
   /* font-family: "Helvetica-Medium", "sans-serif"; */
   /* font-family: Arial, Helvetica, sans-serif; */
   /* font-family: HelveticaNeue, sans-serif; */
-  font-family: GTWalsheimProLight, sans-serif !important;
+  font-family: NoirPro !important;
   min-height: 100vh;
   height: 100% !important;
   box-sizing: border-box;
@@ -127,7 +171,22 @@ td {
   height: fit-content;
   max-height: 50px !important;
 }
-
+.order_table td {
+  border-bottom: 1px solid #c8c8c8;
+}
+.order_table th {
+  text-align: start;
+  padding-bottom: 16px;
+  font-weight: normal;
+}
+.order_table td div:nth-child(2) {
+  font-size: 11px;
+  color: #909090;
+}
+.order_table td div:nth-child(1) {
+  font-size: 14px;
+  color: #1e1e1e;
+}
 th {
   padding: 10px 10px 30px;
 }
@@ -174,4 +233,23 @@ th {
 
 .file-box > label {
   width: 100% !important;
+}
+
+.scrolling::-webkit-scrollbar {
+  display: none;
+}
+
+.scrolling::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  border-radius: 8px;
+  background-color: #e6e6e6;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #0c203c;
 }

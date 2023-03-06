@@ -4,7 +4,7 @@ import { FileUploader } from "react-drag-drop-files";
 import { DEFAULT_AVATAR } from "utils/constants";
 import { ReactComponent as EditSpan } from "assets/icons/edit-span.svg";
 import { extractFileNameFromUrl } from "utils/functions";
-import ImageModal from "../modal/imageModal/ImageModal";
+import ImageModal from "../Modal/imageModal/ImageModal";
 
 const AvatarPhoto = ({
   file,

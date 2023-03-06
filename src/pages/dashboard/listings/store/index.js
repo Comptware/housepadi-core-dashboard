@@ -126,6 +126,7 @@ class ListingStore {
       this.loading = false;
     }
   };
+
   // uploadListingImages
   uploadListingImages = async (form) => {
     this.loading = true;
@@ -154,6 +155,7 @@ class ListingStore {
 
     return urls;
   };
+
   // Create Listings
   createListing = async ({ complete = false, navigate, route }) => {
     this.loading = true;
@@ -246,6 +248,7 @@ class ListingStore {
       this.aarLoading = false;
     }
   };
+
   // Update Listings
   updateListingAAR = async ({ data, type, action, shortlet_id }) => {
     this.loading = true;
@@ -270,6 +273,7 @@ class ListingStore {
       this.createAarLoading = false;
     }
   };
+
   searchListingsById = async (shortlet_id) => {
     this.searchIdLoading = true;
     try {
@@ -282,8 +286,9 @@ class ListingStore {
       this.searchIdLoading = false;
     }
   };
+
   handleFindListing = async (url, navigate) => {
-    let currentListing = await this.searchListingsById(url);
+    const currentListing = await this.searchListingsById(url);
     if (currentListing) {
       const {
         // Form one
@@ -301,7 +306,7 @@ class ListingStore {
         lng,
         city,
         state,
-        //Form two
+        // Form two
         amenities,
         allowances,
         rules,
@@ -374,6 +379,7 @@ class ListingStore {
   savelistingForm = (field, form) => {
     this[field] = form;
   };
+
   resetlistingForm = () => {
     this.listingFormOne = { ...emptyListingFormOne };
     this.listingFormTwo = { ...emptyListingFormTwo };
@@ -381,6 +387,7 @@ class ListingStore {
     this.listingFormFour = { ...emptyListingFormFour };
     this.selectedAddress = null;
   };
+
   savelistingFormOne = (prop, val, type) => {
     if (type === "+") {
       this.listingFormOne = { ...this.listingFormOne, [prop]: val + 1 };
@@ -393,6 +400,7 @@ class ListingStore {
       this.listingFormOne = { ...this.listingFormOne, [prop]: val };
     }
   };
+
   savelistingFormTwo = async (item, items, prop, shortlet_id) => {
     let newArr = [...items, item];
     newArr = [...new Set(newArr)];
@@ -432,15 +440,19 @@ class ListingStore {
       this.listingFormTwo = { ...this.listingFormTwo, [prop]: newArr };
     }
   };
+
   savelistingFormThree = (prop, val) => {
     this.listingFormThree = { ...this.listingFormThree, [prop]: val };
   };
+
   savelistingFormFour = (prop, val) => {
     this.listingFormFour = { ...this.listingFormFour, [prop]: val };
   };
+
   setSelectedAddress = (value) => {
     this.selectedAddress = value;
   };
+
   setListingDataSet = (value) => {
     this.listingDataSet = value;
   };

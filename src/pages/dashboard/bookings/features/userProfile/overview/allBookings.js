@@ -12,9 +12,9 @@ const AllBookings = observer(({ data }) => {
   const { loading, getBookings, bookingsCount } = HomeStore;
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    currentPage > 1 && getBookings(currentPage);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   currentPage > 1 && getBookings(currentPage);
+  // }, [currentPage]);
 
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit px-3 py-6 sm:p-6 space-y-5 max-h-fit relative">

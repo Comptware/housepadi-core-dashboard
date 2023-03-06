@@ -79,10 +79,10 @@ const Select = ({
           apiKey={GOOGLE_MAP_API_KEY}
           selectProps={{
             address: addressValue,
-            onChange: onChange,
+            onChange,
 
-            styles: styles,
-            options: options,
+            styles,
+            options,
             placeholder: addressPlaceholder,
             componentRestrictions: {
               country: "ng",

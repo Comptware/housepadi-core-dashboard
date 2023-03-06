@@ -1,48 +1,66 @@
-import React, { useEffect, useRef } from "react";
-import { observer } from "mobx-react-lite";
+import { orders } from "components/arrays/meals";
+import React, { useState } from "react";
+import All from "./tabs/All";
+import Cancelled from "./tabs/Cancelled";
+import Completed from "./tabs/Completed";
+import Pending from "./tabs/Pending";
+import Progress from "./tabs/Progress";
 
-import UserProfile from "pages/dashboard/home/features/userProfile";
-import ListingStore from "../store";
-import Listings from "./listings";
-import Overview from "./overview";
+const ListingsHome = () => {
+  const [tab, setTab] = useState("All Orders");
+  const tabs = [
+    "All Orders",
+    "In Progress",
+    "Pending",
+    "Completed",
+    "Cancelled",
+  ];
 
-const ListingsHome = observer(() => {
-  const { getListings, listings } = ListingStore;
-  const listTopRef = useRef(null);
-  useEffect(() => {
-    getListings(1);
-  }, []);
-
-  useEffect(() => {
-    return scrollToListTop();
-  }, [listings]);
-
-  const scrollToListTop = () => listTopRef?.current?.scrollIntoView();
+  const pending = orders.filter((order) => order.status === "Pending");
+  const progress = orders.filter((order) => order.status === "In Progress");
+  const cancel = orders.filter((order) => order.status === "Cancelled");
+  const complete = orders.filter((order) => order.status === "Completed");
   return (
-    <div className="flex flex-col justify-start items-start h-full w-full">
-      <div className="flex flex-row justify-start items-start h-fit  w-full bg-white p-4 border-b-1/2 border-grey-border">
-        <h3 className="text-lg text-black regular-font">Your Listings</h3>
+    <div className="text-black w-full">
+      <div className="flex mlg:flex-row 4xs:flex-col-reverse 4xs:gap-[25px] justify-between 4xs:items-start 1xs:items-center mlg:items-end border-b pb-[8px] border-b-[#acacac] w-full">
+        <div className="flex 1xs:flex-row 4xs:flex-col gap-[32px] 4xs:pl-[35px] 1xs:pl-0 mlg:pl-[35px]">
+          {tabs.map((data, i) => (
+            <div
+              key={i}
+              onClick={() => setTab(data)}
+              className={`${
+                tab === data
+                  ? "text-black font-medium underline underline-offset-[14px] decoration-2"
+                  : "text-[#acacac]"
+              } ${tab !== data ? "hover:text-[#4CB53A]" : ""} cursor-pointer`}
+            >
+              {data}
+            </div>
+          ))}
+        </div>
+
+        <div className="flex 4xs:ml-[30px] 1xs:ml-0 4xs:mr-0 mlg:mr-[35px] py-[8px] px-[18px] items-center text-[14px] gap-[15px] bg-[#D4EEF8] rounded-full">
+          <div className="flex gap-[4px] items-center text-[#4A4A4A] ">
+            <div className="text-red font-medium text-[16px]">6</div>
+            <div className="text-[11px]">Tracking Orders</div>
+          </div>
+          <div className="bg-black h-[20px] w-[2px]" />
+          <div className="flex  gap-[7px] items-center">
+            <div className="text-green font-medium text-[16px]">2</div>
+            <div className="text-[11px]">Pending Orders</div>
+          </div>
+        </div>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-start items-start h-auto md:h-full w-full mb-24 px-3 sm:px-6 space-x-0 md:space-x-10 md:pb-8">
-        {/* Left column */}
-
-        <div className="flex flex-col basis-[100%] mlg:basis-[70%] justify-start items-start h-full w-full space-y-7 pt-8 md:overflow-y-scroll">
-          <div ref={listTopRef} />
-          {/* Listings */}
-          <Listings />
-
-          <Overview />
-        </div>
-
-        {/* Right column */}
-        <div className="hidden mlg:flex flex-col basis-[100%] mlg:basis-[30%] h-full bg-white justify-start items-center space-y-7 md:overflow-y-scroll border-l-1/2 border-grey-border">
-          {/* OutflowOverview */}
-          <UserProfile />
-        </div>
+      <div className="pl-[35px] w-full pt-[15px]">
+        {tab === "All Orders" && <All />}
+        {tab === "In Progress" && <Progress progress={progress} />}
+        {tab === "Pending" && <Pending pending={pending} />}
+        {tab === "Completed" && <Completed complete={complete} />}
+        {tab === "Cancelled" && <Cancelled cancel={cancel} />}
       </div>
     </div>
   );
-});
+};
 
 export default ListingsHome;

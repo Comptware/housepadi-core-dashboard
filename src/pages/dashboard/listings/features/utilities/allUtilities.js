@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import CircleLoader from "components/general/circleLoader/circleLoader";
 import ListingStore from "../../store/index";
-import DeleteModal from "components/general/modal/deleteModal";
+import DeleteModal from "components/general/Modal/deleteModal";
 import { AddButton } from "components/general/button";
 import AddAarModal from "./addAarModal";
 import { Link } from "react-router-dom";
@@ -14,9 +14,9 @@ const AllUtilities = observer(({ data, type }) => {
   const [deleteModal, setDeleteModal] = useState(null);
   const [addModal, setAddModal] = useState(false);
 
-  useEffect(() => {
-    getAAR();
-  }, []);
+  // useEffect(() => {
+  //   getAAR();
+  // }, []);
 
   const handleDelete = async () => {
     setDeleteModal(null);

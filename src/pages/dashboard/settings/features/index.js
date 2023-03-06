@@ -17,13 +17,13 @@ const SettingsHome = () => {
   const { getSettings, settings, updateLoading, updateSettings } =
     SettingsStore;
 
-  useEffect(() => {
-    getSettings();
-  }, []);
+  // useEffect(() => {
+  //   getSettings();
+  // }, []);
 
-  useEffect(() => {
-    handleFormUpdate();
-  }, [settings]);
+  // useEffect(() => {
+  //   handleFormUpdate();
+  // }, [settings]);
 
   const handleFormUpdate = () => {
     setForm({
@@ -36,7 +36,7 @@ const SettingsHome = () => {
   const updateSetting = async (prop, val) => {
     setLoadingStates((prev) => [...prev, prop]);
     await updateSettings({ [prop]: val });
-    setLoadingStates((prev) => prev.filter((state) => state != prop));
+    setLoadingStates((prev) => prev.filter((state) => state !== prop));
   };
   return (
     <section className="py-6 pl-6 pr-6 sm:pr-12">

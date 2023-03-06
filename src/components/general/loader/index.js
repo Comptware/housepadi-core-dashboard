@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { ZuscoIcon } from "assets/icons";
 import CircleLoader from "components/general/circleLoader/circleLoader";
-import Modal from "../modal/modal/modal";
+import Modal from "../Modal/modal/modal";
 const Loader = ({ absolute }) => {
   return (
     <Modal noPadding bodyClass="" size="md" active={true} absolute={absolute}>

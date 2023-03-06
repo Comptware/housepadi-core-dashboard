@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import { observer } from "mobx-react-lite";
 
 import Input from "components/general/input/input";
-import Modal from "components/general/modal/modal/modal";
-import ModalBody from "components/general/modal/modalBody/modalBody";
+import Modal from "components/general/Modal/modal/modal";
+import ModalBody from "components/general/Modal/modalBody/modalBody";
 import { Button } from "components/general/button";
 import cleanPayload from "utils/cleanPayload";
-import ModalHeader from "components/general/modal/modalHeader/modalHeader";
+import ModalHeader from "components/general/Modal/modalHeader/modalHeader";
 import { uploadImageToCloud } from "utils/uploadImagesToCloud";
 import ListingStore from "../../store";
 import FileInput from "components/general/input/fileInput";
 import { handleFileType } from "utils/functions";
-import ImageModal from "components/general/modal/imageModal/ImageModal";
+import ImageModal from "components/general/Modal/imageModal/ImageModal";
 
 const AddAarModal = ({ toggleModal, type, active }) => {
   const { createAAR, getAAR } = ListingStore;

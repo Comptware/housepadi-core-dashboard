@@ -19,9 +19,9 @@ const AllTransactions = observer(({ data }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    currentPage > 1 && getListings(currentPage);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   currentPage > 1 && getListings(currentPage);
+  // }, [currentPage]);
 
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit p-3 sm:p-6 max-h-fit ">

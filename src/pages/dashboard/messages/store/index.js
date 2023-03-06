@@ -31,18 +31,23 @@ class MessagesStore {
   setConversations = (data) => {
     this.conversations = data;
   };
+
   setCurrentChat = (data) => {
     this.currentChat = data;
   };
+
   setCurrentChatRef = (data) => {
     this.currentChatRef = data;
   };
+
   setChats = (data) => {
     this.chats = data;
   };
+
   setLoading = (data) => {
     this.loading = data;
   };
+
   setExternalChat = (data) => {
     this.externalChat = data;
   };

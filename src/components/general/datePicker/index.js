@@ -19,7 +19,6 @@ const CustomInput = forwardRef(
       onChange={onChange}
       ref={ref}
       value={value}
-      className="custom-input"
       {...rest}
       autoComplete={autoComplete}
     />

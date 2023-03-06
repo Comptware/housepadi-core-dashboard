@@ -19,9 +19,9 @@ const AllBookings = observer(() => {
     userBookings,
   } = UserStore;
   const [currentPage, setCurrentPage] = useState(1);
-  useEffect(() => {
-    getUserBookings({ agent_id: path }, currentPage);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   getUserBookings({ agent_id: path }, currentPage);
+  // }, [currentPage]);
 
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit px-3 py-6 sm:p-6 space-y-5 max-h-fit relative">

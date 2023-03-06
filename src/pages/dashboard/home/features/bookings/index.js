@@ -6,9 +6,9 @@ import HomeStore from "../../store";
 
 const Bookings = () => {
   const { getBookings } = HomeStore;
-  useEffect(() => {
-    getBookings(1);
-  }, []);
+  // useEffect(() => {
+  //   getBookings(1);
+  // }, []);
 
   return (
     <div className="flex flex-col justify-start items-start h-full w-full">

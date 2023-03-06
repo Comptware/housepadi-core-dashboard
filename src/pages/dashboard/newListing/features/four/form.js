@@ -38,22 +38,22 @@ const Form = () => {
   const [saveType, setSaveType] = useState("");
   const [selectedBank, setSelectedBank] = useState("");
 
-  useEffect(() => {
-    !listingFormThree && navigate("/new-listing/step-two", { replace: false });
-    getBanks();
-  }, []);
+  // useEffect(() => {
+  //   !listingFormThree && navigate("/new-listing/step-two", { replace: false });
+  //   getBanks();
+  // }, []);
 
-  useEffect(() => {
-    path && !listingDataSet && handleFindListing(path, navigate);
-  }, [path]);
+  // useEffect(() => {
+  //   path && !listingDataSet && handleFindListing(path, navigate);
+  // }, [path]);
 
-  useEffect(() => {
-    banks &&
-      banks[0] &&
-      selectedBank?.value &&
-      listingFormFour?.account_number?.length > 9 &&
-      getUserBankDetails(listingFormFour?.account_number, selectedBank?.value);
-  }, [listingFormFour?.account_number, selectedBank]);
+  // useEffect(() => {
+  //   banks &&
+  //     banks[0] &&
+  //     selectedBank?.value &&
+  //     listingFormFour?.account_number?.length > 9 &&
+  //     getUserBankDetails(listingFormFour?.account_number, selectedBank?.value);
+  // }, [listingFormFour?.account_number, selectedBank]);
 
   const saveAndContinue = (e) => {
     e.preventDefault();

@@ -9,9 +9,9 @@ import HomeStore from "../store";
 
 const RecentRequests = () => {
   const { loading, getBookings, bookings } = HomeStore;
-  useEffect(() => {
-    getBookings(1);
-  }, []);
+  // useEffect(() => {
+  //   getBookings(1);
+  // }, []);
 
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit sm:p-6 space-y-6">

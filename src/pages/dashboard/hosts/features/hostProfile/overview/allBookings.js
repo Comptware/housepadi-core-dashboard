@@ -20,13 +20,13 @@ const AllBookings = observer(() => {
     getHostListings,
   } = HostStore;
   const [currentPage, setCurrentPage] = useState(1);
-  useEffect(() => {
-    getHostBookings({ agent_id: path }, currentPage);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   getHostBookings({ agent_id: path }, currentPage);
+  // }, [currentPage]);
 
-  useEffect(() => {
-    getHostListings({ agent_id: path }, currentPage);
-  }, []);
+  // useEffect(() => {
+  //   getHostListings({ agent_id: path }, currentPage);
+  // }, []);
 
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit px-3 py-6 sm:p-6 space-y-5 max-h-fit relative">

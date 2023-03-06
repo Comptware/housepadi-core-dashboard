@@ -31,13 +31,13 @@ const Form = () => {
 
   const [saveType, setSaveType] = useState("");
 
-  useEffect(() => {
-    !listingFormTwo && navigate("/new-listing/step-two", { replace: false });
-  }, []);
+  // useEffect(() => {
+  //   !listingFormTwo && navigate("/new-listing/step-two", { replace: false });
+  // }, []);
 
-  useEffect(() => {
-    path && !listingDataSet && handleFindListing(path, navigate);
-  }, [path]);
+  // useEffect(() => {
+  //   path && !listingDataSet && handleFindListing(path, navigate);
+  // }, [path]);
   const saveAndContinue = (e) => {
     e.preventDefault();
     setSaveType("continue");

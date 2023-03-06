@@ -7,7 +7,7 @@ import { ReactComponent as ArrowBack } from "assets/icons/arrow-back.svg";
 import { ReactComponent as SmallLoader } from "assets/icons/loader/loader.svg";
 import NewListingLayout from "components/layout/listing";
 import ListingStore from "pages/dashboard/listings/store";
-import DeleteModal from "components/general/modal/deleteModal";
+import DeleteModal from "components/general/Modal/deleteModal";
 import Loader from "components/general/loader";
 import useWindowDimensions from "hooks/useWindowDimensions";
 const NewLising = () => {

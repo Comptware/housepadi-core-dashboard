@@ -30,13 +30,13 @@ const AllListings = observer(({ data }) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    handleGlobalCheckboxChange();
-  }, [checked]);
+  // useEffect(() => {
+  //   handleGlobalCheckboxChange();
+  // }, [checked]);
 
-  useEffect(() => {
-    getListings(currentPage);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   getListings(currentPage);
+  // }, [currentPage]);
 
   const handleCheckboxChange = (item) => {
     let newArr = [...selectedRows, item];

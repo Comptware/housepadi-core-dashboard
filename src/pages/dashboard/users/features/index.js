@@ -7,9 +7,9 @@ import Overview from "./overview";
 
 const ListingsHome = observer(() => {
   const { getUsers, userCount } = HostStore;
-  useEffect(() => {
-    getUsers(1);
-  }, []);
+  // useEffect(() => {
+  //   getUsers(1);
+  // }, []);
   return (
     <div className="flex flex-col justify-start items-start h-full w-full">
       <div className="flex flex-row justify-start items-start h-fit  w-full bg-white p-4 border-b-1/2 border-grey-border">

@@ -15,9 +15,9 @@ const Listings = () => {
   const { resetlistingForm, listingsCount, reservedListings, getListings } =
     ListingStore;
 
-  useEffect(() => {
-    getListings("1");
-  }, []);
+  // useEffect(() => {
+  //   getListings("1");
+  // }, []);
 
   const data = {
     labels: ["Occupied listings", "All listings"],

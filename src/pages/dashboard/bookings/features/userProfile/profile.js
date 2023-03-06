@@ -35,9 +35,9 @@ const UserProfile = () => {
   const [prevConversations, setPrevConversations] = useState(null);
   const [sending, setSending] = useState(false);
 
-  useEffect(() => {
-    currentBooking?.user?.id && getConversations();
-  }, [currentBooking?.user?.id]);
+  // useEffect(() => {
+  //   currentBooking?.user?.id && getConversations();
+  // }, [currentBooking?.user?.id]);
 
   const getConversations = async () => {
     setLoading(true);

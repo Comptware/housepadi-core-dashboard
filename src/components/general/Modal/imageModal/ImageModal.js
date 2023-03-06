@@ -2,7 +2,6 @@ import "./styles.css";
 import React from "react";
 import PropTypes from "prop-types";
 import { Slide } from "react-slideshow-image";
-
 import Modal from "../modal/modal";
 import ModalBody from "../modalBody/modalBody";
 

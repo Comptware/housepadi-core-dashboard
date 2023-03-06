@@ -29,9 +29,9 @@ const AllListings = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeData, setActiveData] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  useEffect(() => {
-    getHostListings({ agent_id: path }, currentPage);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   getHostListings({ agent_id: path }, currentPage);
+  // }, [currentPage]);
 
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit p-3 sm:p-6 max-h-fit ">
