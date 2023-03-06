@@ -108,12 +108,9 @@ const Progress = ({ progress }) => {
                 <div className="flex gap-[28px]">
                   <div className="text-[#C30D21] font-medium">1x</div>
                   <div className="text-[12px]">
-                    <div className="text-black">
-                      Pulled BBQ Chicken Shawarma
-                    </div>
+                    <div className="text-black">Rice and Stew</div>
                     <div className="text-[#757575] w-[80%]">
-                      Special shawarma loaded with pulled BBQ chicken with
-                      veggies & special sauce
+                      With catfish, apple juice and water
                     </div>
                   </div>
                 </div>
