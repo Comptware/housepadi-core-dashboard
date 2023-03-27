@@ -51,7 +51,7 @@ const Button = ({
       : ` ${
           isDisabled
             ? "bg-green/[.2] border-green"
-            : "bg-green border-green hover:bg-green-hover shadow-[0_4px_4px_rgba(0,0,0,0.25)] drop-shadow-[6px_12px_30px_rgba(50,149,217,0.24)]"
+            : "bg-green border-green hover:bg-green-hover shadow-[0_4px_4px_rgba(0,0,0,0.1)]"
         } text-white`
   }`;
   return (

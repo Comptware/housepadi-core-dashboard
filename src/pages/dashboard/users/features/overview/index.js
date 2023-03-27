@@ -43,14 +43,14 @@ const Overview = observer(() => {
   };
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit rounded-lg">
-      <div className="flex justify-between items-center w-full border-b-1/2 border-grey-border">
+      <div className="flex justify-between items-center w-full border-b-1/2 border-grey-border pl-6">
         <div className="flex justify-between items-center" ref={containerRef}>
           {tabs.map(({ title }, index) => (
             <button
               key={title + index}
               className={`w-[100px] h-fit p-3 text-center whitespace-nowrap text-base hover:bg-grey-lighter transition-all duration-300 ease-in-out rounded-t-lg ${
                 activeTab?.title === title
-                  ? "text-blue medium-font"
+                  ? "text-green medium-font"
                   : "text-grey-text"
               }`}
               onClick={() => setActiveTab({ title, index })}
@@ -60,9 +60,9 @@ const Overview = observer(() => {
           ))}
         </div>
       </div>
-      <div className="w-full h-fit">
+      <div className="w-full h-fit  pl-6">
         <div
-          className="h-[1.5px] bg-blue rounded-lg transition-all duration-300 ease-in-out"
+          className="h-[1.5px] bg-green rounded-lg transition-all duration-300 ease-in-out"
           style={{
             width: `${sliderWidth}px`,
             transform: `translateX(${sliderPosition}px)`,

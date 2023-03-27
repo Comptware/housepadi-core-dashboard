@@ -18,6 +18,7 @@ class UserStore {
   searchLoading = false;
   userBookingsLoading = false;
   blockUserLoading = false;
+  updateUsersLoading = false;
   activeUser = null;
   acceptOrRejectUserLoading = false;
   constructor() {
@@ -33,13 +34,17 @@ class UserStore {
   // Actions
   // ====================================================
 
+  setActiveUser = (payload) => {
+    this.activeUser = payload;
+  };
+
   // getUsers
   getUsers = async (page_number) => {
     this.loading = true;
     try {
       let res = await apis.getUsers(page_number);
       this.userCount = res?.total;
-      res = res?.data;
+      res = res?.results;
 
       this.users = res || [];
 
@@ -67,6 +72,31 @@ class UserStore {
     }
   };
 
+  updateUser = async ({ data, pageNumber, callbackFunc }) => {
+    this.updateUsersLoading = true;
+    try {
+      await apis.updateUser(data);
+      successToast(`Operation successful!`, "User updated successfully.");
+      callbackFunc && callbackFunc();
+      this.getUsers(pageNumber);
+    } finally {
+      this.updateUsersLoading = false;
+    }
+  };
+
+  deleteUser = async ({ pageNumber, callbackFunc }) => {
+    this.deleteUsersLoading = true;
+    try {
+      await apis.deleteUser(this.activeUser?.id);
+      successToast(`Operation successful!`, "User deleted successfully.");
+      callbackFunc && callbackFunc();
+      this.activeUser = null;
+      this.getUsers(pageNumber);
+    } finally {
+      this.deleteUsersLoading = false;
+    }
+  };
+
   // blockUser
   blockUser = async (data, handleOk, { url, navigate, route }) => {
     this.blockUserLoading = true;
@@ -88,8 +118,7 @@ class UserStore {
     try {
       this.searchLoading = true;
       currentUser = await apis.getUsersById(url);
-      currentUser = currentUser?.agent;
-      if (currentUser) {
+      if (currentUser?.id) {
         this.activeUser = currentUser;
       } else {
         navigate(route);

@@ -41,7 +41,7 @@ export function apiInstance2(
   return axios(url, config)
     .then(async (response) => {
       const data = response.data;
-      if (response.statusText) {
+      if (data) {
         return Promise.resolve({
           ok: response.statusText,
           ...data,

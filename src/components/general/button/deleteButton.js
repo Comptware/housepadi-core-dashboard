@@ -1,19 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ReactComponent as TrashBin } from "assets/icons/search.svg";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import Button from "./button";
 
-const DeleteButton = ({ onClick }) => (
+const DeleteButton = ({ ...props }) => (
   <Button
-    {...{ onClick }}
-    text="Delete"
-    icon={<TrashBin className="stroke-current" />}
-    whiteBg
+    icon={<RiDeleteBin6Line className="stroke-current" />}
+    redBg
+    {...props}
   />
 );
 
 DeleteButton.propTypes = {
-  onClick: PropTypes.func,
+  props: PropTypes.object,
 };
 
 export default DeleteButton;

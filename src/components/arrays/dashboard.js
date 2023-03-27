@@ -1,29 +1,47 @@
-import { BookAStay, Dashboard, Meals, Settings } from "assets/icons";
-
-import { ReactComponent as CashStack } from "assets/icons/cards/cash-stack.svg";
-import { ReactComponent as Dollar } from "assets/icons/cards/dollar-span.svg";
-import { ReactComponent as Food } from "assets/icons/cards/food.svg";
+import { FiUsers } from "react-icons/fi";
+import { GiForkKnifeSpoon, GiNotebook } from "react-icons/gi";
+import {
+  MdOutlineLocalLaundryService,
+  MdOutlineSettingsSystemDaydream,
+  MdOutlineSpaceDashboard,
+} from "react-icons/md";
 
 export const dashboardLinks = [
   {
     title: "Dashboard",
     link: "/dashboard/home",
-    icon: <Dashboard className="stroke-current" />,
+    icon: <MdOutlineSpaceDashboard className="stroke-current text-xl" />,
   },
   {
     title: "Meal Orders",
-    link: "/dashboard/meals",
-    icon: <Meals className="stroke-current" />,
+    link: "/dashboard/meal-orders/current-orders",
+    slug: "/dashboard/meal-orders",
+    icon: <GiNotebook className="stroke-current text-xl" />,
   },
   {
-    title: "Dry Cleaning Orders",
-    link: "/dashboard/dry-cleaning",
-    icon: <BookAStay className="fill-current" />,
+    title: "Laundry Orders",
+    link: "/dashboard/laundries/current-orders",
+    slug: "/dashboard/laundries",
+    icon: <MdOutlineLocalLaundryService className="fill-current text-xl" />,
   },
   {
-    title: "Settings",
-    link: "/dashboard/settings",
-    icon: <Settings className="stroke-current" />,
+    title: "Meal Settings",
+    link: "/dashboard/meal-settings/meals",
+    slug: "/dashboard/meal-settings/",
+    icon: <GiForkKnifeSpoon className="stroke-current text-xl" />,
+  },
+  {
+    title: "Laundry Settings",
+    link: "/dashboard/laundry-settings/laundry-items",
+    slug: "/dashboard/laundry-settings/",
+    icon: (
+      <MdOutlineSettingsSystemDaydream className="stroke-current text-xl" />
+    ),
+  },
+  {
+    title: "Users",
+    link: "/dashboard/users",
+    icon: <FiUsers className="stroke-current text-xl" />,
   },
 ];
 
@@ -43,33 +61,5 @@ export const body = [
     sub: "Valerie Uba",
     row4: "$4,356",
     end: "Revenue",
-  },
-];
-
-export const orders = [
-  {
-    title: "Total Orders",
-    val: "205",
-    icon: <Food />,
-  },
-  {
-    title: "Average Order Value",
-    val: "2,400",
-    icon: <Dollar />,
-  },
-  {
-    title: "Highest Order Amount",
-    val: "2,400",
-    icon: <CashStack />,
-  },
-  {
-    title: "Lowest Order Amount",
-    val: "2,400",
-    icon: <CashStack />,
-  },
-  {
-    title: "Average Daily Orders",
-    val: "115",
-    icon: <Food />,
   },
 ];
