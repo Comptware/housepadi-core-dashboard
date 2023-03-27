@@ -26,7 +26,7 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
     checkDiscountsLoading,
     discountCodeisValid,
   } = SettingsStore;
-  const { FIXED } = DISCOUNT_TYPES;
+  const { FIXED, PERCENTAGE } = DISCOUNT_TYPES;
   const [form, setForm] = useState({
     discountCode: activeDiscount?.discountCode || "",
     discountValue: activeDiscount?.discountValue || "",
@@ -136,7 +136,13 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
           type="number"
           value={form?.discountValue}
           onChangeFunc={(val) => handleChange("discountValue", val)}
-          placeholder={`Enter ${modaltype} discountValue`}
+          placeholder={
+            discountType === FIXED
+              ? "400"
+              : discountType === PERCENTAGE
+              ? "0.2"
+              : `Enter ${modaltype} Value`
+          }
           prefix={discountType === FIXED ? "NGN" : ""}
           required
           labelAlt={

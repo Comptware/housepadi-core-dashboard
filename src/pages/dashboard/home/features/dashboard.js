@@ -122,7 +122,7 @@ const DashBoard = () => {
                       {data?.title}
                     </div>
 
-                    <div className="text-[32px] flex gap-[10px] items-center mt-[8px] leading-none font-bold">
+                    <div className="text-[24px] flex gap-[10px] items-center mt-[8px] leading-none font-bold">
                       {getStatsLoading ? (
                         <CircleLoader blue size="tiny" />
                       ) : (

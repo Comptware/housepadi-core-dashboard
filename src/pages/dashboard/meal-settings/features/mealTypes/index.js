@@ -7,7 +7,7 @@ import Tippy from "@tippyjs/react";
 
 import CircleLoader from "components/general/circleLoader/circleLoader";
 import DeleteModal from "components/general/Modal/deleteModal";
-import { Button } from "components/general/button";
+import { AddButton, Button } from "components/general/button";
 import Pagination from "components/general/pagination";
 import SettingsStore from "../../store";
 import MealModal from "./modal";
@@ -49,23 +49,11 @@ const MealTypes = observer(() => {
       )}
 
       <div className="flex justify-between items-start w-full h-fit gap-x-3 mt-2 mb-3">
-        <button
+        <AddButton
           onClick={() => setModalType("Create")}
-          className="text-green underline text-sm"
-        >
-          Create {type}
-        </button>
-        {mealTypesCount && (
-          <Tippy content="drag and drop the cards below to rearrange meal types">
-            <div className="w-fit flex items-start justify-end gap-2">
-              <Button text={`Save arrangement`} xsmall />
-
-              <div>
-                <AiFillExclamationCircle className="text-grey mt-0.5" />
-              </div>
-            </div>
-          </Tippy>
-        )}
+          text={`Create ${type}`}
+          xsmall
+        />
       </div>
       <ReactSortable
         list={mealTypes}

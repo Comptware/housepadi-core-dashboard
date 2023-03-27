@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { MdOutlineDragIndicator } from "react-icons/md";
-import { AiFillExclamationCircle } from "react-icons/ai";
 import { ReactSortable } from "react-sortablejs";
-import Tippy from "@tippyjs/react";
 
 import CircleLoader from "components/general/circleLoader/circleLoader";
 import DeleteModal from "components/general/Modal/deleteModal";
-import { Button } from "components/general/button";
+import { AddButton } from "components/general/button";
 import Pagination from "components/general/pagination";
 import { pageCount } from "utils/constants";
 import SettingsStore from "../../store";
@@ -49,13 +47,13 @@ const LaundryTypes = observer(() => {
       )}
 
       <div className="flex justify-between items-start w-full h-fit gap-x-3 mt-2 mb-3">
-        <button
+        <AddButton
           onClick={() => setModalType("Create")}
-          className="text-green underline text-sm"
-        >
-          Create {type}
-        </button>
-        {laundryTypesCount && (
+          text={`Create ${type}`}
+          xsmall
+        />
+
+        {/* {laundryTypesCount && (
           <Tippy content="drag and drop the cards below to rearrange laundry types">
             <div className="w-fit flex items-start justify-end gap-2">
               <Button text={`Save arrangement`} xsmall />
@@ -65,7 +63,7 @@ const LaundryTypes = observer(() => {
               </div>
             </div>
           </Tippy>
-        )}
+        )} */}
       </div>
       <ReactSortable
         list={laundryTypes}
