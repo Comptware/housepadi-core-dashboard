@@ -1,103 +1,31 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useAuth } from "hooks/auth";
 import { ReactComponent as Logout } from "assets/icons/logout.svg";
-import ListingStore from "pages/dashboard/listings/store";
 import CommonStore from "stores/common";
-import SettingsStore from "pages/dashboard/settings/store";
-import HomeStore from "pages/dashboard/home/store";
-import notificationAlertSound from "assets/audios/quick-alert.wav";
-import { getUserInfoFromStorage } from "utils/storage";
-import db from "services/firebase.config";
+
 import Header from "../header";
 import { dashboardLinks } from "components/arrays/dashboard";
 
 const DashboardLayout = ({ children }) => {
   const location = useLocation();
   const { logout } = useAuth();
-  const { setListingDataSet } = ListingStore;
-  const { getMe, me, sidenavOpen, setSidenavOpen } = CommonStore;
-  const { getSettings, settings } = SettingsStore;
-  const { notificationItems, getNotificationData, handleSetNotificationItems } =
-    HomeStore;
-  const userInfo = getUserInfoFromStorage();
 
-  // useEffect(() => {
-  //   setListingDataSet(false);
-  // }, []);
-
-  const notificationAlertAudio = new Audio(notificationAlertSound);
-  const playAudio = (audioFile) => {
-    audioFile?.play();
-  };
+  const { sidenavOpen, setSidenavOpen } = CommonStore;
 
   const listingLinks = [
     {
       title: "Logout",
       link: "/auth/login",
       click: () => {
-        sessionStorage.clear();
+        logout();
       },
-      // click: () => {
-      //   logout();
-      // },
       icon: <Logout className="w-3.5 mr-1" />,
     },
   ];
-
-  const getConversations = async () => {
-    let convos = [];
-    const convoRef = collection(db, "conversations");
-    const q = query(convoRef, where("agentId", "==", userInfo?.id));
-    let loaded = false;
-    onSnapshot(q, (querySnapshot) => {
-      convos = [];
-
-      querySnapshot.forEach((item) => {
-        convos.push(item.data());
-      });
-
-      convos = convos.sort(
-        (a, b) =>
-          new Date(b?.lastMessageAt?.toDate()) -
-          new Date(a?.lastMessageAt?.toDate())
-      );
-
-      const unreadConvos = convos?.filter((item) => item?.unreadUserChats > 0);
-
-      if (unreadConvos.length > 0 && loaded) {
-        unreadConvos?.forEach((item) => {
-          const itemIsInNotificationItems = notificationItems?.find(
-            (ntf) =>
-              ntf.unreadUserChats + ntf.lastMessageAt?.toDate() ===
-              item.unreadUserChats + item.lastMessageAt?.toDate()
-          )?.lastMessageAt;
-          if (!itemIsInNotificationItems) {
-            handleSetNotificationItems([
-              {
-                ...item,
-                notification_type: "message",
-                link: `/dashboard/messages`,
-              },
-            ]);
-          }
-        });
-
-        settings?.chat_notification && playAudio(notificationAlertAudio);
-      }
-      loaded = true;
-    });
-  };
-
-  // useEffect(() => {
-  //   getMe();
-  //   getConversations();
-  //   getSettings();
-  // }, []);
 
   return (
     <div className="overflow-x-hidden relative">
@@ -113,17 +41,18 @@ const DashboardLayout = ({ children }) => {
          `}
         >
           <div className="flex pl-8 pr-4 flex-1 border-t border-[#e0e0e0] pt-[24px] flex-col justify-start items-start pb-10 w-full space-y-2 cursor-pointer transition-all duration-150 ease-in-out">
-            {dashboardLinks.map(({ title, icon, link }) => (
+            {dashboardLinks.map(({ title, icon, link, slug }) => (
               <Link
                 to={link}
+                addAarModal
                 key={title}
                 onClick={() => setSidenavOpen(false)}
                 className="w-full"
               >
                 <div
                   className={`flex justify-start items-center hover:!text-green-hover text-grey text-sm space-x-2 px-5 py-3 rounded-lg w-full ${
-                    location.pathname.includes(link) &&
-                    "!text-black bg-grey-dark"
+                    location.pathname.includes(slug || link) &&
+                    "!text-green bg-grey-dark"
                   }`}
                 >
                   {icon}
@@ -151,7 +80,7 @@ const DashboardLayout = ({ children }) => {
             ))}
           </div>
         </aside>
-        <main className="bg-grey-whitesmoke min-h-[100vh] w-full lg:pl-[270px] pt-[120px] mlg:pb-14">
+        <main className="bg-grey-whitesmoke min-h-[100vh] w-full lg:pl-[277px] pt-[120px] mlg:pb-14">
           {children}
         </main>
       </div>

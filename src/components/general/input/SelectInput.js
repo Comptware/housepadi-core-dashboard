@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CaretDown } from "assets/icons";
 
-const SelectInput = ({ array, label, stat, opt, filter, setFilter }) => {
+const SelectInput = ({ options, label, stat, opt, filter, setFilter }) => {
   const [show, setShow] = useState(false);
   return (
     <div className="relative">
@@ -67,7 +67,7 @@ const SelectInput = ({ array, label, stat, opt, filter, setFilter }) => {
                 opt ? "right-0" : "left-0"
               } bg-white shadow-lg p-3 rounded-md`}
             >
-              {array?.map((data, i) => (
+              {options?.map((data, i) => (
                 <div
                   key={i}
                   onClick={() => {

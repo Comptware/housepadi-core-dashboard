@@ -12,7 +12,6 @@ import { FormErrorMessage } from "components/general/errorMessage";
 import Input from "components/general/input/input";
 import useLoginSetup from "hooks/loginSetup";
 import { isEmail } from "utils/validations";
-import { useNavigate } from "react-router";
 
 YupPassword(Yup);
 
@@ -29,7 +28,6 @@ const schema = Yup.object({
 const Login = () => {
   const { login, loading } = AuthStore;
   const { logUserIn } = useLoginSetup();
-  const navigate = useNavigate();
   const {
     handleSubmit,
     formState: { errors },
@@ -53,10 +51,6 @@ const Login = () => {
     await trigger(name);
   };
 
-  const submit = () => {
-    sessionStorage.setItem("user", "user");
-    navigate("/dashboard/home");
-  };
   const onSubmit = (data) => {
     const { email, password } = data;
     login(
@@ -78,15 +72,16 @@ const Login = () => {
     >
       <section className="w-[90%] h-fit md:w-[380px] mx-auto md:m-auto flex flex-col">
         <h2 className="text-black text-[24px] mb-4 medium-font">
-          {" "}
-          Welcome to Zusco Admin
+          Welcome to Housepadi Admin
         </h2>
         <h2 className="text-lg text-grey-textalt mb-3">
-          {" "}
           Enter login email and password to login to the dashboard
         </h2>
 
-        <form onSubmit={submit} className="flex flex-col w-full ">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col w-full "
+        >
           <div className="w-full mb-4">
             <Input
               label="Email Address"
@@ -117,7 +112,7 @@ const Login = () => {
               type="submit"
               text="Login"
               isLoading={loading}
-              isDisabled={!password || !isEmail(email)}
+              isDisabled={!password || !isEmail(email) || loading}
               fullWidth
             />
           </div>

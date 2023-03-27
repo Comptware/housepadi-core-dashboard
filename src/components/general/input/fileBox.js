@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { FileUploader } from "react-drag-drop-files";
+import { isArray, isEmpty } from "lodash";
 
 import { extractFileNameFromUrl } from "utils/functions";
 import ImageModal from "../Modal/imageModal/ImageModal";
@@ -23,7 +24,7 @@ const FileBox = ({
 }) => {
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const fileTypes = ["JPG", "PNG", "JPEG"];
+  const fileTypes = ["JPG", "PNG", "JPEG", "WEBP"];
   useEffect(() => {
     if (!isError) return setError(false);
     setError(true);
@@ -35,6 +36,13 @@ const FileBox = ({
     setError(false);
   }, [file]);
 
+  const imageUrl = useMemo(
+    () =>
+      file && typeof file !== "string"
+        ? URL.createObjectURL(file)
+        : url || file,
+    [file, url]
+  );
   return (
     <div className="flex flex-col justify-start items-start space-y-2 w-full min-w-full relative file-box">
       {title && (
@@ -50,7 +58,7 @@ const FileBox = ({
             bottom-[5%] mx-auto
 
             ${
-              file && file[0]
+              file
                 ? "medium-font text-white cursor-pointer"
                 : "text-grey-text text-[8px]"
             }
@@ -63,11 +71,19 @@ const FileBox = ({
             }
           }}
         >
-          {file && file[0] ? "Preview " : placeholder}
+          {file ? (
+            <div className="z-[99] cursor-pointer flex justify-center items-center text-black bg-grey bg-opacity-30 hover:bg-opacity-100 hover:!text-white hover:!regular-font hover:bg-green rounded-lg transition-all duration-150 ease-in-out ">
+              <div className="relative flex justify-center items-center px-2 py-1 text-xs">
+                Preview
+              </div>
+            </div>
+          ) : (
+            placeholder
+          )}
         </p>
       }
 
-      {file && file[0] && !isAvatar && (
+      {file && !isAvatar && (
         <div
           className="absolute -top-3 right-2 z-[99] cursor-pointer flex justify-center items-center text-black bg-grey bg-opacity-30 hover:bg-opacity-100 hover:!text-white hover:!regular-font hover:bg-red rounded-lg transition-all duration-150 ease-in-out "
           onClick={removeAllClick}
@@ -110,18 +126,18 @@ const FileBox = ({
           type="button"
           disabled={isDisabled}
         >
-          {file && file[0] && (
+          {file && (
             <div
               className={`
-            absolute top-0 right-0 left-0 bottom-0 z-[9] bg-blue-backdrop fade-in rounded-2xl
-            ${isAvatar ? " bg-no-repeat bg-center bg-cover" : ""}
+            absolute top-0 right-0 left-0 bottom-0 z-[9] fade-in rounded-2xl  bg-no-repeat bg-top bg-cover
+         
             `}
               style={{
-                backgroundImage: url ? `url(${url})` : "",
+                backgroundImage: `url(${imageUrl})`,
               }}
             />
           )}
-          {file && file[0] && (
+          {file && (
             <span className="flex justify-start items-center text-white text-xs medium-font pl-2 z-[99]">
               {file?.length} {file?.length === 1 ? "photo" : "photos"}
             </span>
@@ -129,7 +145,7 @@ const FileBox = ({
 
           <p
             className={`w-full z-[99] text-sm 
-          ${file && file[0] ? "medium-font text-white" : "text-blue"}
+          ${file ? "medium-font text-white" : "text-blue"}
           ${isXl ? "text-sm" : "text-xs"}
         
         `}
@@ -143,12 +159,28 @@ const FileBox = ({
         <ImageModal
           active={showModal}
           toggler={() => setShowModal(false)}
-          photos={file?.map((item) => {
-            return {
-              name: extractFileNameFromUrl(item),
-              url: typeof item === "string" ? item : URL.createObjectURL(item),
-            };
-          })}
+          togglerClass="top-[30px] right-[30px]"
+          photos={
+            isArray(file)
+              ? file?.map((item) => {
+                  return {
+                    name: extractFileNameFromUrl(item),
+                    url:
+                      typeof item === "string"
+                        ? item
+                        : URL.createObjectURL(item),
+                  };
+                })
+              : [
+                  {
+                    name: extractFileNameFromUrl(file),
+                    url:
+                      typeof file === "string"
+                        ? item
+                        : URL.createObjectURL(file),
+                  },
+                ]
+          }
         />
       )}
     </div>

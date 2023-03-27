@@ -3,13 +3,15 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as Logo } from "assets/icons/logo.svg";
-import { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
+// import { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
 import CommonStore from "stores/common";
 import Hamburger from "../hamburger";
-import { Avatar } from "assets/images/exports";
+import { getUserInfoFromStorage } from "utils/storage";
 
 const Header = () => {
   const { sidenavOpen, setSidenavOpen } = CommonStore;
+
+  const userInfo = getUserInfoFromStorage();
   return (
     <header className="flex flex-col justify-center items-center w-full py-4 fixed border-b-1/2 border-[#c8c8c8] text-black z-[99] h-[92px] bg-white">
       <div className="flex justify-between w-full items-center 4xs:px-10 mlg:px-0">
@@ -20,23 +22,22 @@ const Header = () => {
 
           <div className="mlg:flex 4xs:hidden mlg:flex-row gap-[16px] items-center">
             <div className="flex gap-[24px] items-center">
-              <div className="flex gap-[10px] items-center w-[306px] py-[8px] rounded-full border border-[#acacac] px-[26px]">
+              {/* <div className="flex gap-[10px] items-center w-[306px] py-[8px] rounded-full border border-[#acacac] px-[26px]">
                 <SearchIcon />
                 <input
                   placeholder="Search by Order Code"
                   className="placeholder:text-[14px] text-black outline-none placeholder:text-[#c8c8c8]"
                 />
-              </div>
+              </div> */}
               <div className="flex">
                 <div>
-                  <div className="font-medium text-[#2d2d2d]">Iruene Seyi</div>
+                  <div className="font-medium text-[#2d2d2d]">
+                    {userInfo?.user?.name}
+                  </div>
                   <div className="text-[11px] text-[#acacac]">
-                    Kitchen Staff
+                    {userInfo?.user?.role}
                   </div>
                 </div>
-              </div>
-              <div className="rounded-full border-[2px] border-[#C30D21]">
-                <img src={Avatar} className="w-[44px] h-44px]" />
               </div>
             </div>
           </div>

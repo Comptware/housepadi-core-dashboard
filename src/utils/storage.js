@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
-const TOKEN = "zusco-token";
-const USER_DATA = "zusco-user-data";
-const LAST_CURRENT_BUSINESS = "zusco-lcb";
+const TOKEN = "hp-token";
+const USER_DATA = "hp-user-data";
+const LAST_CURRENT_BUSINESS = "hp-lcb";
 export const ACCOUNT_CREATED = "ACCOUNT_CREATED";
 
 export const saveToken = (token) => {

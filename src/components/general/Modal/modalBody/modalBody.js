@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const ModalBody = ({ children }) => {
   return (
-    <div className="body-content flex flex-col justify-start items-start w-full h-full max-h-[500px] flex-grow">
+    <div className="body-content flex flex-col justify-start items-start w-full h-full max-h-[500px] flex-grow overflow-y-scroll">
       {children}
     </div>
   );

@@ -9,20 +9,20 @@ import CircleLoader from "components/general/circleLoader/circleLoader";
 import UserStore from "../../store/index";
 import Pagination from "components/general/pagination";
 
-const listingsHead = ["USER", "PHONE", "EMAIL"];
+const listingsHead = ["NAME", "PHONE", "EMAIL", "ROLE", "ADDRESS"];
 const AllUsers = observer(({ data }) => {
   const navigate = useNavigate();
   const { loading, userCount, getUsers } = UserStore;
   const [currentPage, setCurrentPage] = useState(1);
 
-  // useEffect(() => {
-  //   currentPage > 1 && getUsers(currentPage);
-  // }, [currentPage]);
+  useEffect(() => {
+    getUsers(currentPage);
+  }, [currentPage]);
 
   return (
     <div className="flex flex-col justify-start items-start w-full h-fit p-3 sm:p-6 max-h-fit ">
       <Table head={listingsHead}>
-        {data?.map(({ id, first_name, last_name, phone_number, email }, i) => {
+        {data?.map(({ id, name, phoneNumber, email, role, addressText }, i) => {
           const tdClass = "max-h-fit border-b-1/2 border-grey-border";
           return (
             <tr
@@ -32,15 +32,24 @@ const AllUsers = observer(({ data }) => {
             >
               <td className={tdClass}>
                 <span className="text-sm text-grey-textalt capitalize">
-                  {first_name ? `${first_name} ${last_name}` : "N/A"}
+                  {name || "N/A"}
                 </span>
               </td>
 
               <td className={tdClass}>
-                <span className="text-sm text-black">{phone_number}</span>
+                <span className="text-sm text-black">{phoneNumber}</span>
               </td>
               <td className={tdClass}>
                 <span className="text-sm text-black">{email || "N/A"}</span>
+              </td>
+              <td className={tdClass}>
+                <span className="text-sm text-black">{role || "N/A"}</span>
+              </td>
+
+              <td className={tdClass}>
+                <span className="text-sm text-black">
+                  {addressText || "N/A"}
+                </span>
               </td>
             </tr>
           );

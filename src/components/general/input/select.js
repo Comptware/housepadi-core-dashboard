@@ -1,8 +1,10 @@
 import React from "react";
-import ReactSelect from "react-select";
+import ReactSelect, { components } from "react-select";
 import AsyncSelect from "react-select/async";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import PropTypes from "prop-types";
+
+import { BsCaretDownFill } from "react-icons/bs";
 
 const Select = ({
   label,
@@ -14,18 +16,33 @@ const Select = ({
   address,
   addressValue,
   addressPlaceholder,
+  fullWidth,
+  style,
   ...rest
 }) => {
   const GOOGLE_MAP_API_KEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
-  const classNames =
-    "w-[calc(100%-2px)] h-fit mx-[1px] text-base border-slate-300 placeholder-slate-400 !placeholder:text-grey cursor-pointer";
+  const classNames = `${
+    fullWidth ? "w-full" : "w-fit"
+  } h-fit mx-[1px] text-xs border-slate-300 placeholder-slate-400 !placeholder:text-grey cursor-pointer`;
   const styles = {
     control: (base, state) => ({
       ...base,
-      height: "44px",
-      borderRadius: 8,
-      border: "1px solid #909090 !important",
+      height: address ? "38px" : "30px",
+      minHeight: address ? "38px" : "30px",
+      borderRadius: 30,
+      border: state.isFocused
+        ? `1px solid ${style?.color || "#7DD13A"} !important`
+        : `1px solid ${style?.color || "#909090"} !important`,
+      outline: state.isFocused ? "none !important" : "none !important",
+      boxShadow: "none",
       cursor: "pointer",
+      fontSize: "12px",
+      backgroundColor: `${style?.background || ""}`,
+    }),
+
+    singleValue: (base) => ({
+      ...base,
+      color: `${style?.color || "#000000"} !important`,
     }),
     indicatorSeparator: () => ({
       display: "none",
@@ -49,20 +66,27 @@ const Select = ({
     }),
     option: (base, state) => ({
       ...base,
-      fontSize: "16px",
+      fontSize: "12px",
       backgroundColor: (state.isFocused || state.isSelected) && "#F5F6FA",
       cursor: "pointer",
       color: "#000",
     }),
   };
+  const DropdownIndicator = (props) => {
+    return (
+      <components.DropdownIndicator {...props}>
+        <BsCaretDownFill size={11} color={style?.color || "#000"} />
+      </components.DropdownIndicator>
+    );
+  };
   return (
-    <div className="w-full searchable-select-component">
+    <div className={`${fullWidth ? "w-full" : "w-fit"}`}>
       {label && (
-        <div className="flex justify-between">
+        <div className="flex justify-between mb-1">
           <label className="general-input-label text-grey-label text-sm">
             {label}
           </label>
-          {labelControl || null}
+          {labelControl && labelControl}
         </div>
       )}
       {async ? (
@@ -95,6 +119,7 @@ const Select = ({
           onChange={(selected) => onChange(selected, { name, value: selected })}
           styles={styles}
           className={classNames}
+          components={{ DropdownIndicator }}
           {...rest}
         ></ReactSelect>
       )}

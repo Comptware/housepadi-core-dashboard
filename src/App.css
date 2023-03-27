@@ -171,22 +171,27 @@ td {
   height: fit-content;
   max-height: 50px !important;
 }
+
 .order_table td {
   border-bottom: 1px solid #c8c8c8;
 }
+
 .order_table th {
   text-align: start;
   padding-bottom: 16px;
   font-weight: normal;
 }
+
 .order_table td div:nth-child(2) {
   font-size: 11px;
   color: #909090;
 }
+
 .order_table td div:nth-child(1) {
   font-size: 14px;
   color: #1e1e1e;
 }
+
 th {
   padding: 10px 10px 30px;
 }
@@ -252,4 +257,52 @@ th {
 
 *::-webkit-scrollbar-thumb {
   background-color: #0c203c;
+}
+
+/* react-date-range custom styles */
+
+.rdrInRange {
+  background: rgba(188, 210, 252, 0.22) !important;
+}
+
+.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span {
+  font-family: GTWalsheimProRegular, sans-serif !important;
+  color: #5599dd !important;
+}
+
+.rdrStartEdge {
+  background: rgba(85, 153, 221, 0.1) !important;
+  border: 1px solid #5599dd !important;
+  border-radius: 2px !important;
+}
+
+.rdrEndEdge {
+  background: rgba(85, 153, 221, 0.1) !important;
+  border: 1px solid #5599dd !important;
+  border-radius: 2px !important;
+}
+
+.rdrDayHovered {
+  border: none !important;
+}
+
+.rdrDayStartPreview,
+.rdrDayEndPreview {
+  border: 1px solid #5599dd !important;
+  border-radius: 2px !important;
+}
+
+.rdrDateInput input {
+  color: #5599dd !important;
+}
+
+.rdrDateDisplayWrapper {
+  background: none !important;
+}
+
+.rdrMonth {
+  width: 100%;
 }

@@ -1,14 +1,11 @@
 import { useAuth } from "hooks/auth";
 import DashboardLayout from "components/layout/dashboard";
-// import LandingLayout from "components/layout/landing";
 import { string, bool, node } from "prop-types";
 import { Navigate } from "react-router-dom";
 
-export const AuthRoute = ({ path, notProtected, children, ...rest }) => {
-  // const { isAuthenticated } = useAuth();
-  const user = sessionStorage.getItem("user");
-  console.log(notProtected);
-  if (notProtected && user) {
+export const AuthRoute = ({ path, notProtected, children }) => {
+  const { isAuthenticated } = useAuth();
+  if (notProtected && isAuthenticated) {
     return (
       <DashboardLayout>
         <Navigate replace to="/dashboard/home" />;
@@ -16,7 +13,7 @@ export const AuthRoute = ({ path, notProtected, children, ...rest }) => {
     );
   }
 
-  if (!user && !notProtected) {
+  if (!isAuthenticated && !notProtected) {
     return (
       <Navigate
         replace

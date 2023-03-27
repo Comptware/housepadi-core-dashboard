@@ -13,7 +13,7 @@ import {
 
 import { ReactComponent as Logo } from "assets/icons/logo/logo-green.svg";
 import { ReactComponent as Notification } from "assets/icons/notification.svg";
-import ListingStore from "pages/dashboard/listings/store";
+import ListingStore from "pages/dashboard/meal-orders/store";
 
 import Toast from "../../general/toast/toast";
 

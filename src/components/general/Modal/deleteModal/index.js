@@ -15,6 +15,7 @@ const DeleteModal = ({
   onChangeFunc,
   value,
   actionText = "Delete",
+  closeText = "Cancel",
   placeholder,
   titleAlt,
   isDisabled,
@@ -50,7 +51,7 @@ const DeleteModal = ({
 
           <div className="flex justify-between items-center w-full border-t p-[24px] ">
             <div>
-              <Button whiteBg text="Cancel" onClick={onClose} />
+              <Button whiteBg text={closeText} onClick={onClose} />
             </div>
             <div>
               <Button
@@ -72,6 +73,7 @@ DeleteModal.propTypes = {
   handleDelete: PropTypes.func,
   isDeleting: PropTypes.bool,
   onClose: PropTypes.func,
+  closeText: PropTypes.string,
   title: PropTypes.string,
   text: PropTypes.string,
   onChangeFunc: PropTypes.func,

@@ -3,6 +3,48 @@ import { ReactComponent as Hint } from "assets/icons/hint.svg";
 import { ReactComponent as Card } from "assets/icons/card.svg";
 import Tippy from "@tippyjs/react";
 
+export const ORDER_STATUSES = {
+  PENDING: "PENDING",
+  INPROGRESS: "INPROGRESS",
+  CANCELLED: "CANCELLED",
+  COMPLETED: "COMPLETED",
+};
+
+export const ORDER_STATUS_OPTIONS = [
+  {
+    value: ORDER_STATUSES.PENDING,
+    label: "Pending",
+    color: "",
+    background: "",
+  },
+  {
+    value: ORDER_STATUSES.INPROGRESS,
+    label: "In Progress",
+    color: "#B5B03A",
+    background: "#F7F6DA",
+  },
+  {
+    value: ORDER_STATUSES.CANCELLED,
+    label: "Cancelled",
+    color: "#C30D21",
+    background: "#FBCFD4",
+  },
+  {
+    value: ORDER_STATUSES.COMPLETED,
+    label: "Completed",
+    color: "#4CB53A",
+    background: "#DEF7DA",
+  },
+];
+
+export const MEALS_SORT_OPTIONS = [
+  { value: "mealType", label: "Sort meals by type" },
+  { value: "mealCategory", label: "Sort meals by category" },
+];
+export const LAUNDRIES_SORT_OPTIONS = [
+  { value: "laundryType", label: "Sort laundries by type" },
+];
+
 export const HOUSE_TYPES = [
   { value: "duplex", label: "Duplex" },
   { value: "flat", label: "Flat" },

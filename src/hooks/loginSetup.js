@@ -13,9 +13,9 @@ function useLoginSetup() {
 
   const logUserIn = (user, route) => {
     if (user) {
-      const { token, ...rest } = user;
-      saveToken(token);
-      setToken(token);
+      const { accessToken, ...rest } = user;
+      saveToken(accessToken);
+      setToken(accessToken);
       saveUserInfoToStorage(rest);
       setAuthenticatedUser(user);
       clearAccountCreation();

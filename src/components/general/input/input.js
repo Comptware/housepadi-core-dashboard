@@ -76,7 +76,7 @@ const Input = ({
   return (
     <div className="w-full ">
       {label && (
-        <div className="flex justify-between items-start w-full space-x-2">
+        <div className="flex justify-between items-start w-full space-x-2 mb-1">
           <label className="general-input-label text-grey-label text-sm capitalize whitespace-nowrap truncate">
             {label}
           </label>
@@ -209,7 +209,7 @@ Input.propTypes = {
   prefix: PropTypes.string,
   rest: PropTypes.object,
   icon: PropTypes.element,
-  labelAlt: PropTypes.string,
+  labelAlt: PropTypes.any,
   labelAltClassName: PropTypes.string,
 };
 

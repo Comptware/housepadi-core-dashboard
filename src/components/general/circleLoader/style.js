@@ -9,7 +9,7 @@ export const LoadingWrapper = styled.div`
   }
   .loader {
     border: 2.5px solid #e1e1e1; /* Light grey */
-    border-top: 2.5px solid #00509d; /* Blue */
+    border-top: 2.5px solid #7dd13a; /* Green */
     border-radius: 50%;
     animation: spin 1s linear infinite;
     ${(props) => {

@@ -8,7 +8,7 @@ const EditButton = ({ onClick, text }) => (
     {...{ onClick }}
     text={text}
     textColor="text-green"
-    icon={<Edit />}
+    icon={<Edit className="text-green fill-green" />}
     isOutline
     fullWidth
     borderColor="border-green"

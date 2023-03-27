@@ -106,6 +106,7 @@ module.exports = {
         "1xs": "555px",
         xs: "705px",
         mlg: "1024px",
+        xlg: "1290px",
         max: "100rem",
       },
       margin: {
