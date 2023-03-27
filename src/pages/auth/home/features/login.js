@@ -99,7 +99,7 @@ const Login = () => {
               label="Password"
               value={password}
               onChangeFunc={(e) => sharedOnChange("password", e)}
-              placeholder="taiwoharry@gmail.com"
+              placeholder="Enter password"
               type="password"
               required
             />
