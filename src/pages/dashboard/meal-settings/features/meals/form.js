@@ -8,11 +8,12 @@ import sanitizePayload from "utils/sanitizePayload";
 import FileBox from "components/general/input/fileBox";
 import Select from "components/general/input/select";
 import { uploadImageToCloud } from "utils/uploadImagesToCloud";
+import { errorToast } from "components/general/toast/toast";
+import AppSwitch from "components/general/switch";
 import SettingsStore from "../../store";
 import { MODAL_TYPES } from "../../utils";
 import MealTypeModal from "../mealTypes/modal";
 import MealcategoryModal from "../mealCategories/modal";
-import { errorToast } from "components/general/toast/toast";
 
 const Form = ({ toggleModal, type, modaltype, currentPage }) => {
   const {
@@ -35,6 +36,7 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
     imageUrl: activeMeal?.imageUrl || "",
     mealTypeId: activeMeal?.mealTypeId || "",
     mealCategoryId: activeMeal?.mealCategoryId || "",
+    featured: activeMeal?.featured || false,
   });
   const [modalType, setModalType] = useState("");
   const [loading, setLoading] = useState(false);
@@ -76,7 +78,9 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
   );
 
   const formDisabled = useMemo(
-    () => !Object.values(form).every((x) => x),
+    () =>
+      !Object.values(form).every((x) => x) &&
+      (form?.featured || !form?.featured),
     [form]
   );
 
@@ -156,12 +160,17 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
           removeAllClick={() => {
             handleChange("imageUrl", null);
           }}
-          isDisabled={formDisabled || formLoading}
+          isDisabled={formLoading}
           isError={false}
           maxSize={3}
           onSizeError={(file) => console.log("sizeerror", file)}
         />
-
+        <AppSwitch
+          checked={form?.featured}
+          onChange={() => handleChange("featured", !form.featured)}
+          disabled={formLoading}
+          label={`feature ${modaltype}`}
+        />
         <Button
           text={`${type} ${modaltype}`}
           isDisabled={formDisabled}

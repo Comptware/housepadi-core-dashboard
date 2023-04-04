@@ -25,7 +25,7 @@ const AppSwitch = ({
           <span className="text-black text-xs medium-font">{title}</span>
 
           {label && (
-            <span className="text-grey-text text-[11px] regular-font">
+            <span className="text-grey-label text-sm capitalize whitespace-nowrap truncate">
               {label}
             </span>
           )}

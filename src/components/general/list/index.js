@@ -6,7 +6,18 @@ import { numberWithCommas } from "utils/formatter";
 const List = ({ details, onEditClick, onDeleteClick }) => {
   return (
     <div className="flex flex-col justify-start items-start w-full gap-1">
-      <div className="bg-white flex flex-col justify-center items-start gap-y-1 w-full h-fit rounded-lg border-1/2 border-grey-border">
+      <div className="bg-white flex flex-col justify-center items-start gap-y-1 w-full h-fit rounded-lg border-1/2 border-grey-border relative">
+        {details?.featured && (
+          <div className="bg-green text-white text-xs px-2 py-0.5 rounded-full absolute top-2 right-2 shadow-2xl ">
+            Featured
+          </div>
+        )}
+
+        {details?.tag && (
+          <div className="bg-green text-white text-xs px-2 py-0.5 rounded-full absolute bottom-2 right-2 shadow-2xl truncate max-w-[100px] ">
+            {details?.tag}
+          </div>
+        )}
         {details?.imageUrl && (
           <div
             alt="img"
@@ -21,12 +32,14 @@ const List = ({ details, onEditClick, onDeleteClick }) => {
         )}
         <div className="flex flex-col justify-center items-start gap-y-1 w-full p-3">
           <span className="text-xl text-black whitespace-nowrap truncate pt-1 max-w-full">
-            {details?.name || details?.discountCode}
+            {details?.name || details?.discountCode || details?.title}
           </span>
-          <span className="text-sm text-grey-text whitespace-nowrap truncate ">
+          <div className="text-sm text-grey-text line-clamp-2">
             {(details?.price || details?.discountType === "FIXED") && "NGN"}
-            {numberWithCommas(details?.price || details?.discountValue)}
-          </span>
+            {(details?.price || details?.discountValue) &&
+              numberWithCommas(details?.price || details?.discountValue)}
+            {details?.subtitle}
+          </div>
           <span className="text-sm text-grey-text whitespace-nowrap truncate ">
             {details?.discountExpiryTime
               ? `Expiry: ${moment(details?.discountExpiryTime).format(

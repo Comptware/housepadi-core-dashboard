@@ -12,9 +12,7 @@ import DeleteModal from "../Modal/deleteModal";
 const { INPROGRESS, PENDING, COMPLETED, CANCELLED } = ORDER_STATUSES;
 
 const OrderCard = ({ data, type, cardStatus, pageNumber, getPayload }) => {
-  console.log("data in card: ", data?.userRequest?.code, " : ", data?.status);
   const { userRequest, status, meals } = data;
-  console.log("data in card destructure: ", userRequest?.code, " : ", status);
   const { updateOrder, updateOrdersLoading } = MealOrdersStore;
 
   const orderStatusMatch = ORDER_STATUS_OPTIONS.find(

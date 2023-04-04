@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { observer } from "mobx-react-lite";
 import moment from "moment";
@@ -29,29 +29,32 @@ const Laundry = ({ status = "all" }) => {
     cancelledOrdersCount,
     inProgressOrdersCount,
   } = LaundriesStore;
-  const ref = React.useRef(null);
-  const [dateFilter, setDateFilter] = useState();
+  const ref = useRef(null);
+  const [dateFilter, setDateFilter] = useState([filterRangeOptions[0]]);
   const [dateFilters, setDateFilters] = useState(filterRangeOptions);
   const [showDateModal, setShowDateModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handleGetOrders = (isRefresh) => {
+  const handleGetOrders = ({ page, date }, isRefresh) => {
+    const startDate = date?.[0]?.startDate || dateFilter?.[0]?.startDate;
+    const endDate = date?.[0]?.endDate || dateFilter?.[0]?.endDate;
     isRefresh && setCurrentPage(1);
     dateFilter?.[0]?.startDate &&
       getOrders({
-        pageNumber: isRefresh ? 1 : currentPage,
+        pageNumber: page || currentPage,
         status,
         payload: {
-          startDate: dateFilter?.[0]?.startDate,
-          endDate: dateFilter?.[0]?.endDate,
+          startDate,
+          endDate,
         },
       });
   };
-  useEffect(() => {
-    handleGetOrders();
-  }, [dateFilter, status, currentPage]);
 
-  useEffect(() => setDateFilter([filterRangeOptions[0]]), [status]);
+  useEffect(() => {
+    setCurrentPage(1);
+    setDateFilter([filterRangeOptions[0]]);
+    handleGetOrders({ page: 1, date: [filterRangeOptions[0]] });
+  }, [status]);
 
   const scroll = (direction) => {
     if (direction === "left") {
@@ -60,8 +63,16 @@ const Laundry = ({ status = "all" }) => {
       ref.current.scrollLeft += 410;
     }
   };
-  const handleDateFilterchange = (val) => {
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    handleGetOrders({ page });
+  };
+  const handleDateChange = (val) => {
     setDateFilter(val);
+    handleGetOrders({ date: val, page: 1 });
+  };
+
+  const handleDateFilterchange = (val) => {
     if (
       moment(val[0]?.endDate).valueOf() !== moment(val[0]?.startDate).valueOf()
     ) {
@@ -77,8 +88,9 @@ const Laundry = ({ status = "all" }) => {
       ...dateVal,
       value: dateRange,
       label: dateRange,
+      type: "custom",
     };
-    setDateFilter([newDateFilter]);
+    handleDateChange([newDateFilter]);
     setDateFilters([...filterRangeOptions, newDateFilter]);
     setShowDateModal(false);
   };
@@ -108,7 +120,7 @@ const Laundry = ({ status = "all" }) => {
             if (val?.value === "custom") {
               setShowDateModal(true);
             } else {
-              setDateFilter([val]);
+              handleDateChange([val]);
             }
           }}
           options={dateFilters}
@@ -118,13 +130,13 @@ const Laundry = ({ status = "all" }) => {
           <div className="flex items-center justify-end gap-[5px]">
             <div
               onClick={() => scroll("left")}
-              className="transform rotate-180 bg-[#DEDEDE] text-[15px] rounded-full py-[7px] px-[7px]  cursor-pointer"
+              className="transform rotate-180 bg-[#DEDEDE] text-[15px] rounded-full py-[7px] px-[7px] cursor-pointer"
             >
               <RightArrow className="w-[20px] h-[20px]" />
             </div>
             <div
               onClick={() => scroll("right")}
-              className="bg-[#DEDEDE] gap-[10px] text-[15px] items-center flex rounded-full py-[8px] px-[16px]  cursor-pointer"
+              className="bg-[#DEDEDE] gap-[10px] text-[15px] items-center flex rounded-full py-[8px] px-[16px] cursor-pointer"
             >
               <div>Next</div>
               <div>
@@ -133,7 +145,7 @@ const Laundry = ({ status = "all" }) => {
             </div>
           </div>
           <button
-            onClick={() => handleGetOrders(true)}
+            onClick={() => handleGetOrders({ page: 1 }, true)}
             className="flex justify-start items-center text-black underline text-sm pr-3 gap-x-1"
             type="button"
           >
@@ -170,7 +182,7 @@ const Laundry = ({ status = "all" }) => {
 
       <Pagination
         pageCount={Number(data?.count) / pageCount}
-        onPageChange={(page) => setCurrentPage(page)}
+        onPageChange={(page) => handlePageChange(page)}
         currentPage={currentPage}
       />
       <DateModal

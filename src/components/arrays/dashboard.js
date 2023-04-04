@@ -4,6 +4,7 @@ import {
   MdOutlineLocalLaundryService,
   MdOutlineSettingsSystemDaydream,
   MdOutlineSpaceDashboard,
+  MdOutlineLocalOffer,
 } from "react-icons/md";
 
 export const dashboardLinks = [
@@ -37,6 +38,11 @@ export const dashboardLinks = [
     icon: (
       <MdOutlineSettingsSystemDaydream className="stroke-current text-xl" />
     ),
+  },
+  {
+    title: "Offers",
+    link: "/dashboard/offers",
+    icon: <MdOutlineLocalOffer className="stroke-current text-xl" />,
   },
   {
     title: "Users",

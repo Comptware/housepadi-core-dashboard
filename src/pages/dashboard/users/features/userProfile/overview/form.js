@@ -47,7 +47,6 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
 
   const handleGetLatLng = () => {
     if (form?.addressText) {
-      console.log("form?.addressText: ", form?.addressText);
       geocodeByAddress(form?.addressText)
         .then((results) => getLatLng(results[0]))
         .then((res) => {
@@ -62,7 +61,7 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
   useEffect(() => {
     handleGetLatLng();
   }, [form?.addressText]);
-  console.log("form: ", form);
+
   return (
     <>
       <form

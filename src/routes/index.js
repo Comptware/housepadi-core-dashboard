@@ -11,6 +11,8 @@ import MealSettings from "pages/dashboard/meal-settings";
 import MealSettingsSettingsHome from "pages/dashboard/meal-settings/features";
 import LaundrySettings from "pages/dashboard/laundry-settings";
 import LaundrySettingsHome from "pages/dashboard/laundry-settings/features";
+import Offers from "pages/dashboard/offers";
+import OffersHome from "pages/dashboard/offers/features";
 import Users from "pages/dashboard/users";
 import UsersHome from "pages/dashboard/users/features";
 import UserProfile from "pages/dashboard/users/features/userProfile";
@@ -70,6 +72,19 @@ const Router = () => {
           <Route path="" element={<LaundriesHome />} />
         </Route>
         {/* end bookings */}
+
+        {/* offers */}
+        <Route
+          path="/dashboard/offers"
+          element={
+            <AuthRoute path="">
+              <Offers />
+            </AuthRoute>
+          }
+        >
+          <Route path="" element={<OffersHome />} />
+        </Route>
+        {/* end offers */}
 
         {/* users */}
         <Route
