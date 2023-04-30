@@ -5,6 +5,7 @@ import {
   MdOutlineSettingsSystemDaydream,
   MdOutlineSpaceDashboard,
   MdOutlineLocalOffer,
+  MdOutlineNotificationsNone,
 } from "react-icons/md";
 
 export const dashboardLinks = [
@@ -43,6 +44,11 @@ export const dashboardLinks = [
     title: "Offers",
     link: "/dashboard/offers",
     icon: <MdOutlineLocalOffer className="stroke-current text-xl" />,
+  },
+  {
+    title: "Notifications",
+    link: "/dashboard/notifications",
+    icon: <MdOutlineNotificationsNone className="stroke-current text-xl" />,
   },
   {
     title: "Users",

@@ -9,8 +9,11 @@ import FileBox from "components/general/input/fileBox";
 
 import { uploadImageToCloud } from "utils/uploadImagesToCloud";
 import { errorToast } from "components/general/toast/toast";
-import OffersStore from "../../store";
+import AppSwitch from "components/general/switch";
 import Textarea from "components/general/input/textarea";
+import OffersStore from "../../store";
+import Select from "components/general/input/select";
+import { OFFER_TYPES } from "../../utils";
 
 const Form = ({ toggleModal, type, modaltype, currentPage }) => {
   const {
@@ -26,6 +29,8 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
     subtitle: activeOffer?.subtitle || "",
     tag: activeOffer?.tag || "",
     imageUrl: activeOffer?.imageUrl || "",
+    ...(type === "Create" && { notification: false }),
+    requestType: activeOffer?.requestType || "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -62,8 +67,12 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
   );
 
   const formDisabled = useMemo(
-    () => !Object.values(form).every((x) => x),
+    () => !Object.values(form).every((x) => x || x === false),
     [form]
+  );
+  const requestType = useMemo(
+    () => OFFER_TYPES?.find(({ value }) => value === form?.requestType),
+    [form.requestType]
   );
 
   return (
@@ -72,6 +81,14 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
         className="flex flex-col justify-around gap-y-4 sm:gap-x-4 md:gap-x-6 lg:gap-x-10 w-full py-3 pr-3"
         onSubmit={handleSubmit}
       >
+        <Select
+          label="Offer Type"
+          value={requestType}
+          onChange={(val) => handleChange("requestType", val.value)}
+          placeholder="Select offer type"
+          options={OFFER_TYPES}
+          fullWidth
+        />
         <Input
           label={`${modaltype} title`}
           value={form?.title}
@@ -110,7 +127,14 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
           maxSize={3}
           onSizeError={(file) => console.log("sizeerror", file)}
         />
-
+        {type === "Create" && (
+          <AppSwitch
+            checked={form?.notification}
+            onChange={() => handleChange("notification", !form.notification)}
+            disabled={formLoading}
+            label={`Push notification`}
+          />
+        )}
         <Button
           text={`${type} ${modaltype}`}
           isDisabled={formDisabled}

@@ -7,15 +7,23 @@ const List = ({ details, onEditClick, onDeleteClick }) => {
   return (
     <div className="flex flex-col justify-start items-start w-full gap-1">
       <div className="bg-white flex flex-col justify-center items-start gap-y-1 w-full h-fit rounded-lg border-1/2 border-grey-border relative">
-        {details?.featured && (
-          <div className="bg-green text-white text-xs px-2 py-0.5 rounded-full absolute top-2 right-2 shadow-2xl ">
-            Featured
+        {(details?.featured || details.requestType) && (
+          <div
+            className={`${
+              details?.requestType === "LAUNDRY"
+                ? "bg-[#44A7DE]"
+                : details?.requestType === "MEAL"
+                ? "bg-[#EA0F27]"
+                : "bg-green"
+            } text-white text-xs px-2 py-0.5 rounded-full absolute top-2 right-2 shadow-2xl`}
+          >
+            {details.requestType || "Featured"}
           </div>
         )}
 
-        {details?.tag && (
+        {(details?.tag || details.requestType) && (
           <div className="bg-green text-white text-xs px-2 py-0.5 rounded-full absolute bottom-2 right-2 shadow-2xl truncate max-w-[100px] ">
-            {details?.tag}
+            {details?.tag || details.requestType}
           </div>
         )}
         {details?.imageUrl && (
@@ -32,7 +40,12 @@ const List = ({ details, onEditClick, onDeleteClick }) => {
         )}
         <div className="flex flex-col justify-center items-start gap-y-1 w-full p-3">
           <span className="text-xl text-black whitespace-nowrap truncate pt-1 max-w-full">
-            {details?.name || details?.discountCode || details?.title}
+            {details?.value && (
+              <span className="text-[#C30D21] font-medium text-sm">
+                {details?.value}x
+              </span>
+            )}{" "}
+            {details?.name || details?.discountCode || details?.title}{" "}
           </span>
           <div className="text-sm text-grey-text line-clamp-2">
             {(details?.price || details?.discountType === "FIXED") && "NGN"}

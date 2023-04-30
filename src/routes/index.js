@@ -17,6 +17,8 @@ import Users from "pages/dashboard/users";
 import UsersHome from "pages/dashboard/users/features";
 import UserProfile from "pages/dashboard/users/features/userProfile";
 import { AuthRoute } from "./authRoute";
+import NotificationsHome from "pages/dashboard/notifications/features";
+import Notifications from "pages/dashboard/notifications";
 
 const Router = () => {
   return (
@@ -85,6 +87,19 @@ const Router = () => {
           <Route path="" element={<OffersHome />} />
         </Route>
         {/* end offers */}
+
+        {/* notifications */}
+        <Route
+          path="/dashboard/notifications"
+          element={
+            <AuthRoute path="">
+              <Notifications />
+            </AuthRoute>
+          }
+        >
+          <Route path="" element={<NotificationsHome />} />
+        </Route>
+        {/* end notifications */}
 
         {/* users */}
         <Route

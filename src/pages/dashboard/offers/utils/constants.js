@@ -11,3 +11,7 @@ export const SETTINGS_TABS = [
 export const MODAL_TYPES = {
   LAUNDRY_TYPE: "LAUNDRY_TYPE",
 };
+export const OFFER_TYPES = [
+  { label: "Meal Offer", value: "MEAL" },
+  { label: "Laundry Offer", value: "LAUNDRY" },
+];

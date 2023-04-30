@@ -39,7 +39,7 @@ const Textarea = ({
   return (
     <div className={`relative h-full w-full`} ref={domNode}>
       {label && (
-        <label className="text-grey general-input-label mb-[12px]">
+        <label className="text-grey-label capitalize text-sm general-input-label mb-[12px]">
           {label}
         </label>
       )}

@@ -73,7 +73,7 @@ const Form = ({ toggleModal, type, modaltype, currentPage }) => {
   );
 
   const formDisabled = useMemo(
-    () => !Object.values(form).every((x) => x),
+    () => !Object.values(form).every((x) => x || x === false),
     [form]
   );
 
