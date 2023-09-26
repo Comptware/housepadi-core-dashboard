@@ -11,7 +11,14 @@ import DeleteModal from "../Modal/deleteModal";
 
 const { INPROGRESS, PENDING, COMPLETED, CANCELLED } = ORDER_STATUSES;
 
-const OrderCard = ({ data, type, cardStatus, pageNumber, getPayload }) => {
+const OrderCard = ({
+  data,
+  type,
+  cardStatus,
+  pageNumber,
+  getPayload,
+  onUserClick,
+}) => {
   const { userRequest, status, meals } = data;
   const { updateOrder, updateOrdersLoading } = MealOrdersStore;
 
@@ -53,6 +60,7 @@ const OrderCard = ({ data, type, cardStatus, pageNumber, getPayload }) => {
   const orderIsCancelled = orderStatus?.value === CANCELLED;
   const orderIsCompleted = orderStatus?.value === COMPLETED;
   const orderCancellingDisabled = orderIsCancelled || orderIsCompleted;
+
   return (
     <>
       <div className="mr-[20px] border border-[#e0e0e0] rounded-[8px] min-w-[389px] max-w-[389px] px-[16px] py-[12px]">
@@ -62,7 +70,10 @@ const OrderCard = ({ data, type, cardStatus, pageNumber, getPayload }) => {
               <div className="text-[#2d2d2d] uppercase">
                 {userRequest?.code}
               </div>
-              <div className="text-[12px] text-[#ACACAC]">
+              <div
+                onClick={() => onUserClick?.(userRequest?.user)}
+                className="text-[12px] text-[#ACACAC] underline cursor-pointer"
+              >
                 {userRequest?.user?.name}
               </div>
             </div>
@@ -199,5 +210,6 @@ OrderCard.propTypes = {
   ]),
   pageNumber: PropTypes.number,
   getPayload: PropTypes.object,
+  onUserClick: PropTypes.func,
 };
 export default observer(OrderCard);

@@ -12,6 +12,7 @@ import { ORDER_STATUSES, pageCount } from "utils/constants";
 import DateModal from "components/general/Modal/dateModal";
 import Pagination from "components/general/pagination";
 import MealOrdersStore from "../store";
+import UserModal from "components/general/Modal/userModal";
 
 const { INPROGRESS, PENDING, COMPLETED, CANCELLED } = ORDER_STATUSES;
 const MealOrders = ({ status = "all" }) => {
@@ -34,6 +35,7 @@ const MealOrders = ({ status = "all" }) => {
   const [dateFilters, setDateFilters] = useState(filterRangeOptions);
   const [showDateModal, setShowDateModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const handleGetOrders = ({ page, date }, isRefresh) => {
     const startDate = date?.[0]?.startDate || dateFilter?.[0]?.startDate;
@@ -173,6 +175,9 @@ const MealOrders = ({ status = "all" }) => {
             type="MEAL"
             cardStatus={status}
             pageNumber={1}
+            onUserClick={(e) => {
+              setCurrentUser(e);
+            }}
             getPayload={{
               startDate: dateFilter?.[0]?.startDate,
               endDate: dateFilter?.[0]?.endDate,
@@ -191,6 +196,11 @@ const MealOrders = ({ status = "all" }) => {
         active={showDateModal}
         onChange={(item) => handleDateFilterchange([item.selection])}
         ranges={dateFilter}
+      />
+      <UserModal
+        details={currentUser}
+        active={!!currentUser}
+        toggleModal={() => setCurrentUser(null)}
       />
     </div>
   );
